@@ -14,7 +14,11 @@
     "skipLibCheck": true,
     "skipDefaultLibCheck": true,
     "baseUrl": ".",
-    "paths": {}
+    "paths": {
+      "@sapops/commands/list-tables": [
+        "packages/commands/list-tables/src/index.ts"
+      ]
+    }
   },
   "exclude": ["node_modules", "tmp"]
 }

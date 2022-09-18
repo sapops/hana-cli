@@ -20,7 +20,9 @@
 			"extensions": [
 				"dbaeumer.vscode-eslint",
 				"nrwl.angular-console",
-				"SAPSE.vscode-cds"
+				"SAPSE.vscode-cds",
+				"eamodio.gitlens",
+				"SAPSE.hana-database-explorer"
 			]
 		}
 	},

@@ -22,7 +22,8 @@
 				"nrwl.angular-console",
 				"SAPSE.vscode-cds",
 				"eamodio.gitlens",
-				"SAPSE.hana-database-explorer"
+				"SAPSE.hana-database-explorer",
+				"esbenp.prettier-vscode"
 			]
 		}
 	},

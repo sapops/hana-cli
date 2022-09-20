@@ -19,6 +19,13 @@
       "options": {
         "lintFilePatterns": ["packages/commands/list-tables/**/*.ts"]
       }
+    },
+    "watch":{
+      "executor": "nx:run-commands",
+      "options": {
+        "command": "cds watch --profile hybrid",
+        "cwd": "packages/commands/list-tables"
+      }      
     }
   },
   "tags": []

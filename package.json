@@ -6,7 +6,8 @@
   "private": true,
   "dependencies": {
     "@sap/cds": "^6.4.0",
-    "tslib": "^2.3.0"
+    "tslib": "^2.3.0",
+    "hdb": "^0.19.0"
   },
   "devDependencies": {
     "@nrwl/cli": "15.4.5",
@@ -32,5 +33,17 @@
   },
   "workspaces": [
     "packages/**"
-  ]
+  ],
+  "cds": {
+    "requires": {
+      "[hybrid]": {
+        "db": {
+          "kind": "hana-cloud"
+        }
+      },
+      "db": {
+        "kind": "sql"
+      }
+    }
+  }
 }

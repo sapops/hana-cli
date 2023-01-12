@@ -17,7 +17,8 @@
     "paths": {
       "@sapops/commands/list-tables": [
         "packages/commands/list-tables/src/index.ts"
-      ]
+      ],
+      "@sapops/read-table": ["packages/read-table/src/index.ts"]
     }
   },
   "exclude": ["node_modules", "tmp"]

@@ -1,0 +1,11 @@
+{    
+  "requires": {
+    "db" :{
+      "kind": "hana",
+      "model":["db"]
+    }
+  },
+    "data": {
+        "sql_mapping": "quoted"
+      }
+}

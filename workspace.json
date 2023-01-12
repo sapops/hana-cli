@@ -2,6 +2,7 @@
   "$schema": "./node_modules/nx/schemas/workspace-schema.json",
   "version": 2,
   "projects": {
-    "commands-list-tables": "packages/commands/list-tables"
+    "commands-list-tables": "packages/commands/list-tables",
+    "read-table": "packages/read-table"
   }
 }

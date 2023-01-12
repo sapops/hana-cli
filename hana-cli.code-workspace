@@ -6,8 +6,5 @@
 		{
 			"path": "packages/commands/list-tables"
 		}
-	],
-	"settings": {
-		"SAP HANA Database Explorer.displaySapWebAnalyticsStartupNotification": false
-	}
+	]
 }

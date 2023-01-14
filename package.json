@@ -3,7 +3,7 @@
   "version": "0.0.0",
   "license": "MIT",
   "scripts": {
-    "make:secrets":"cds env get requires.db.credentials --resolve-bindings | json2fs --to ~/cds/requires/db/credentials"
+    "make:secrets":"cds env get requires.db.credentials --resolve-bindings | json2fs --to .cds/requires/db/credentials"
   },
   "private": true,
   "dependencies": {
@@ -27,7 +27,7 @@
     "eslint-config-prettier": "8.1.0",
     "jest": "28.1.1",
     "jest-environment-jsdom": "28.1.1",
-    "json2fs": "^0.1.3",
+    "json2fs": "^0.1.4npm",
     "nx": "15.4.5",
     "prettier": "^2.6.2",
     "ts-jest": "28.0.5",

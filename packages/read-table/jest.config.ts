@@ -11,5 +11,7 @@ export default {
     '^.+\\.[tj]s$': 'ts-jest',
   },
   moduleFileExtensions: ['ts', 'js', 'html'],
-  coverageDirectory: '../../coverage/packages/read-table'  
+  coverageDirectory: '../../coverage/packages/read-table' ,
+  testEnvironment: 'node'
+  
 };

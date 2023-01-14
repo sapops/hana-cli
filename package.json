@@ -2,12 +2,14 @@
   "name": "sapops",
   "version": "0.0.0",
   "license": "MIT",
-  "scripts": {},
+  "scripts": {
+    "make:secrets":"cds env get requires.db.credentials --resolve-bindings | json2fs --to ~/cds/requires/db/credentials"
+  },
   "private": true,
   "dependencies": {
     "@sap/cds": "^6.4.0",
-    "tslib": "^2.3.0",
-    "hdb": "^0.19.0"
+    "hdb": "^0.19.0",
+    "tslib": "^2.3.0"
   },
   "devDependencies": {
     "@nrwl/cli": "15.4.5",
@@ -25,6 +27,7 @@
     "eslint-config-prettier": "8.1.0",
     "jest": "28.1.1",
     "jest-environment-jsdom": "28.1.1",
+    "json2fs": "^0.1.3",
     "nx": "15.4.5",
     "prettier": "^2.6.2",
     "ts-jest": "28.0.5",

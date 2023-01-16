@@ -6,5 +6,7 @@ export async function readTable() {
 
   const tables = await db.read(TABLES);
 
+  console.log(tables);
+
 
 }

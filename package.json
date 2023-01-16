@@ -3,6 +3,7 @@
   "version": "0.0.0",
   "license": "MIT",
   "scripts": {
+    "start:hana":"cf update-service hana -c '{\"action\": \"START\"}'",
     "make:secrets":"cds env get requires.db.credentials --resolve-bindings | json2fs --to .cds/requires/db/credentials"
   },
   "private": true,

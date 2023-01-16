@@ -4,5 +4,5 @@ entity ![VIEW_COLUMNS] {
     key SCHEMA_NAME : String;
     key VIEW_NAME  : String;
     key COLUMN_NAME: String;
-    POSITION: Integer
+    POSITION: Integer;
 }

@@ -3,6 +3,7 @@
   "version": 2,
   "projects": {
     "commands-list-tables": "packages/commands/list-tables",
+    "hana-public-cds": "packages/hana-public-cds",
     "read-table": "packages/read-table"
   }
 }

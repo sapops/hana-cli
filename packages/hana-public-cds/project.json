@@ -2,7 +2,7 @@
   "name": "hana-public-cds",
   "$schema": "../../node_modules/nx/schemas/project-schema.json",
   "sourceRoot": "packages/hana-public-cds/src",
-  "projectType": "library",
+  "projectType": "library",  
   "targets": {
     "lint": {
       "executor": "nx:run-commands",
@@ -18,7 +18,17 @@
       "options": {
         "command": "cds compile index.cds --dest gen/csn.json",
         "cwd": "packages/hana-public-cds"
-      }
+      },
+      "dependsOn": ["lint"]
+    },
+    "publish": {
+      "executor": "nx:run-commands",
+      "outputs": [],
+      "options": {
+        "command": "npm publish",
+        "cwd": "packages/hana-public-cds"
+      },
+      "dependsOn": ["build"]
     }
   },
   "tags": []

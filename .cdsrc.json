@@ -2,7 +2,7 @@
   "requires": {
     "db" :{
       "kind": "hana",
-      "model":["db"]
+      "model":["hana-public-cds"]
     }
   },
     "data": {

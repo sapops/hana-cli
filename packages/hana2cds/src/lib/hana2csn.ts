@@ -1,7 +1,7 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import * as cds from '@sap/cds';
 import { CSN, Definition } from '@sap/cds/apis/csn';
-import { getCdsType, HanaTypeDefinition } from './hana2cdsType';
+import { getCdsType } from './hana2cdsType';
 import * as Types from '../cds/other';
 import path = require('path');
 //import model = require('../gen/csn.json');
@@ -73,7 +73,7 @@ export async function hana2csn(input: SingleInput): Promise<CSN> {
                   .sort((a, b) => a.POSITION - b.POSITION)
                   .map((c) => [
                     c.COLUMN_NAME,
-                    getCdsType(c as HanaTypeDefinition) as unknown,
+                    getCdsType(c) as unknown,
                   ])
               ),
           } as Definition),

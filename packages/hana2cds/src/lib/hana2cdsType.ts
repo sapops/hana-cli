@@ -1,77 +1,58 @@
 import assert = require('assert');
 
-enum HanaTypesEnum {
-  INTEGER,
-  NCLOB,
-  BLOB,
-  NVARCHAR,
-  VARBINARY,
-  BIGINT,
-  DECIMAL,
-  DOUBLE,
-  DATE,
-  TIME,
-  SECONDDATE,
-  TIMESTAMP,
-  BOOLEAN,
-  SMALLINT,
-  TINYINT,
-  SMALLDECIMAL,
-  REAL,
-  CLOB,
-  CHAR,
-  NCHAR,
-  BINARY,
-  VARCHAR,
-  // ST_POINT,
-  // ST_GEOMETRY,
-}
-
-export interface HanaTypeDefinition {
-  DATA_TYPE_NAME: keyof typeof HanaTypesEnum;
-  LENGTH: number;
-  SCALE: number;
-}
-
 const length = (type: TemplateStringsArray) =>
   Object.assign(type.join(), { has_length: true });
+
 const scale = (type: TemplateStringsArray) =>
   Object.assign(type.join(), { has_scale: true });
 
+// const srid = (type: TemplateStringsArray) =>
+//   Object.assign(type.join(), { has_srid: true });
+
 type HanaTypes = Record<
-  keyof typeof HanaTypesEnum,
-  string & { has_length?: boolean; has_scale?: boolean }
+  string,
+  string & { has_length?: boolean; has_scale?: boolean; has_srid?: boolean }
 >;
 
 const hanaTypesMap: HanaTypes = {
-  NCLOB: 'cds.LargeString',
-  NVARCHAR: length`cds.String`,
+  NCLOB: 'LargeString',
+  NVARCHAR: length`String`,
   NCHAR: length`hana.NCHAR`,
   TINYINT: 'hana.TINYINT',
-  BIGINT: 'cds.Integer64',
-  BLOB: 'cds.LargeBinary',
-  VARBINARY: length`cds.Binary`,
+  BIGINT: 'Integer64',
+  BLOB: 'LargeBinary',
+  VARBINARY: length`Binary`,
   BINARY: length`hana.BINARY`,
   CHAR: length`hana.CHAR`,
-  DECIMAL: scale`cds.Decimal`,
-  INTEGER: 'cds.Integer',
+  DECIMAL: scale`Decimal`,
+  INTEGER: 'Integer',
   SMALLINT: 'hana.SMALLINT',
   REAL: 'hana.REAL',
-  DOUBLE: 'cds.Double',
+  DOUBLE: 'Double',
   VARCHAR: length`hana.VARCHAR`,
-  BOOLEAN: 'cds.Boolean',
-  DATE: 'cds.Date',
-  TIME: 'cds.Time',
-  TIMESTAMP: 'cds.Timestamp',
-  SECONDDATE: 'cds.String',
+  BOOLEAN: 'Boolean',
+  DATE: 'Date',
+  TIME: 'Time',
+  TIMESTAMP: 'Timestamp',
+  SECONDDATE: 'String',
   SMALLDECIMAL: 'hana.SMALLDECIMAL',
   CLOB: 'hana.CLOB',
+  // ST_POINT: srid`hana.ST_POINT`,
+  // ST_GEOMETRY: srid`hana.ST_GEOMETRY`,
 };
 
 interface CdsType {
   type?: string;
   length?: number;
   scale?: number;
+  precision?: number;
+  srid?: number;
+}
+
+interface HanaTypeDefinition {
+  DATA_TYPE_NAME: keyof HanaTypes;
+  LENGTH: number;
+  SCALE: number;
 }
 
 // convert hana type defintion to CDS type
@@ -84,7 +65,7 @@ export function getCdsType(field: HanaTypeDefinition): CdsType {
   const type = hanaTypesMap[field.DATA_TYPE_NAME];
 
   // map Hana type to CDS type
-  const result: CdsType = { type: type.toString() };
+  const result: CdsType = { type: `cds.${type.toString()}` };
 
   // fill length only if it's needed
   if (type.has_length) {
@@ -92,7 +73,10 @@ export function getCdsType(field: HanaTypeDefinition): CdsType {
   }
 
   if (type.has_scale) {
-    result.scale = field.SCALE;
+    result.precision = field.LENGTH;
+    if (field.SCALE) {
+      result.scale = field.SCALE;
+    }
   }
 
   return result;

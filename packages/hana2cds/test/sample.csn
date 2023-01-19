@@ -1,0 +1,59 @@
+{
+  "definitions": {
+    "sample": {
+      "kind": "entity",
+      "elements": {
+        "SMALLINT": {
+          "type": "cds.hana.SMALLINT"
+        },
+        "TINYINT": {
+          "type": "cds.hana.TINYINT"
+        },
+        "SMALLDECIMAL": {
+          "type": "cds.hana.SMALLDECIMAL"
+        },
+        "REAL": {
+          "type": "cds.hana.REAL"
+        },
+        "CHAR": {
+          "type": "cds.hana.CHAR",
+          "length": 100
+        },
+        "NCHAR": {
+          "type": "cds.hana.NCHAR",
+          "length": 100
+        },
+        "VARCHAR": {
+          "type": "cds.hana.VARCHAR",
+          "length": 100
+        },
+        "CLOB": {
+          "type": "cds.hana.CLOB"
+        },
+        "BINARY": {
+          "type": "cds.hana.BINARY",
+          "length": 100
+        },
+        "ST_POINT": {
+          "type": "cds.hana.ST_POINT"
+        },
+        "ST_POINT_1": {
+          "type": "cds.hana.ST_POINT",
+          "srid": 1
+        },
+        "ST_GEOMETRY": {
+          "type": "cds.hana.ST_GEOMETRY"
+        },
+        "ST_GEOMETRY_1": {
+          "type": "cds.hana.ST_GEOMETRY",
+          "srid": 1
+        }
+      }
+    }
+  },
+  "meta": {
+    "creator": "CDS Compiler v3.5.4",
+    "flavor": "inferred"
+  },
+  "$version": "2.0"
+}

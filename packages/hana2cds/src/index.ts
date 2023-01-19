@@ -29,7 +29,7 @@ export default new Command()
     // generate CSN model
     const csn = await hana2csn({
       schema: options.schema,
-      objects: options.filter.split(','),
+      objects: options?.filter?.split(','),
     });
 
     const result = JSON.stringify(csn, null, '\t');

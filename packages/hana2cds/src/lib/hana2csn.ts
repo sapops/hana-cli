@@ -47,10 +47,12 @@ export async function hana2csn(input: SingleInput): Promise<CSN> {
       //read table columns
       o.table(with_columns);
     })
-    .where({
-      SCHEMA_NAME: input.schema,
-      OBJECT_NAME: { in: input.objects },
-    })) as Types.OBJECTS[];
+    .where(
+      Object.assign(
+        { SCHEMA_NAME: input.schema },
+        input.objects && { OBJECT_NAME: { in: input.objects } }
+      )
+    )) as Types.OBJECTS[];
 
   type ObjectType = 'table' | 'view';
 
@@ -71,10 +73,7 @@ export async function hana2csn(input: SingleInput): Promise<CSN> {
               Object.fromEntries(
                 columns
                   .sort((a, b) => a.POSITION - b.POSITION)
-                  .map((c) => [
-                    c.COLUMN_NAME,
-                    getCdsType(c) as unknown,
-                  ])
+                  .map((c) => [c.COLUMN_NAME, getCdsType(c) as unknown])
               ),
           } as Definition),
         ];

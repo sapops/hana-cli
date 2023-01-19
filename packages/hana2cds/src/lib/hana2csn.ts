@@ -1,6 +1,6 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import * as cds from '@sap/cds';
-import { CSN, Definition, Element } from '@sap/cds/apis/csn';
+import { CSN, Definition } from '@sap/cds/apis/csn';
 import { getCdsType, HanaTypeDefinition } from './hana2cdsType';
 import * as Types from '../cds/other';
 import path = require('path');
@@ -18,9 +18,8 @@ interface CDSEnv {
 }
 
 export async function hana2csn(input: SingleInput): Promise<CSN> {
-
   //load public hana model
-  const model = await cds.load(path.resolve(__dirname,'../cds/public'));
+  const model = await cds.load(path.resolve(__dirname, '../cds/public'));
 
   // connect to db using public model
   const db = await cds.connect.to('db', {
@@ -31,6 +30,10 @@ export async function hana2csn(input: SingleInput): Promise<CSN> {
 
   const { OBJECTS } = db.entities('');
 
+  const with_columns = (v: any) => {
+    v('*'), v.columns('*');
+  };
+
   // read table/view columns
   const result = (await db
     .read(OBJECTS)
@@ -40,13 +43,9 @@ export async function hana2csn(input: SingleInput): Promise<CSN> {
         o.SCHEMA_NAME,
         o.OBJECT_NAME,
         //read view columns
-        o.view((v: any) => {
-          v('*'), v.columns('*');
-        });
+        o.view(with_columns);
       //read table columns
-      o.table((t: any) => {
-        t('*'), t.columns('*');
-      });
+      o.table(with_columns);
     })
     .where({
       SCHEMA_NAME: input.schema,
@@ -70,10 +69,12 @@ export async function hana2csn(input: SingleInput): Promise<CSN> {
             elements:
               columns &&
               Object.fromEntries(
-                columns.map((c) => [
-                  c.COLUMN_NAME,
-                  { type: getCdsType(c as HanaTypeDefinition) } as Element,
-                ])
+                columns
+                  .sort((a, b) => a.POSITION - b.POSITION)
+                  .map((c) => [
+                    c.COLUMN_NAME,
+                    getCdsType(c as HanaTypeDefinition) as unknown,
+                  ])
               ),
           } as Definition),
         ];

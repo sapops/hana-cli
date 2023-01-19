@@ -3,6 +3,15 @@ using TABLES from './public/TABLES';
 using VIEWS from './public/VIEWS';
 using VIEW_COLUMNS from './public/VIEW_COLUMNS';
 using TABLE_COLUMNS from './public/TABLE_COLUMNS';
+using DATA_TYPES from './public/DATA_TYPES';
+
+extend VIEW_COLUMNS with {
+     data_type: Association to one DATA_TYPES on data_type.TYPE_ID = DATA_TYPE_ID
+}
+
+extend TABLE_COLUMNS with {
+     data_type: Association to one DATA_TYPES on data_type.TYPE_ID = DATA_TYPE_ID
+}
 
 extend VIEWS with {
      columns : Association to many VIEW_COLUMNS

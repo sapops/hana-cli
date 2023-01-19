@@ -1,0 +1,242 @@
+{
+	"namespace": "SYS",
+	"definitions": {
+		"VIEWS": {
+			"@cds.persistence.exists": true,
+			"kind": "entity",
+			"elements": {
+				"SCHEMA_NAME": {
+					"type": "cds.String",
+					"length": 256
+				},
+				"VIEW_NAME": {
+					"type": "cds.String",
+					"length": 256
+				},
+				"VIEW_OID": {
+					"type": "cds.Integer64"
+				},
+				"IS_READ_ONLY": {
+					"type": "cds.String",
+					"length": 5
+				},
+				"IS_DDL_ONLY": {
+					"type": "cds.String",
+					"length": 5
+				},
+				"HAS_CHECK_OPTION": {
+					"type": "cds.String",
+					"length": 5
+				},
+				"HAS_COLUMN_ALIASES": {
+					"type": "cds.String",
+					"length": 5
+				},
+				"DEFINITION": {
+					"type": "cds.LargeString"
+				},
+				"COMMENTS": {
+					"type": "cds.String",
+					"length": 5000
+				},
+				"IS_COLUMN_VIEW": {
+					"type": "cds.String",
+					"length": 5
+				},
+				"VIEW_TYPE": {
+					"type": "cds.String",
+					"length": 16
+				},
+				"IS_VALID": {
+					"type": "cds.String",
+					"length": 5
+				},
+				"HAS_STRUCTURED_PRIVILEGE_CHECK": {
+					"type": "cds.String",
+					"length": 5
+				},
+				"HAS_MASKED_COLUMNS": {
+					"type": "cds.String",
+					"length": 5
+				},
+				"MASK_MODE": {
+					"type": "cds.String",
+					"length": 12
+				},
+				"HAS_PARAMETERS": {
+					"type": "cds.String",
+					"length": 5
+				},
+				"HAS_ANONYMIZATION": {
+					"type": "cds.String",
+					"length": 5
+				},
+				"HAS_CACHE": {
+					"type": "cds.String",
+					"length": 16
+				},
+				"CREATE_TIME": {
+					"type": "cds.Timestamp"
+				}
+			}
+		},
+		"TABLES": {
+			"@cds.persistence.exists": true,
+			"kind": "entity",
+			"elements": {
+				"SCHEMA_NAME": {
+					"type": "cds.String",
+					"length": 256
+				},
+				"TABLE_NAME": {
+					"type": "cds.String",
+					"length": 256
+				},
+				"TABLE_OID": {
+					"type": "cds.Integer64"
+				},
+				"COMMENTS": {
+					"type": "cds.String",
+					"length": 5000
+				},
+				"FIXED_PART_SIZE": {
+					"type": "hana.SMALLINT"
+				},
+				"IS_LOGGED": {
+					"type": "cds.String",
+					"length": 5
+				},
+				"IS_SYSTEM_TABLE": {
+					"type": "cds.String",
+					"length": 5
+				},
+				"IS_COLUMN_TABLE": {
+					"type": "cds.String",
+					"length": 5
+				},
+				"TABLE_TYPE": {
+					"type": "cds.String",
+					"length": 16
+				},
+				"IS_INSERT_ONLY": {
+					"type": "cds.String",
+					"length": 5
+				},
+				"IS_TEMPORARY": {
+					"type": "cds.String",
+					"length": 5
+				},
+				"TEMPORARY_TABLE_TYPE": {
+					"type": "cds.String",
+					"length": 10
+				},
+				"COMMIT_ACTION": {
+					"type": "cds.String",
+					"length": 8
+				},
+				"IS_USER_DEFINED_TYPE": {
+					"type": "cds.String",
+					"length": 5
+				},
+				"HAS_PRIMARY_KEY": {
+					"type": "cds.String",
+					"length": 5
+				},
+				"USES_EXTKEY": {
+					"type": "cds.String",
+					"length": 5
+				},
+				"AUTO_MERGE_ON": {
+					"type": "cds.String",
+					"length": 5
+				},
+				"USES_DIMFN_CACHE": {
+					"type": "cds.String",
+					"length": 5
+				},
+				"IS_PUBLIC": {
+					"type": "cds.String",
+					"length": 5
+				},
+				"AUTO_OPTIMIZE_COMPRESSION_ON": {
+					"type": "cds.String",
+					"length": 5
+				},
+				"COMPRESSED_EXTKEY": {
+					"type": "cds.String",
+					"length": 5
+				},
+				"HAS_TEXT_FIELDS": {
+					"type": "cds.String",
+					"length": 5
+				},
+				"USES_QUEUE_TABLE": {
+					"type": "cds.String",
+					"length": 5
+				},
+				"IS_PRELOAD": {
+					"type": "cds.String",
+					"length": 5
+				},
+				"IS_PARTIAL_PRELOAD": {
+					"type": "cds.String",
+					"length": 5
+				},
+				"UNLOAD_PRIORITY": {
+					"type": "hana.TINYINT"
+				},
+				"IS_REPLICA": {
+					"type": "cds.String",
+					"length": 5
+				},
+				"HAS_STRUCTURED_PRIVILEGE_CHECK": {
+					"type": "cds.String",
+					"length": 5
+				},
+				"ROW_ORDER_TYPE": {
+					"type": "cds.String",
+					"length": 8
+				},
+				"CREATE_TIME": {
+					"type": "cds.Timestamp"
+				},
+				"TEMPORAL_TYPE": {
+					"type": "cds.String",
+					"length": 8
+				},
+				"HAS_MASKED_COLUMNS": {
+					"type": "cds.String",
+					"length": 5
+				},
+				"MASK_MODE": {
+					"type": "cds.String",
+					"length": 12
+				},
+				"PERSISTENT_MEMORY": {
+					"type": "cds.String",
+					"length": 5
+				},
+				"HAS_RECORD_COMMIT_TIMESTAMP": {
+					"type": "cds.String",
+					"length": 5
+				},
+				"IS_REPLICATION_LOG_ENABLED": {
+					"type": "cds.String",
+					"length": 5
+				},
+				"NUMA_NODE_INDEXES": {
+					"type": "cds.String",
+					"length": 5000
+				},
+				"IS_MOVABLE": {
+					"type": "cds.String",
+					"length": 5
+				},
+				"LOAD_UNIT": {
+					"type": "cds.String",
+					"length": 7
+				}
+			}
+		}
+	}
+}

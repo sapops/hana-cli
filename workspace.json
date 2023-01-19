@@ -2,8 +2,6 @@
   "$schema": "./node_modules/nx/schemas/workspace-schema.json",
   "version": 2,
   "projects": {
-    "commands-list-tables": "packages/commands/list-tables",
-    "hana-public-cds": "packages/hana-public-cds",
-    "read-table": "packages/read-table"
+    "hana2cds": "packages/hana2cds"
   }
 }

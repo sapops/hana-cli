@@ -8,7 +8,7 @@
     "default": {
       "runner": "@nrwl/nx-cloud",
       "options": {
-        "cacheableOperations": ["build", "lint", "test", "e2e"],
+        "cacheableOperations": ["build", "lint", "test", "e2e", "build-cds-csn", "build-cds-types"],
         "accessToken": "NTNmNjIwNGQtZTRiZi00ZGM5LTllNDQtMWEyMzVhN2YwMTM1fHJlYWQtd3JpdGU="
       }
     }
@@ -34,6 +34,7 @@
       "!{projectRoot}/tsconfig.spec.json",
       "!{projectRoot}/jest.config.[jt]s"
     ],
+    "cds":["{projectRoot}/**/*.cds"],
     "sharedGlobals": []
   },
   "workspaceLayout": {

@@ -15,10 +15,7 @@
     "skipDefaultLibCheck": true,
     "baseUrl": ".",
     "paths": {
-      "@sapops/commands/list-tables": [
-        "packages/commands/list-tables/src/index.ts"
-      ],
-      "@sapops/read-table": ["packages/read-table/src/index.ts"]
+      "hana2cds": ["packages/hana2cds/src/index.ts"]
     }
   },
   "exclude": ["node_modules", "tmp"]

@@ -1,0 +1,15 @@
+{
+  "name": "hana2cds",
+  "version": "0.0.1",
+  "type": "commonjs",
+  "bin": {
+    "hana2cds": "src/bin/run.ts"
+  },
+  "scripts": {
+    "build:types": "cds2types --cds ./src/cds/public.cds --output ./src/cds/",
+    "build:csn": "cds compile public.cds --dest public.csn"
+  },
+  "devDependencies": {
+    "cds2types": "^3.0.0"
+  }
+}

@@ -1,0 +1,10 @@
+{
+  "requires": {
+    "db": {
+      "kind": "hana",
+      "model": [
+        "cds"
+      ]
+    }
+  }
+}

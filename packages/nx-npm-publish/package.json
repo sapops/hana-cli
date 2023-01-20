@@ -1,6 +1,6 @@
 {
   "name": "@sapops/nx-npm-publish",
-  "version": "0.0.1",
+  "version": "0.0.0",
   "type": "commonjs",
   "private": true,
   "devDependencies": {

@@ -3,17 +3,20 @@
   "version": "0.0.0",
   "license": "MIT",
   "scripts": {
-    "start:hana": "cf update-service hana -c '{\"action\": \"START\"}'",
-    "make:secrets": "cds env get requires.db.credentials --resolve-bindings | json2fs --to .cds/requires/db/credentials"
+    "nx:publish": "nx run-many --target=publish",
+    "make:secrets": "cds env get requires.db.credentials --resolve-bindings | json2fs --to .cds/requires/db/credentials",
+    "version": "nx affected --target=version --base=v${npm_old_version} ${npm_new_version} --workspaces-update=false && npm install --ignore-scripts --package-lock-only --fund=false --audit=false && git add -A "
   },
   "private": true,
   "dependencies": {
-    "@sap/cds": "^6.4.0",    
+    "@sap/cds": "^6.4.0",
+    "commander": "^10.0.0",
     "tslib": "^2.3.0"
   },
   "devDependencies": {
     "@cap-js/graphql": "^0.1.0",
     "@nrwl/cli": "15.4.5",
+    "@nrwl/devkit": "^15.5.2",
     "@nrwl/eslint-plugin-nx": "15.4.5",
     "@nrwl/jest": "15.4.5",
     "@nrwl/js": "15.4.5",
@@ -23,16 +26,19 @@
     "@types/jest": "28.1.1",
     "@types/node": "16.11.7",
     "@typescript-eslint/eslint-plugin": "5.48.1",
-    "@typescript-eslint/parser": "5.48.1",    
+    "@typescript-eslint/parser": "5.48.1",
+    "cds2types": "^3.0.0",
     "eslint": "~8.15.0",
     "eslint-config-prettier": "8.1.0",
     "jest": "28.1.1",
     "jest-environment-jsdom": "28.1.1",
-    "json2fs": "^0.1.4npm",
+    "json2fs": "^0.1.4",
     "nx": "15.4.5",
     "prettier": "^2.6.2",
+    "set-shebang": "^0.1.12",
     "ts-jest": "28.0.5",
     "ts-node": "10.9.1",
+    "type-fest": "^3.5.2",
     "typescript": "4.8.4"
   },
   "workspaces": [

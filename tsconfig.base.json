@@ -3,19 +3,21 @@
   "compilerOptions": {
     "rootDir": ".",
     "sourceMap": true,
+    "inlineSources": true,
     "declaration": false,
     "moduleResolution": "node",
     "emitDecoratorMetadata": true,
     "experimentalDecorators": true,
-    "importHelpers": true,
+    "importHelpers": false,
     "target": "es2015",
     "module": "esnext",
     "lib": ["es2017", "dom"],
     "skipLibCheck": true,
     "skipDefaultLibCheck": true,
     "baseUrl": ".",
-    "paths": {
-      "hana2cds": ["packages/hana2cds/src/index.ts"]
+    "paths": {      
+      "hana2cds": ["packages/hana2cds/src/index.ts"],
+      "nx-npm-publish": ["packages/nx-npm-publish/src/index.ts"]
     }
   },
   "exclude": ["node_modules", "tmp"]

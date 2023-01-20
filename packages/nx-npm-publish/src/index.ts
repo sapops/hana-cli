@@ -2,9 +2,15 @@ import { TargetConfiguration, readJsonFile } from '@nrwl/devkit';
 import { dirname, join } from 'path';
 import { PackageJson } from 'type-fest';
 
+//const root: PackageJson = readJsonFile('package.json');
+
+export const projectFilePatterns = ['project.json'];
 export function registerProjectTargets(
   projectFilePath: string
 ): Record<string, TargetConfiguration> | undefined {
+
+  //console.log(projectFilePath);
+
   //read package.json
   const cwd = dirname(projectFilePath);
   const pkg: PackageJson = readJsonFile(join(cwd, 'package.json'));
@@ -22,7 +28,7 @@ export function registerProjectTargets(
       // rename bin reference in a build folder
       commands.push(`npm pkg set ${bin}, ${path.replace(ts, '.js')}`);
       // replace ts-node shebang with a node command
-      commands.push('npx set-shebang ${path} node');
+      commands.push(`npx set-shebang ${path} node`);
     }
   };
 
@@ -37,6 +43,7 @@ export function registerProjectTargets(
     }
   }
 
+  // inherit version
   commands.push('npm publish');
 
   return {

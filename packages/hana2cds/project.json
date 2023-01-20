@@ -83,6 +83,13 @@
       "dependsOn": [
         "build"
       ]
+    },
+    "version": {
+      "executor": "nx:run-commands",
+      "options": {
+        "command": "npm version",
+        "cwd": "packages/hana2cds"
+      }
     }
   },
   "tags": []

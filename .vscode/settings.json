@@ -1,13 +1,14 @@
 {
-    "SAP HANA Database Explorer.displaySapWebAnalyticsStartupNotification": false,
-    "typescript.tsdk": "node_modules/typescript/lib",
-    "eslint.validate": [
-        "cds",
-        "csn",
-        "csv",
-        "csv",
-        "csv (semicolon)",
-        "tsv",
-        "tab"
-      ]
+  "SAP HANA Database Explorer.displaySapWebAnalyticsStartupNotification": false,
+  "typescript.tsdk": "node_modules/typescript/lib",
+  "eslint.validate": [
+    "cds",
+    "csn",
+    "csv",
+    "csv",
+    "csv (semicolon)",
+    "tsv",
+    "tab"
+  ],
+  "git.followTagsWhenSync": true
 }

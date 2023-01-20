@@ -16,7 +16,8 @@
         "assets": [
           "packages/hana2cds/*.md",
           "packages/hana2cds/**/*.csn"
-        ]
+        ],
+        "buildableProjectDepsInPackageJsonType":"dependencies"
       },
       "dependsOn": [
         "build-cds-csn",

@@ -12,9 +12,8 @@ interface Options {
 export default new Command()
   .description('Generates CDS model from Hana table/view defintion')
   .requiredOption('--schema <schema>', 'Database schema')
-  .option('--filter <filter>', 'Comma-separated list of tables/views')
-  .option('--to <to>', 'Comma-separated list of tables/views')
-  .option('-o, --output <output>', 'Name of output file')
+  .option('--filter <filter>', 'Comma-separated list of tables/views')  
+  .option('-o, --output <output>', 'Name of output file (STDOUT by default)')
   .action(async (options: Options) => {
     const useTTY = !options.output;
     const { write } = stdout;

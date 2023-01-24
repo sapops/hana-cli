@@ -3,6 +3,7 @@
   "version": "0.0.3",
   "license": "MIT",
   "scripts": {
+    "init:sqlite":"cds deploy --to sqlite",
     "nx:publish": "nx run-many --target=publish",
     "make:secrets": "cds env get requires.db.credentials --resolve-bindings | json2fs --to .cds/requires/db/credentials",
     "version": "nx affected --target=version --base=v${npm_old_version} ${npm_new_version} --workspaces-update=false && npm install --ignore-scripts --package-lock-only --fund=false --audit=false && git add -A "
@@ -37,6 +38,7 @@
     "nx": "15.4.5",
     "prettier": "^2.6.2",
     "set-shebang": "^0.1.12",
+    "sqlite3": "^5.1.4",
     "ts-jest": "28.0.5",
     "ts-node": "10.9.1",
     "type-fest": "^3.5.2",
@@ -44,5 +46,15 @@
   },
   "workspaces": [
     "packages/**"
-  ]
+  ],
+  "cds": {
+    "requires": {
+      "db": {
+        "kind": "sqlite",
+        "credentials": {
+          "database": "db.sqlite"
+        }
+      }
+    }
+  }
 }

@@ -4,11 +4,12 @@ import { CSN, Definition } from '@sap/cds/apis/csn';
 import { getCdsType } from './hana2cdsType';
 import * as Types from '../cds/other';
 import path = require('path');
-//import model = require('../gen/csn.json');
+
+import { Service } from '@sap/cds/apis/services';
 
 interface SingleInput {
   schema: string;
-  objects: string[];
+  objects?: string[];
 }
 
 interface CDSEnv {
@@ -17,16 +18,7 @@ interface CDSEnv {
   };
 }
 
-export async function hana2csn(input: SingleInput): Promise<CSN> {
-  //load public hana model
-  const model = await cds.load(path.resolve(__dirname, '../cds/public'));
-
-  // connect to db using public model
-  const db = await cds.connect.to('db', {
-    model: model as any,
-    kind: 'hana',
-    credentials: (cds.env.requires as CDSEnv)?.db.credentials,
-  });
+export async function db2csn(db: Service, input:SingleInput): Promise<CSN>  {
 
   const { OBJECTS } = db.entities('');
 
@@ -49,8 +41,9 @@ export async function hana2csn(input: SingleInput): Promise<CSN> {
     })
     .where(
       Object.assign(
-        { SCHEMA_NAME: input.schema },
-        input.objects && { OBJECT_NAME: { in: input.objects } }
+        { SCHEMA_NAME: input?.schema },
+        { OBJECT_TYPE: { in: ['TABLE', 'VIEW'] } },
+        input?.objects && { OBJECT_NAME: { in: input.objects } }
       )
     )) as Types.OBJECTS[];
 
@@ -58,7 +51,7 @@ export async function hana2csn(input: SingleInput): Promise<CSN> {
 
   // convert Hana definition to CSN model
   return {
-    namespace: input.schema,
+    namespace: input?.schema,
     definitions: Object.fromEntries(
       // map objects to CSN
       result.map((r) => {
@@ -80,4 +73,20 @@ export async function hana2csn(input: SingleInput): Promise<CSN> {
       })
     ),
   };
+  
+}
+
+export async function hana2csn(input: SingleInput): Promise<CSN> {
+  //load public hana model
+  const model = await cds.load(path.resolve(__dirname, '../cds/public'));
+
+  // connect to db using public model
+  const db = await cds.connect.to('db', {
+    model: model as any,
+    kind: 'hana',
+    credentials: (cds.env.requires as CDSEnv)?.db.credentials,
+  });
+
+  return db2csn(db, input);
+
 }

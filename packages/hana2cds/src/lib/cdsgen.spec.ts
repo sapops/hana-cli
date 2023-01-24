@@ -1,14 +1,14 @@
-import { hana2csn } from './hana2csn';
+import * as cds from '@sap/cds';
 
-// describe('hana2cds', () => {
-//   it('should work', () => {
-//     expect(hana2cds()).toEqual('hana2cds');
-//   });
-// });
+import { db2csn } from './hana2csn'
+
 
 describe('hana2csn', () => {
-  test('should work', async () => {
-    const result = await hana2csn({ schema: 'SYS', objects: ['TABLES'] });
-    console.log(result);
+  test('Connect to sqlite', async () => {
+    const db = await cds.connect.to("public");
+
+    const csn = await db2csn(db, {schema: 'SYS'});
+
+
   }, 100000);
 });

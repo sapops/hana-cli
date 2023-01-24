@@ -1,4 +1,3 @@
-@cds.persistence.exists
 entity VIEW_COLUMNS {
     SCHEMA_NAME    : String;
     VIEW_NAME      : String;

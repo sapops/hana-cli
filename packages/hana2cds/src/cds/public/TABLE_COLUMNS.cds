@@ -1,4 +1,3 @@
-@cds.persistence.exists
 entity TABLE_COLUMNS {
     SCHEMA_NAME    : String;
     TABLE_NAME     : String;

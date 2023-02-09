@@ -3,30 +3,33 @@
   "version": "0.0.3",
   "license": "MIT",
   "scripts": {
-    "init:sqlite":"cds deploy --to sqlite",
+    "init:data": "DISABLE_V8_COMPILE_CACHE=1 DEBUG=true nx workspace-generator datagen --verbose",
+    "init:sqlite": "cds deploy --to sqlite  --no-save",
     "nx:publish": "nx run-many --target=publish",
     "make:secrets": "cds env get requires.db.credentials --resolve-bindings | json2fs --to .cds/requires/db/credentials",
     "version": "nx affected --target=version --base=v${npm_old_version} ${npm_new_version} --workspaces-update=false && npm install --ignore-scripts --package-lock-only --fund=false --audit=false && git add -A "
   },
   "private": true,
   "dependencies": {
-    "@sap/cds": "^6.4.0",
+    "@sap/cds": "^6.5.0",
+    "@sap/hana-client": "^2.15.19",
     "commander": "^10.0.0",
     "tslib": "^2.3.0"
   },
   "devDependencies": {
     "@cap-js/graphql": "^0.1.0",
-    "@nrwl/cli": "15.4.5",
-    "@nrwl/devkit": "^15.5.2",
-    "@nrwl/eslint-plugin-nx": "15.4.5",
-    "@nrwl/jest": "15.4.5",
-    "@nrwl/js": "15.4.5",
-    "@nrwl/linter": "15.4.5",
-    "@nrwl/nx-cloud": "15.0.2",
-    "@nrwl/workspace": "15.4.5",
+    "@nrwl/cli": "15.6.3",
+    "@nrwl/devkit": "15.6.3",
+    "@nrwl/eslint-plugin-nx": "15.6.3",
+    "@nrwl/jest": "15.6.3",
+    "@nrwl/js": "15.6.3",
+    "@nrwl/linter": "15.6.3",
+    "@nrwl/nx-cloud": "15.0.3",
+    "@nrwl/workspace": "15.6.3",
     "@sap/cds-dk": "^6.4.1",
+    "@sap/eslint-plugin-cds": "^2.6.1",
     "@types/jest": "28.1.1",
-    "@types/node": "16.11.7",
+    "@types/node": "latest",
     "@typescript-eslint/eslint-plugin": "5.48.1",
     "@typescript-eslint/parser": "5.48.1",
     "cds2types": "^3.0.0",
@@ -35,7 +38,7 @@
     "jest": "28.1.1",
     "jest-environment-jsdom": "28.1.1",
     "json2fs": "^0.1.4",
-    "nx": "15.4.5",
+    "nx": "15.6.3",
     "prettier": "^2.6.2",
     "set-shebang": "^0.1.12",
     "sqlite3": "^5.1.4",
@@ -46,15 +49,5 @@
   },
   "workspaces": [
     "packages/**"
-  ],
-  "cds": {
-    "requires": {
-      "db": {
-        "kind": "sqlite",
-        "credentials": {
-          "database": "db.sqlite"
-        }
-      }
-    }
-  }
+  ]
 }

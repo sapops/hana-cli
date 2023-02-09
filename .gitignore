@@ -42,3 +42,4 @@ Thumbs.db
 .cdsrc-private.json
 
 gen
+*.sqlite

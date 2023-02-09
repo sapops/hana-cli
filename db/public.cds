@@ -1,4 +1,4 @@
-using from '../packages/hana2cds/src/cds/public';
+using from '../packages/hana2cds/src/cds/SYS/tables';
 
 service public {   
 

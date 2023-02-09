@@ -5,7 +5,7 @@ import { db2csn } from './hana2csn'
 
 describe('hana2csn', () => {
   test('Connect to sqlite', async () => {
-    const db = await cds.connect.to("public");
+    const db = await cds.connect.to("mock");
 
     const csn = await db2csn(db, {schema: 'SYS'});
 

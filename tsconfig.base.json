@@ -15,7 +15,7 @@
     "skipLibCheck": true,
     "skipDefaultLibCheck": true,
     "baseUrl": ".",
-    "paths": {      
+    "paths": {
       "hana2cds": ["packages/hana2cds/src/index.ts"],
       "nx-npm-publish": ["packages/nx-npm-publish/src/index.ts"]
     }

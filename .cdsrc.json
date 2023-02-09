@@ -1,16 +1,5 @@
 {
-    "_requires": {
-        "mock": {
-            "kind": "sqlite",
-            "credentials": {
-                "database": "db.sqlite"
-            }
-        },
-        "db": {
-            "kind": "sqlite",
-            "credentials": {
-                "database": "db.sqlite"
-            }
-        }
+    "build": {
+        "target": "."
     }
 }

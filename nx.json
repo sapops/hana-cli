@@ -70,5 +70,7 @@
       "analyzeSourceFiles": true
     }
   },
-  "plugins": ["nx-npm-publish"]
+  "plugins": [
+    "nx-npm-publish"
+  ]  
 }

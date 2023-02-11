@@ -3,10 +3,10 @@
   "version": "0.0.3",
   "license": "MIT",
   "scripts": {
+    "make:secrets": "cds env get requires.db.credentials --resolve-bindings | json2fs --to .cds/requires/db/credentials",
     "init:data": "CDS_CONFIG=./.cds DISABLE_V8_COMPILE_CACHE=1 nx workspace-generator datagen --verbose",
     "init:sqlite": "cds deploy --to sqlite  --no-save",
     "nx:publish": "nx run-many --target=publish",
-    "make:secrets": "cds env get requires.db.credentials --resolve-bindings | json2fs --to .cds/requires/db/credentials",
     "version": "nx affected --target=version --base=v${npm_old_version} ${npm_new_version} --workspaces-update=false && npm install --ignore-scripts --package-lock-only --fund=false --audit=false && git add -A "
   },
   "private": true,
@@ -55,6 +55,11 @@
       "levels": {
         "db|pool": "warn"
       }
+    }
+  },
+  "nx:": {
+    "targets":{
+      
     }
   }
 }

@@ -3,7 +3,7 @@
   "version": "0.0.3",
   "license": "MIT",
   "scripts": {
-    "init:data": "DISABLE_V8_COMPILE_CACHE=1 DEBUG=true nx workspace-generator datagen --verbose",
+    "init:data": "DISABLE_V8_COMPILE_CACHE=1 nx workspace-generator datagen --verbose",
     "init:sqlite": "cds deploy --to sqlite  --no-save",
     "nx:publish": "nx run-many --target=publish",
     "make:secrets": "cds env get requires.db.credentials --resolve-bindings | json2fs --to .cds/requires/db/credentials",
@@ -49,5 +49,12 @@
   },
   "workspaces": [
     "packages/**"
-  ]
+  ],
+  "cds": {
+    "log": {
+      "levels": {
+        "db|pool": "warn"
+      }
+    }
+  }
 }

@@ -1,15 +1,20 @@
 import * as cds from '@sap/cds';
 import { writeFile } from 'fs/promises';
 
+//generate CSV files with remote data
 export default async function () {
-  //load public hana model
-  const model = await cds.load('db');
+  //load public hana model (tables only)
+  const model = await cds.load('db/tables');
+
+  const requires = cds.env.requires as any;
 
   //connect to hana db
+  //delete requires?.db?.credentials?.database;
+
   const db = await cds.connect.to('db', {
     model: model as any,
     kind: 'hana',
-    credentials: (cds.env.requires as any)?.db?.credentials,
+    credentials: requires?.db?.credentials,
   });
 
   //get object list
@@ -43,6 +48,10 @@ export default async function () {
 
   // for every entity
   for (const [entity, definiton] of Object.entries(db.entities)) {
+
+    const filename = `db/data/${entity}.csv`;
+
+    console.log(`Generating ${filename}`);
     //read content
     const result = await db
       .read(definiton)
@@ -57,7 +66,7 @@ export default async function () {
     const csv = arrayOfObjectsToCSV(result, headers);
 
     //write file\
-    await writeFile(`db/data/${entity}.csv`, csv);
+    await writeFile(filename, csv);
   }
 }
 

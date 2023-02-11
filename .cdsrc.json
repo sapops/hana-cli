@@ -1,5 +1,19 @@
 {
     "build": {
         "target": "."
+    },
+    "requires": {
+        "db": {
+            "model": [
+                "db"
+            ],
+            "kind": "hana",
+            "[mock]": {
+                "kind": "sqlite",
+                "credentials": {
+                    "database": "db.sqlite"
+                }
+            }
+        }
     }
 }

@@ -34,8 +34,5 @@
 	// "features": {
 	// 	"docker-from-docker": "latest"
 	// },
-	"remoteEnv": {
-		"CDS_ENV": "hybrid",
-		"CDS_CONFIG": "/workspace/.cds"
-	}
+	"remoteEnv": {}
 }

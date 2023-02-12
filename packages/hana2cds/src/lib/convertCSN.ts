@@ -34,9 +34,10 @@ export async function convertCSN(model: CSN, options: Options): Promise<CSN> {
 
   const definitions = Object.entries(model.definitions).reduce(
     (entries, [entity, definition]) => {
-      const name = `${options?.entities?.prefix || `views.`}${entity}${
-        options?.entities?.suffix || ''
-      }`;
+      const name = `${options?.entities?.prefix || `views.`}${entity.replace(
+        /[^a-zA-Z0-9_]+/g,
+        '.'
+      )}${options?.entities?.suffix || ''}`;
 
       if (definition.kind === 'entity') {
         const projection: Projection = {

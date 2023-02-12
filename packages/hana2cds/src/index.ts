@@ -1,19 +1,26 @@
 import { Command } from 'commander';
 import { writeFile } from 'fs/promises';
 import { stdout } from 'process';
+import { Case, convertCSN } from './lib/convertCSN';
 import { hana2csn } from './lib/hana2csn';
 
 interface Options {
   schema: string;
-  filter: string;
-  output: string;
+  filter?: string;
+  output?: string;
+  case?: Case;
 }
 
 export default new Command()
   .description('Generates CDS model from Hana table/view defintion')
   .requiredOption('-s, --schema <schema>', 'Database schema')
-  .option('-f, --filter <filter>', 'Comma-separated list of tables/views')  
+  .option('-f, --filter <filter>', 'Comma-separated list of tables/views')
   .option('-o, --output <output>', 'Name of output file (STDOUT by default)')
+  .option(
+    '-c, --case <properties case>',
+    'Convert properties to a specific case'
+  )
+  // .option('-n, --prefix <projection prefix>', 'Prefix for converted projections (applicable if case is provided)')
   .action(async (options: Options) => {
     const useTTY = !options.output;
     const { write } = stdout;
@@ -31,12 +38,23 @@ export default new Command()
       objects: options?.filter?.split(','),
     });
 
+    if (options?.case && csn.definitions) {
+      try {
+        const csnConverted = await convertCSN(csn, {
+          properties: { case: options?.case },
+        });
+        Object.assign(csn.definitions, csnConverted.definitions);
+      } catch (error) {
+        //do nothing
+      }
+    }
+
     const result = JSON.stringify(csn, null, '\t');
 
     if (useTTY) {
       stdout.write = write;
       stdout.write(result);
     } else {
-      await writeFile(options.output, result);
+      options?.output && (await writeFile(options?.output, result));
     }
   });

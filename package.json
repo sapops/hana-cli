@@ -1,6 +1,6 @@
 {
   "name": "sapops",
-  "version": "0.0.4",
+  "version": "0.0.5",
   "license": "MIT",
   "scripts": {
     "make:secrets": "cds env get requires.db.credentials --resolve-bindings | json2fs --to .cds/requires/db/credentials",

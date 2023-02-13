@@ -1,0 +1,22 @@
+{
+	"namespace": "_SYS_BI",
+	"definitions": {
+		"AMS_STATUS": {
+			"@cds.persistence.exists": true,
+			"kind": "entity",
+			"elements": {
+				"KEY": {
+					"@title": null,
+					"type": "cds.String",
+					"length": 256,
+					"key": true
+				},
+				"VALUE": {
+					"@title": null,
+					"type": "cds.String",
+					"length": 256
+				}
+			}
+		}
+	}
+}

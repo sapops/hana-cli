@@ -67,23 +67,28 @@ export async function db2csn(db: Service, input: SingleInput): Promise<CSN> {
 
         return [
           r.OBJECT_NAME,
-          Object.assign({ '@cds.persistence.exists': true }, {
-            kind: 'entity',
-            elements:
-              columns &&
-              Object.fromEntries(
-                columns
-                  .sort((a, b) => a.POSITION - b.POSITION)
-                  .map((c) => [
-                    c.COLUMN_NAME,
-                    Object.assign(
-                      {},
-                      getCdsType(c),
-                      keys.includes(c.COLUMN_NAME) && { key: true }
-                    ),
-                  ])
-              ),
-          } as Definition),
+          Object.assign(
+            { '@cds.persistence.exists': true },
+            {
+              kind: 'entity',
+              elements:
+                columns &&
+                Object.fromEntries(
+                  columns
+                    .sort((a, b) => a.POSITION - b.POSITION)
+                    .map((c) => [
+                      c.COLUMN_NAME,
+                      Object.assign(
+                        {} as any,
+                        getCdsType(c),
+                        keys.includes(c.COLUMN_NAME) && { key: true },
+                        c.COMMENTS && { '@title': c.COMMENTS }
+                      ),
+                    ])
+                ),
+            } as Definition,
+            object?.COMMENTS && { '@title': object.COMMENTS }
+          ),
         ];
       })
     ),

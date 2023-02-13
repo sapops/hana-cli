@@ -1,5 +1,5 @@
 entity sample {
-    SMALLINT      : hana.SMALLINT;
+    SMALLINT      : hana.SMALLINT @title:'Small Integer';
     TINYINT       : hana.TINYINT;
     SMALLDECIMAL  : hana.SMALLDECIMAL;
     REAL          : hana.REAL;
@@ -14,7 +14,8 @@ entity sample {
     ST_GEOMETRY_1 : hana.ST_GEOMETRY(1);
 };
 
-entity views.sample as projection on sample {
+@title: 'test'
+entity views.sample as projection on sample  {
     key SMALLINT as smallint,
     TINYINT  as tinyint
 }

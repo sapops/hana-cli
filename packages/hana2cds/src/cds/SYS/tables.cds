@@ -4,3 +4,4 @@ using from './tables/VIEWS';
 using from './tables/VIEW_COLUMNS';
 using from './tables/TABLE_COLUMNS';
 using from './tables/DATA_TYPES';
+using from './tables/INDEX_COLUMNS';

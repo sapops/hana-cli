@@ -15,6 +15,6 @@ entity sample {
 };
 
 entity views.sample as projection on sample {
-    SMALLINT as smallint,
+    key SMALLINT as smallint,
     TINYINT  as tinyint
 }

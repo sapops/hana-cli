@@ -18,26 +18,22 @@ interface CDSEnv {
   };
 }
 
-export async function db2csn(db: Service, input:SingleInput): Promise<CSN>  {
-
+export async function db2csn(db: Service, input: SingleInput): Promise<CSN> {
   const { OBJECTS } = db.entities('');
-
-  const with_columns = (v: any) => {
-    v('*'), v.columns('*');
-  };
 
   // read table/view columns
   const result = (await db
     .read(OBJECTS)
     .columns((o: any) => {
-      o.OBJECT_TYPE,
-        o.OBJECT_OID,
-        o.SCHEMA_NAME,
-        o.OBJECT_NAME,
-        //read view columns
-        o.view(with_columns);
-      //read table columns
-      o.table(with_columns);
+      o.OBJECT_TYPE, o.OBJECT_OID, o.SCHEMA_NAME, o.OBJECT_NAME;
+      // read view columns
+      o.view((v: any) => {
+        v('*'), v.columns('*');
+      }),
+        //read table columns
+        o.table((v: any) => {
+          v('*'), v.columns('*'), v.keys('*');
+        });
     })
     .where(
       Object.assign(
@@ -57,6 +53,18 @@ export async function db2csn(db: Service, input:SingleInput): Promise<CSN>  {
       result.map((r) => {
         const object = r?.[r.OBJECT_TYPE.toLowerCase() as ObjectType];
         const columns = object?.columns;
+
+        let keys = [] as string[];
+
+        switch (r.OBJECT_TYPE) {
+          case 'TABLE':
+            keys =
+              (object as Types.TABLES).keys?.map((k) => k.COLUMN_NAME) || [];
+            break;
+          default:
+            break;
+        }
+
         return [
           r.OBJECT_NAME,
           Object.assign({ '@cds.persistence.exists': true }, {
@@ -66,14 +74,20 @@ export async function db2csn(db: Service, input:SingleInput): Promise<CSN>  {
               Object.fromEntries(
                 columns
                   .sort((a, b) => a.POSITION - b.POSITION)
-                  .map((c) => [c.COLUMN_NAME, getCdsType(c) as unknown])
+                  .map((c) => [
+                    c.COLUMN_NAME,
+                    Object.assign(
+                      {},
+                      getCdsType(c),
+                      keys.includes(c.COLUMN_NAME) && { key: true }
+                    ),
+                  ])
               ),
           } as Definition),
         ];
       })
     ),
   };
-  
 }
 
 export async function hana2csn(input: SingleInput): Promise<CSN> {
@@ -88,5 +102,4 @@ export async function hana2csn(input: SingleInput): Promise<CSN> {
   });
 
   return db2csn(db, input);
-
 }

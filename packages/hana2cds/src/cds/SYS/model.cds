@@ -1,11 +1,20 @@
-using {DATA_TYPES, VIEW_COLUMNS, TABLE_COLUMNS, TABLES, VIEWS } from './tables';
+using {
+     DATA_TYPES,
+     VIEW_COLUMNS,
+     TABLE_COLUMNS,
+     TABLES,
+     VIEWS,
+     INDEX_COLUMNS
+} from './tables';
 
 extend VIEW_COLUMNS with {
-     data_type: Association to one DATA_TYPES on data_type.TYPE_ID = DATA_TYPE_ID
+     data_type : Association to one DATA_TYPES
+                      on data_type.TYPE_ID = DATA_TYPE_ID
 }
 
 extend TABLE_COLUMNS with {
-     data_type: Association to one DATA_TYPES on data_type.TYPE_ID = DATA_TYPE_ID
+     data_type : Association to one DATA_TYPES
+                      on data_type.TYPE_ID = DATA_TYPE_ID
 }
 
 extend VIEWS with {
@@ -18,13 +27,16 @@ extend TABLES with {
      columns : Association to many TABLE_COLUMNS
                     on  columns.SCHEMA_NAME = SCHEMA_NAME
                     and columns.TABLE_NAME  = TABLE_NAME;
+     keys    : Association to many INDEX_COLUMNS
+                    on  keys.TABLE_OID  = TABLE_OID
+                    and keys.CONSTRAINT = 'PRIMARY KEY';
 };
 
 extend OBJECTS with {
      table : Association to one TABLES
                   on  table.TABLE_OID = OBJECT_OID
                   and OBJECT_TYPE     = 'TABLE';
-     view : Association to one VIEWS
+     view  : Association to one VIEWS
                   on  view.VIEW_OID = OBJECT_OID
-                  and OBJECT_TYPE     = 'VIEW';
+                  and OBJECT_TYPE   = 'VIEW';
 }

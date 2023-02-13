@@ -1,3 +1,9 @@
+# Hana CLI
+This project is supposed to be a monorepo CLI for multiple hana commands ( next-gen hana-cli ) where each of subcommands will be published also as a separate module.
+
+# Commands
+- [hana2cds](packages/hana2cds/README.md) CDS generator from Hana artifacts
+
 # Set up local environment
 - Install all dependencies using `npm install`
 - For remote access generate hana secrets as described [here](packages/hana2cds/README.md)

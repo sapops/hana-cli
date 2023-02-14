@@ -44,6 +44,10 @@ export default async function () {
       SCHEMA_NAME,
       VIEW_NAME: { in: OBJECTS },
     },
+    INDEX_COLUMNS: {
+      SCHEMA_NAME,
+      TABLE_NAME: { in: OBJECTS }
+    }
   };
 
   // for every entity

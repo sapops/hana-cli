@@ -1,5 +1,6 @@
 SCHEMA_NAME;VIEW_NAME;VIEW_OID;COMMENTS
 "SYS";"DATA_TYPES";"137186";"Available SQL data types"
+"SYS";"INDEX_COLUMNS";"136633";"Columns of indexes"
 "SYS";"OBJECTS";"138258";"Available objects"
 "SYS";"TABLES";"136788";"Available tables"
 "SYS";"TABLE_COLUMNS";"138209";"Available table columns"

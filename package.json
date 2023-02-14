@@ -3,7 +3,7 @@
   "version": "0.0.6",
   "license": "MIT",
   "scripts": {
-    "make:secrets": "cds env get requires.db.credentials --resolve-bindings | json2fs --to .cds/requires/db/credentials",
+    "make:secrets": "CDS_ENV=hybrid cds env get requires.db.credentials --resolve-bindings > .cds/requires/db/credentials",
     "init:data": "CDS_CONFIG=./.cds DISABLE_V8_COMPILE_CACHE=1 nx workspace-generator datagen --verbose",
     "init:sqlite": "cds deploy --to sqlite  --no-save",
     "nx:publish": "nx run-many --target=publish",

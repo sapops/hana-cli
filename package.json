@@ -7,9 +7,8 @@
     "init:data": "CDS_CONFIG=./.cds DISABLE_V8_COMPILE_CACHE=1 nx workspace-generator datagen --verbose",
     "init:sqlite": "cds deploy --to sqlite  --no-save",
     "nx:publish": "nx run-many --target=publish",
-    "preversion": "nx print-affected --select=projects --base=v${npm_old_version}",
-    "version": "nx print-affected --select=projects --base=v${npm_old_version}",
-    "_version": "nx affected --target=version --base=v${npm_old_version} ${npm_new_version} --workspaces-update=false && npm install --ignore-scripts --package-lock-only --fund=false --audit=false && git add -A "
+    "preversion": "nx affected --target=version --base=v${npm_old_version} ${npm_new_version} --workspaces-update=false",
+    "version": "npm install --ignore-scripts --package-lock-only --fund=false --audit=false && git add -A "
   },
   "private": true,
   "dependencies": {

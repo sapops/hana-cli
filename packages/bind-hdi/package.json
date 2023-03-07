@@ -4,6 +4,5 @@
   "type": "commonjs",
   "bin": {
     "bind-hdi": "src/bin/run.ts"
-  },
-  "private":"false"
+  }
 }

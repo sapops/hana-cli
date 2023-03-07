@@ -35,7 +35,7 @@
         "commands": [
           "npm pkg set bin=src/bin/run.js",
           "set-shebang src/bin/run.js node",
-          "npm publish"
+          "npm publish --access=public"
         ],
         "cwd": "dist/packages/bind-hdi"
       },

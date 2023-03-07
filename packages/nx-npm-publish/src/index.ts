@@ -1,5 +1,5 @@
 import { TargetConfiguration, readJsonFile } from '@nrwl/devkit';
-import { dirname, join } from 'path';
+import * as path from 'path';
 import { PackageJson } from 'type-fest';
 
 //const root: PackageJson = readJsonFile('package.json');
@@ -8,15 +8,25 @@ export const projectFilePatterns = ['project.json'];
 export function registerProjectTargets(
   projectFilePath: string
 ): Record<string, TargetConfiguration> | undefined {
-
   //console.log(projectFilePath);
 
   //read package.json
-  const cwd = dirname(projectFilePath);
-  const pkg: PackageJson = readJsonFile(join(cwd, 'package.json'));
+  //onst cwd = dirname(projectFilePath);
+  const pkg: PackageJson = readJsonFile(
+    path.resolve(projectFilePath, '../package.json')
+  );
 
   // ignore private packages;
   if (pkg.private) {
+    return;
+  }
+
+  //
+  const root: PackageJson = readJsonFile(
+    path.resolve(projectFilePath).replace(projectFilePath, 'package.json')
+  );
+
+  if (pkg.version !== root.version) {
     return;
   }
 
@@ -26,7 +36,7 @@ export function registerProjectTargets(
     const ts = /\.ts$/;
     if (ts.test(path)) {
       // rename bin reference in a build folder
-      commands.push(`npm pkg set ${bin}, ${path.replace(ts, '.js')}`);
+      commands.push(`npm pkg set ${bin} ${path.replace(ts, '.js')}`);
       // replace ts-node shebang with a node command
       commands.push(`npx set-shebang ${path} node`);
     }
@@ -51,9 +61,9 @@ export function registerProjectTargets(
       executor: 'nx:run-commands',
       options: {
         commands,
-        cwd,
+        cwd: `dist/${path.dirname(projectFilePath)}`,
       },
-      dependsOn:["build"]
+      dependsOn: ['build'],
     },
   };
 }

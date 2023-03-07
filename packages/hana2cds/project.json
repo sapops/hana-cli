@@ -71,20 +71,6 @@
         "cwd": "packages/hana2cds/src/cds"
       }
     },
-    "publish": {
-      "executor": "nx:run-commands",
-      "options": {
-        "commands": [
-          "npm pkg set bin=src/bin/run.js",
-          "set-shebang src/bin/run.js node",
-          "npm publish"
-        ],
-        "cwd": "dist/packages/hana2cds"
-      },
-      "dependsOn": [
-        "build"
-      ]
-    },
     "version": {
       "executor": "nx:run-commands",
       "options": {

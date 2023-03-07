@@ -54,7 +54,7 @@ export function registerProjectTargets(
   }
 
   // inherit version
-  commands.push('npm publish');
+  commands.push('npm publish --access public');
 
   return {
     publish: {

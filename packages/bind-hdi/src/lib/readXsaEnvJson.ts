@@ -7,8 +7,8 @@ const tmpFile = "./di-builder.json";
 
 const execAsync = promisify(exec);
 
-export async function readDiBuilderJson() {
-  await execAsync(`xs env di-builder --export-json=${tmpFile}`);
+export async function readXsaEnvJson(app: string) {
+  await execAsync(`xs env ${app} --export-json=${tmpFile}`);
   const json = await readFile(tmpFile, "utf-8");
   await unlink(tmpFile);
   // console.log(`successfully deleted ${tmpFile}`);

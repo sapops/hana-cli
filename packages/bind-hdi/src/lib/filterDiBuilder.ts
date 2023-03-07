@@ -1,10 +1,11 @@
-import {readDiBuilderJson} from "./readDiBuilder";
+import {readXsaEnvJson} from "./readXsaEnvJson";
 import {ServiceReplacement, XsaEnv} from "./XSAtypes";
 
 export async function filterDiBuilder(
   mainService: ServiceReplacement  
 ): Promise<XsaEnv> {
-  const {VCAP_SERVICES} = await readDiBuilderJson();
+  //read di-builder
+  const {VCAP_SERVICES} = await readXsaEnvJson('di-builder');
 
   return {
     VCAP_SERVICES: {

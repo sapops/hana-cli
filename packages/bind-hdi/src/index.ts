@@ -32,3 +32,5 @@ export default new Command('bind-hdi')
       await writeFile(options.to, JSON.stringify(json, null, '\t'));
     }
   });
+
+  

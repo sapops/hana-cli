@@ -11,13 +11,13 @@
   },
   "private": true,
   "dependencies": {
-    "@sap/cds": "6.6.0",
-    "@sap/hana-client": "2.15.22",
+    "@sap/cds": "^6.6.0",
+    "@sap/hana-client": "^2.15.22",
     "commander": "^10.0.0",
     "tslib": "^2.3.0"
   },
   "devDependencies": {
-    "@cap-js/graphql": "0.3.1",
+    "@cap-js/graphql": "^0.3.1",
     "@nrwl/cli": "15.8.5",
     "@nrwl/devkit": "15.8.5",
     "@nrwl/eslint-plugin-nx": "15.8.5",

@@ -1,6 +1,6 @@
 {
   "name": "sapops",
-  "version": "0.0.6",
+  "version": "0.0.7",
   "license": "MIT",
   "scripts": {
     "make:secrets": "CDS_ENV=hybrid cds env get requires.db.credentials --resolve-bindings > .cds/requires/db/credentials",

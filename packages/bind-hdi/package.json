@@ -1,6 +1,6 @@
 {
   "name": "@sapops/bind-hdi",
-  "version": "0.0.1",
+  "version": "0.0.7",
   "type": "commonjs",
   "bin": {
     "bind-hdi": "src/bin/run.ts"

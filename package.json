@@ -1,6 +1,6 @@
 {
   "name": "sapops",
-  "version": "0.0.8",
+  "version": "0.0.9",
   "license": "MIT",
   "scripts": {
     "make:secrets": "CDS_ENV=hybrid cds env get requires.db.credentials --resolve-bindings > .cds/requires/db/credentials",
@@ -8,7 +8,7 @@
     "init:sqlite": "cds deploy --to sqlite  --no-save",
     "nx:publish": "nx run-many --target=publish",
     "preversion": "nx print-affected --select=projects --base=v${npm_old_version}",
-    "version":"nx print-affected --select=projects --base=v${npm_old_version}",
+    "version": "nx print-affected --select=projects --base=v${npm_old_version}",
     "_version": "nx affected --target=version --base=v${npm_old_version} ${npm_new_version} --workspaces-update=false && npm install --ignore-scripts --package-lock-only --fund=false --audit=false && git add -A "
   },
   "private": true,

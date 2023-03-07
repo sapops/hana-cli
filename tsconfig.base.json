@@ -16,6 +16,7 @@
     "skipDefaultLibCheck": true,
     "baseUrl": ".",
     "paths": {
+      "@sapops/bind-hdi": ["packages/bind-hdi/src/index.ts"],
       "hana2cds": ["packages/hana2cds/src/index.ts"],
       "nx-npm-publish": ["packages/nx-npm-publish/src/index.ts"]
     }

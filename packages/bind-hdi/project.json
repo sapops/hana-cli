@@ -1,0 +1,48 @@
+{
+  "name": "bind-hdi",
+  "$schema": "../../node_modules/nx/schemas/project-schema.json",
+  "sourceRoot": "packages/bind-hdi/src",
+  "projectType": "library",
+  "targets": {
+    "build": {
+      "executor": "@nrwl/js:tsc",
+      "outputs": ["{options.outputPath}"],
+      "options": {
+        "outputPath": "dist/packages/bind-hdi",
+        "main": "packages/bind-hdi/src/index.ts",
+        "tsConfig": "packages/bind-hdi/tsconfig.lib.json",
+        "assets": ["packages/bind-hdi/*.md"]
+      }
+    },
+    "lint": {
+      "executor": "@nrwl/linter:eslint",
+      "outputs": ["{options.outputFile}"],
+      "options": {
+        "lintFilePatterns": ["packages/bind-hdi/**/*.ts"]
+      }
+    },
+    "version": {
+      "executor": "nx:run-commands",
+      "options": {
+        "command": "npm version",
+        "cwd": "packages/bind-hdi"
+      }
+    },
+    
+    "publish": {
+      "executor": "nx:run-commands",
+      "options": {
+        "commands": [
+          "npm pkg set bin=src/bin/run.js",
+          "set-shebang src/bin/run.js node",
+          "npm publish"
+        ],
+        "cwd": "dist/packages/bind-hdi"
+      },
+      "dependsOn": [
+        "build"
+      ]
+    }
+  },
+  "tags": []
+}

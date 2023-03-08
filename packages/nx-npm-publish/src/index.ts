@@ -35,11 +35,11 @@ export function registerProjectTargets(
   const renameTsBin = function (bin: string, path: string) {
     const ts = /\.ts$/;
     if (ts.test(path)) {
-      const bin = path.replace(ts, '.js');
+      const newPath = path.replace(ts, '.js');
       // rename bin reference in a build folder
-      commands.push(`npm pkg set ${bin}=${bin}`);
+      commands.push(`npm pkg set ${bin}=${newPath}`);
       // replace ts-node shebang with a node command
-      commands.push(`npx set-shebang ${bin} node`);
+      commands.push(`npx set-shebang ${newPath} node`);
     }
   };
 

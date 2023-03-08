@@ -1,6 +1,6 @@
 {
   "name": "hana2cds",
-  "version": "0.0.12",
+  "version": "0.0.0",
   "type": "commonjs",
   "bin": {
     "hana2cds": "src/bin/run.ts"

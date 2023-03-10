@@ -9,8 +9,5 @@
     "type": "git",
     "url": "https://github.com/sapops/hana-cli.git",
     "directory": "packages/hana2cds"
-  },
-  "peerDependencies": {
-    "@sap/hana-client": "^2.x"
   }
 }

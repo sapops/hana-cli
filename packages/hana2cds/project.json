@@ -6,40 +6,27 @@
   "targets": {
     "build": {
       "executor": "@nrwl/js:tsc",
-      "outputs": [
-        "{options.outputPath}"
-      ],
+      "outputs": ["{options.outputPath}"],
       "options": {
+        "rootDir": "../../",
         "outputPath": "dist/packages/hana2cds",
         "main": "packages/hana2cds/src/index.ts",
         "tsConfig": "packages/hana2cds/tsconfig.lib.json",
-        "assets": [
-          "packages/hana2cds/*.md",
-          "packages/hana2cds/**/*.csn"
-        ],
-        "buildableProjectDepsInPackageJsonType":"dependencies"
+        "assets": ["packages/hana2cds/*.md", "packages/hana2cds/**/*.csn"],
+        "buildableProjectDepsInPackageJsonType": "dependencies"
       },
-      "dependsOn": [
-        "build-cds-csn",
-        "build-cds-types"
-      ]
+      "dependsOn": ["^build", "build-cds-csn", "build-cds-types"]
     },
     "lint": {
       "executor": "@nrwl/linter:eslint",
-      "outputs": [
-        "{options.outputFile}"
-      ],
+      "outputs": ["{options.outputFile}"],
       "options": {
-        "lintFilePatterns": [
-          "packages/hana2cds/**/*.ts"
-        ]
+        "lintFilePatterns": ["packages/hana2cds/**/*.ts"]
       }
     },
     "test": {
       "executor": "@nrwl/jest:jest",
-      "outputs": [
-        "{workspaceRoot}/coverage/{projectRoot}"
-      ],
+      "outputs": ["{workspaceRoot}/coverage/{projectRoot}"],
       "options": {
         "jestConfig": "packages/hana2cds/jest.config.ts",
         "passWithNoTests": true
@@ -47,12 +34,8 @@
     },
     "build-cds-csn": {
       "executor": "nx:run-commands",
-      "inputs": [
-        "cds"
-      ],
-      "outputs": [
-        "{projectRoot}/src/cds/public.csn"
-      ],
+      "inputs": ["cds"],
+      "outputs": ["{projectRoot}/src/cds/public.csn"],
       "options": {
         "command": "npx cds compile src/cds/public.cds --dest src/cds/public.csn",
         "cwd": "packages/hana2cds/src/cds"
@@ -60,12 +43,8 @@
     },
     "build-cds-types": {
       "executor": "nx:run-commands",
-      "inputs": [
-        "cds"
-      ],
-      "outputs": [
-        "{projectRoot}/src/cds/other.ts"
-      ],
+      "inputs": ["cds"],
+      "outputs": ["{projectRoot}/src/cds/other.ts"],
       "options": {
         "command": "npx cds2types --cds ./src/cds/public.cds --output ./src/cds/",
         "cwd": "packages/hana2cds/src/cds"

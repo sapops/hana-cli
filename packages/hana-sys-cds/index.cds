@@ -5,7 +5,7 @@ using {
      TABLES,
      VIEWS,
      INDEX_COLUMNS
-} from './tables';
+} from './SYS/tables';
 
 extend VIEW_COLUMNS with {
      data_type : Association to one DATA_TYPES

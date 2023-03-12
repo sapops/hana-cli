@@ -1,1 +1,1 @@
-using from './SYS/model';
+using from '@sapops/hana-sys-cds';

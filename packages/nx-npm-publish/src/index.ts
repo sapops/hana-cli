@@ -10,6 +10,8 @@ export function registerProjectTargets(
 ): Record<string, TargetConfiguration> | undefined {
   //console.log(projectFilePath);
 
+  const dirname = path.dirname(projectFilePath);
+
   //read package.json
   //onst cwd = dirname(projectFilePath);
   const pkg: PackageJson = readJsonFile(
@@ -26,45 +28,55 @@ export function registerProjectTargets(
     path.resolve(projectFilePath).replace(projectFilePath, 'package.json')
   );
 
-  if (pkg.version !== root.version) {
-    return;
-  }
-
-  const commands: string[] = [];
-
-  const renameTsBin = function (bin: string, path: string) {
-    const ts = /\.ts$/;
-    if (ts.test(path)) {
-      const newPath = path.replace(ts, '.js');
-      // rename bin reference in a build folder
-      commands.push(`npm pkg set ${bin}=${newPath}`);
-      // replace ts-node shebang with a node command
-      commands.push(`npx set-shebang ${newPath} node`);
-    }
-  };
-
-  // process typescript files
-  if (pkg.bin) {
-    if (typeof pkg.bin === 'string') {
-      renameTsBin('bin', pkg.bin);
-    } else {
-      Object.entries(pkg.bin).forEach(
-        ([bin, path]) => path && renameTsBin(`bin.${bin}`, path)
-      );
-    }
-  }
-
-  // inherit version
-  commands.push('npm publish --access public');
-
-  return {
-    publish: {
+  const config = {
+    version: {
       executor: 'nx:run-commands',
       options: {
-        commands,
-        cwd: `dist/${path.dirname(projectFilePath)}`,
+        command: 'npm version',
+        cwd: `${dirname}`,
       },
-      dependsOn: ['build'],
     },
   };
+
+  if (pkg.version === root.version) {
+    const commands: string[] = [];
+
+    const renameTsBin = function (bin: string, path: string) {
+      const ts = /\.ts$/;
+      if (ts.test(path)) {
+        const newPath = path.replace(ts, '.js');
+        // rename bin reference in a build folder
+        commands.push(`npm pkg set ${bin}=${newPath}`);
+        // replace ts-node shebang with a node command
+        commands.push(`npx set-shebang ${newPath} node`);
+      }
+    };
+
+    // process typescript files
+    if (pkg.bin) {
+      if (typeof pkg.bin === 'string') {
+        renameTsBin('bin', pkg.bin);
+      } else {
+        Object.entries(pkg.bin).forEach(
+          ([bin, path]) => path && renameTsBin(`bin.${bin}`, path)
+        );
+      }
+    }
+
+    // inherit version
+    commands.push('npm publish --access public');
+
+    Object.assign(config, {
+      publish: {
+        executor: 'nx:run-commands',
+        options: {
+          commands,
+          cwd: `dist/${dirname}`,
+        },
+        dependsOn: ['build'],
+      },
+    });
+  }
+
+  return config;
 }

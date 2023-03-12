@@ -1,7 +1,3 @@
-# hana-sys-cds
+# Hana System CDS types
 
-This library was generated with [Nx](https://nx.dev).
-
-## Building
-
-Run `nx build hana-sys-cds` to build the library.
+This package serves mainly as a dependency for `hana2cds` CLI which is also used to generate cds files in this project.

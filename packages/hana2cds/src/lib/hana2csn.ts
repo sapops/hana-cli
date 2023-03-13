@@ -2,7 +2,7 @@
 import * as cds from '@sap/cds';
 import { CSN, Definition } from '@sap/cds/apis/csn';
 import { getCdsType } from './hana2cdsType';
-import * as Types from '../cds/SYS';
+import * as Types from '../cds/other';
 import path = require('path');
 
 import { Service } from '@sap/cds/apis/services';

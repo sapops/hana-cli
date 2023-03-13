@@ -58,3 +58,4 @@ cds env get requires.db.credentials --resolve-bindings | json2fs --to .cds/requi
 
 This additional utility also developed in this project will parse the file and will store secrets in key-based files with the provided path. In can be local path ( make sure you ignore it from git ) or it can be your home directory for example. In this case CDS will be able to read those secrets automatically if you define this PATH in CDS_CONFIG=`/workspace/.cds`. Keep in mind that currenlty CDS_CONFIG only supports absolute paths, and even tilda is not parsed properly. Also notice that the folder should have a structure requires->service_name->credentials and CDS config is ponting to the root folder for requires.
 
+

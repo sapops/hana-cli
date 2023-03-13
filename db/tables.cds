@@ -1,2 +1,2 @@
-using from '../packages/hana2cds/src/cds/SYS/tables';
+using from '../packages/hana-sys-cds/SYS/tables';
 

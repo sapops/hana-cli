@@ -1,8 +1,9 @@
 define make_sys_table_schema
 	CDS_CONFIG=.cds npx hana2cds -s SYS -f $1 > packages/hana-sys-cds/SYS/$1.csn
 	npx cdsc toCdl packages/hana-sys-cds/SYS/$1.csn --out packages/hana-sys-cds/SYS/$1
-	rm packages/hana-sys-cds/SYS/$1.csn packages/hana-sys-cds/SYS/$1/namespace.cds
+	rm packages/hana-sys-cds/SYS/$1.csn
 endef
+
 # npx cds compile $1/model.csn --to cdl --dest $1
 # rm $1/model.csn $1/namespace.cds	
 

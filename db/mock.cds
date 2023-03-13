@@ -1,1 +1,1 @@
-using from '../packages/hana2cds/src/cds/SYS/model';
+using from '../packages/hana-sys-cds';

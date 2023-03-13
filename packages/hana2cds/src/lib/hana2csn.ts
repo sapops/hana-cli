@@ -47,7 +47,7 @@ export async function db2csn(db: Service, input: SingleInput): Promise<CSN> {
 
   // convert Hana definition to CSN model
   return {
-    namespace: input?.schema,
+    //namespace: input?.schema,
     definitions: Object.fromEntries(
       // map objects to CSN
       result.map((r) => {
@@ -66,7 +66,7 @@ export async function db2csn(db: Service, input: SingleInput): Promise<CSN> {
         }
 
         return [
-          r.OBJECT_NAME,
+          `${input?.schema}.${r.OBJECT_NAME}`,
           Object.assign(
             { '@cds.persistence.exists': true },
             {

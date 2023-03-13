@@ -2,7 +2,7 @@
 import * as cds from '@sap/cds';
 import { CSN, Definition } from '@sap/cds/apis/csn';
 import { getCdsType } from './hana2cdsType';
-import * as Types from '../cds/other';
+import * as Types from '../cds/SYS';
 import path = require('path');
 
 import { Service } from '@sap/cds/apis/services';
@@ -10,6 +10,8 @@ import { Service } from '@sap/cds/apis/services';
 interface SingleInput {
   schema: string;
   objects?: string[];
+  namespace?: string;
+  prefix?: string;
 }
 
 interface CDSEnv {
@@ -47,7 +49,7 @@ export async function db2csn(db: Service, input: SingleInput): Promise<CSN> {
 
   // convert Hana definition to CSN model
   return {
-    //namespace: input?.schema,
+    namespace: input?.namespace,
     definitions: Object.fromEntries(
       // map objects to CSN
       result.map((r) => {
@@ -66,7 +68,7 @@ export async function db2csn(db: Service, input: SingleInput): Promise<CSN> {
         }
 
         return [
-          `${input?.schema}.${r.OBJECT_NAME}`,
+          `${input?.prefix || ''}${r.OBJECT_NAME}`,
           Object.assign(
             { '@cds.persistence.exists': true },
             {

@@ -15,7 +15,7 @@
   "dependencies": {
     "@commander-js/extra-typings": "^12",
     "@fastify/deepmerge": "^2",
-    "@sap/cds": "^8.1.1",
+    "@sap/cds": "^7",
     "@sap/hana-client": "^2.21.28",
     "commander": "^12",
     "tslib": "^2.6.3"
@@ -27,7 +27,7 @@
     "@nx/js": "19.6.2",
     "@nx/plugin": "19.6.2",
     "@nx/workspace": "19.6.2",
-    "@sap/cds-dk": "^8",
+    "@sap/cds-dk": "^7",
     "@sap/eslint-plugin-cds": "^3",
     "@swc-node/register": "~1.9.1",
     "@swc/cli": "~0.3.12",

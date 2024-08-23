@@ -1,4 +1,4 @@
-import { TargetConfiguration, readJsonFile } from '@nrwl/devkit';
+import { TargetConfiguration, readJsonFile } from '@nx/devkit';
 import * as path from 'path';
 import { PackageJson } from 'type-fest';
 

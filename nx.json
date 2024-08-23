@@ -1,40 +1,38 @@
 {
   "$schema": "./node_modules/nx/schemas/nx-schema.json",
-  "npmScope": "sapops",
-  "affected": {
-    "defaultBase": "main"
-  },
-  "tasksRunnerOptions": {
-    "default": {
-      "runner": "@nrwl/nx-cloud",
-      "options": {
-        "cacheableOperations": [
-          "build",
-          "lint",
-          "test",
-          "e2e",
-          "build-cds-csn",
-          "build-cds-types"
-        ],
-        "accessToken": "NTNmNjIwNGQtZTRiZi00ZGM5LTllNDQtMWEyMzVhN2YwMTM1fHJlYWQtd3JpdGU="
-      }
-    }
-  },
   "targetDefaults": {
-    "build": {
+    "@nx/js:tsc": {
+      "cache": true,
       "dependsOn": ["^build"],
       "inputs": ["production", "^production"]
     },
-    "lint": {
-      "inputs": ["default", "{workspaceRoot}/.eslintrc.json"]
+    "build-cds-csn": {
+      "cache": true
     },
-    "test": {
-      "inputs": ["default", "^production", "{workspaceRoot}/jest.preset.js"]
+    "build-cds-types": {
+      "cache": true
+    },
+    "@nx/jest:jest": {
+      "inputs": ["default", "^production", "{workspaceRoot}/jest.preset.js"],
+      "cache": true,
+      "options": {
+        "passWithNoTests": true
+      },
+      "configurations": {
+        "ci": {
+          "ci": true,
+          "codeCoverage": true
+        }
+      }
+    },
+    "@nx/eslint:lint": {
+      "inputs": ["default", "{workspaceRoot}/.eslintrc.json"],
+      "cache": true
     }
   },
   "namedInputs": {
     "default": ["{projectRoot}/**/*", "sharedGlobals"],
-    "production": ["default"],
+    "production": ["default", "!{projectRoot}/src/test-setup.[jt]s"],
     "cds": ["{projectRoot}/**/*.cds"],
     "sharedGlobals": []
   },
@@ -43,9 +41,12 @@
     "libsDir": "packages"
   },
   "pluginsConfig": {
-    "@nrwl/js": {
+    "@nx/js": {
       "analyzeSourceFiles": true
     }
   },
-  "plugins": ["nx-npm-publish"]
+  "plugins": ["nx-npm-publish"],
+  "nxCloudAccessToken": "NTNmNjIwNGQtZTRiZi00ZGM5LTllNDQtMWEyMzVhN2YwMTM1fHJlYWQtd3JpdGU=",
+  "useInferencePlugins": false,
+  "defaultBase": "main"
 }

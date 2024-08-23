@@ -43,3 +43,6 @@ Thumbs.db
 
 gen
 *.sqlite
+
+.nx/cache
+.nx/workspace-data

@@ -1,0 +1,9 @@
+{
+  "generators": {
+    "datagen": {
+      "implementation": "./src/generators/datagen",
+      "schema": "./src/generators/datagen/schema.json",
+      "description": "Generator datagen"
+    }
+  }
+}

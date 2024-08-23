@@ -46,13 +46,12 @@ export default async function () {
     },
     INDEX_COLUMNS: {
       SCHEMA_NAME,
-      TABLE_NAME: { in: OBJECTS }
-    }
+      TABLE_NAME: { in: OBJECTS },
+    },
   };
 
   // for every entity
   for (const [entity, definiton] of Object.entries(db.entities)) {
-
     const filename = `db/data/${entity}.csv`;
 
     console.log(`Generating ${filename}`);

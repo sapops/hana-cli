@@ -3,9 +3,10 @@
   "$schema": "../../node_modules/nx/schemas/project-schema.json",
   "sourceRoot": "packages/bind-hdi/src",
   "projectType": "library",
+  "tags": [],
   "targets": {
     "build": {
-      "executor": "@nrwl/js:tsc",
+      "executor": "@nx/js:tsc",
       "outputs": ["{options.outputPath}"],
       "options": {
         "outputPath": "dist/packages/bind-hdi",
@@ -15,11 +16,7 @@
       }
     },
     "lint": {
-      "executor": "@nrwl/linter:eslint",
-      "outputs": ["{options.outputFile}"],
-      "options": {
-        "lintFilePatterns": ["packages/bind-hdi/**/*.ts"]
-      }
+      "executor": "@nx/eslint:lint"
     },
     "version": {
       "executor": "nx:run-commands",
@@ -28,6 +25,5 @@
         "cwd": "packages/bind-hdi"
       }
     }
-  },
-  "tags": []
+  }
 }

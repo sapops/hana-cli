@@ -8,7 +8,8 @@
     "csv",
     "csv (semicolon)",
     "tsv",
-    "tab"
+    "tab",
+    "json"
   ],
   "git.followTagsWhenSync": true
 }

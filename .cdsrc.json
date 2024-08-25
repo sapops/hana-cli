@@ -10,8 +10,9 @@
             "kind": "hana",
             "[mock]": {
                 "kind": "sqlite",
+                "impl":"@cap-js/sqlite",
                 "credentials": {
-                    "database": "db.sqlite"
+                    "url": "db.sqlite"
                 }
             }
         }

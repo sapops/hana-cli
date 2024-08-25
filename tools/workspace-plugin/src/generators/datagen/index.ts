@@ -1,10 +1,13 @@
 import * as cds from '@sap/cds';
 import { writeFile } from 'fs/promises';
+import { type csn } from '@sap/cds';
+
+type kinds = csn.kinds | 'element';
 
 //generate CSV files with remote data
 export default async function () {
   //load public hana model (tables only)
-  const model = await cds.load('db/tables');
+  const model = await cds.load('models/public');
 
   const requires = cds.env.requires as any;
 
@@ -63,7 +66,9 @@ export default async function () {
 
     //define CSV headers
     const headers = Object.values(definiton.elements)
-      .filter((e) => e.kind === 'element')
+      .filter(
+        (e) => (e.kind as kinds) === 'element' && e.type !== 'cds.Association'
+      )
       .map((e) => e.name);
 
     const csv = arrayOfObjectsToCSV(result, headers);

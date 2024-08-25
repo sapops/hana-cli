@@ -21,7 +21,8 @@
 				"SAPSE.vscode-cds",
 				"eamodio.gitlens",
 				"SAPSE.hana-database-explorer",
-				"esbenp.prettier-vscode"
+				"esbenp.prettier-vscode",
+				"qwtel.sqlite-viewer"
 			]
 		}
 	},

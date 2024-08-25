@@ -1,11 +1,11 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import * as cds from '@sap/cds';
-import { CSN, Definition } from '@sap/cds/apis/csn';
+
 import { getCdsType } from './hana2cdsType';
 import * as Types from '../cds/other';
 import path = require('path');
 
-import { Service } from '@sap/cds/apis/services';
+
 
 interface SingleInput {
   schema: string;
@@ -20,7 +20,7 @@ interface CDSEnv {
   };
 }
 
-export async function db2csn(db: Service, input: SingleInput): Promise<CSN> {
+export async function db2csn(db: cds.Service, input: SingleInput): Promise<cds.csn.CSN> {
   const { OBJECTS } = db.entities('');
 
   // read table/view columns
@@ -88,7 +88,7 @@ export async function db2csn(db: Service, input: SingleInput): Promise<CSN> {
                       ),
                     ])
                 ),
-            } as Definition,
+            } as cds.csn.Definition,
             object?.COMMENTS && { '@title': object.COMMENTS }
           ),
         ];
@@ -97,7 +97,7 @@ export async function db2csn(db: Service, input: SingleInput): Promise<CSN> {
   };
 }
 
-export async function hana2csn(input: SingleInput): Promise<CSN> {
+export async function hana2csn(input: SingleInput): Promise<cds.csn.CSN> {
   //load public hana model
   const model = await cds.load(path.resolve(__dirname, '../cds/public'));
 
@@ -105,7 +105,7 @@ export async function hana2csn(input: SingleInput): Promise<CSN> {
   const db = await cds.connect.to('db', {
     model: model as any,
     kind: 'hana',
-    credentials: (cds.env.requires as CDSEnv)?.db.credentials,
+    credentials: cds.env.requires?.db?.['credentials'],
   });
 
   return db2csn(db, input);

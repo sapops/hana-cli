@@ -49,3 +49,5 @@ gen
 # added by cds
 default-env.json
 db.sqlite*
+
+@cds-models

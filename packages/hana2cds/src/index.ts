@@ -41,7 +41,7 @@ export default new Command()
       schema: options.schema,
       objects: options?.filter?.split(','),
       namespace: options?.namespace,
-      prefix: options?.prefix
+      prefix: options?.prefix,
     });
 
     if (options?.case && csn.definitions) {
@@ -51,7 +51,7 @@ export default new Command()
         });
         Object.assign(csn.definitions, csnConverted.definitions);
       } catch (error) {
-        //do nothing
+        console.error(error);
       }
     }
 
@@ -60,7 +60,7 @@ export default new Command()
     if (useTTY) {
       stdout.write = write;
       stdout.write(result);
-    } else {
-      options?.output && (await writeFile(options?.output, result));
+    } else if (options?.output) {
+      await writeFile(options?.output, result);
     }
   });

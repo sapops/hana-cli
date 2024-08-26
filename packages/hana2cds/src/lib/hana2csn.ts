@@ -1,10 +1,8 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import * as cds from '@sap/cds';
-
-
 import { getCdsType } from './hana2cdsType';
-import * as Types from '../cds/other';
 import * as path from 'path';
+import type { OBJECTS as OBJECTS_Type } from './types';
 
 interface SingleInput {
   schema: string;
@@ -13,7 +11,11 @@ interface SingleInput {
   prefix?: string;
 }
 
-export async function db2csn(db: cds.Service, input: SingleInput): Promise<cds.csn.CSN> {
+export async function db2csn(
+  db: cds.Service,
+  input: SingleInput
+): Promise<cds.csn.CSN> {
+  //  const { OBJECTS } = await import('./types/index');
   const { OBJECTS } = db.entities('');
 
   // read table/view columns
@@ -36,7 +38,7 @@ export async function db2csn(db: cds.Service, input: SingleInput): Promise<cds.c
         { OBJECT_TYPE: { in: ['TABLE', 'VIEW'] } },
         input?.objects && { OBJECT_NAME: { in: input.objects } }
       )
-    )) as Types.OBJECTS[];
+    )) as Array<OBJECTS_Type>;
 
   type ObjectType = 'table' | 'view';
 
@@ -46,15 +48,16 @@ export async function db2csn(db: cds.Service, input: SingleInput): Promise<cds.c
     definitions: Object.fromEntries(
       // map objects to CSN
       result.map((r) => {
-        const object = r?.[r.OBJECT_TYPE.toLowerCase() as ObjectType];
+        const object = r?.[r.OBJECT_TYPE?.toLowerCase() as ObjectType];
         const columns = object?.columns;
 
         let keys = [] as string[];
 
         switch (r.OBJECT_TYPE) {
           case 'TABLE':
-            keys =
-              (object as Types.TABLES).keys?.map((k) => k.COLUMN_NAME) || [];
+            r.table?.keys?.forEach(
+              (k) => k.COLUMN_NAME && keys.push(k.COLUMN_NAME)
+            );
             break;
           default:
             break;
@@ -70,13 +73,13 @@ export async function db2csn(db: cds.Service, input: SingleInput): Promise<cds.c
                 columns &&
                 Object.fromEntries(
                   columns
-                    .sort((a, b) => a.POSITION - b.POSITION)
+                    .sort((a, b) => (a.POSITION ?? 0) - (b.POSITION ?? 0))
                     .map((c) => [
-                      c.COLUMN_NAME,
+                      c.COLUMN_NAME ?? '',
                       Object.assign(
                         {} as any,
                         getCdsType(c),
-                        keys.includes(c.COLUMN_NAME) && { key: true },
+                        keys.includes(c.COLUMN_NAME ?? '') && { key: true },
                         c.COMMENTS && { '@title': c.COMMENTS }
                       ),
                     ])

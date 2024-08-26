@@ -1,6 +1,9 @@
 const baseConfig = require('../../eslint.config.js');
 
 module.exports = [
+  {
+    ignores: ['**/src/cds/**/*.ts'],
+  },
   ...baseConfig,
   {
     files: ['**/*.ts', '**/*.tsx', '**/*.js', '**/*.jsx'],
@@ -13,8 +16,5 @@ module.exports = [
   {
     files: ['**/*.js', '**/*.jsx'],
     rules: {},
-  },
-  {
-    ignores: ['src/cds/**/*.ts'],
   },
 ];

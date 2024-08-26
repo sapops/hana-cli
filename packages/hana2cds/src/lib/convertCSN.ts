@@ -16,10 +16,13 @@ interface Options {
 
 interface Projection {
   kind: 'entity';
-  projection: SELECT<any>['SELECT'];
+  projection: SELECT<unknown>['SELECT'];
 }
 
-export async function convertCSN(model: csn.CSN, options: Options): Promise<csn.CSN> {
+export async function convertCSN(
+  model: csn.CSN,
+  options: Options
+): Promise<csn.CSN> {
   assert(model.definitions, 'Model definitions are not defined');
 
   // switch (options.case) {
@@ -52,7 +55,9 @@ export async function convertCSN(model: csn.CSN, options: Options): Promise<csn.
 
               const as = applyCase(e, options?.properties?.case);
 
-              as && as !== e && Object.assign(ref, { as });
+              if (as && as !== e) {
+                Object.assign(ref, { as });
+              }
 
               return ref;
             }),

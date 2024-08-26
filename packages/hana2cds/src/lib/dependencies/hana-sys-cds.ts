@@ -1,1 +1,0 @@
-import "@sapops/hana-sys-cds";

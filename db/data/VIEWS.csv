@@ -2,6 +2,7 @@ SCHEMA_NAME;VIEW_NAME;VIEW_OID;COMMENTS
 "SYS";"DATA_TYPES";"137381";"Available SQL data types"
 "SYS";"INDEX_COLUMNS";"136690";"Columns of indexes"
 "SYS";"OBJECTS";"138717";"Available objects"
+"SYS";"SYNONYMS";"137174";"Available synonyms"
 "SYS";"TABLES";"136909";"Available tables"
 "SYS";"TABLE_COLUMNS";"138645";"Available table columns"
 "SYS";"VIEWS";"136779";"Available views"

@@ -1,3 +1,4 @@
+@cds.persistence.exists: true
 entity VIEWS {
         SCHEMA_NAME : String;
         VIEW_NAME   : String;

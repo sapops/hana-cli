@@ -5,12 +5,13 @@
     "requires": {
         "db": {
             "model": [
-                "db"
+                "db/model"
             ],
             "kind": "hana",
             "[mock]": {
                 "kind": "sqlite",
                 "impl":"@cap-js/sqlite",
+                "model":["db/mock"],
                 "credentials": {
                     "url": "db.sqlite"
                 }

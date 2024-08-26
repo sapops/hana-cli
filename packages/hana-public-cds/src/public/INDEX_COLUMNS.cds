@@ -1,3 +1,4 @@
+@cds.persistence.exists: true
 entity INDEX_COLUMNS {
         SCHEMA_NAME     : String;
         TABLE_NAME      : String;

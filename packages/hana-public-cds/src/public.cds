@@ -5,6 +5,7 @@ using {VIEWS} from './public/VIEWS';
 using {TABLES} from './public/TABLES';
 using {OBJECTS} from './public/OBJECTS';
 using {INDEX_COLUMNS} from './public/INDEX_COLUMNS';
+using {SYNONYMS} from './public/SYNONYMS';
 
 extend VIEW_COLUMNS with {
      data_type : Association to one DATA_TYPES
@@ -38,4 +39,11 @@ extend OBJECTS with {
      view  : Association to one VIEWS
                   on  view.VIEW_OID = OBJECT_OID
                   and OBJECT_TYPE   = 'VIEW';
+}
+
+extend SYNONYMS with {
+     object : Association to one OBJECTS
+                   on  object.SCHEMA_NAME = SCHEMA_NAME
+                   and object.OBJECT_NAME = OBJECT_NAME
+                   and object.OBJECT_TYPE = OBJECT_TYPE;
 }

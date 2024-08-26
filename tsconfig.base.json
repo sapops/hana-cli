@@ -4,7 +4,6 @@
     "rootDir": ".",
     "sourceMap": true,
     "inlineSources": true,
-    "declaration": false,
     "moduleResolution": "node",
     "emitDecoratorMetadata": true,
     "experimentalDecorators": true,
@@ -20,7 +19,8 @@
       "@sapops/hana-sys-cds": ["packages/hana-sys-cds/src/index.ts"],
       "hana2cds": ["packages/hana2cds/src/index.ts"],
       "nx-npm-publish": ["packages/nx-npm-publish/src/index.ts"],
-      "workspace-plugin": ["tools/workspace-plugin/src/index.ts"]
+      "workspace-plugin": ["tools/workspace-plugin/src/index.ts"],
+      "@sap/cds":["node_modules/@cap-js/cds-types"]
     }
   },
   "exclude": ["node_modules", "tmp"]

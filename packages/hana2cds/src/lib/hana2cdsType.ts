@@ -1,4 +1,4 @@
-import assert = require('assert');
+import * as assert from 'assert';
 
 const length = (type: TemplateStringsArray) =>
   Object.assign(type.join(), { has_length: true });

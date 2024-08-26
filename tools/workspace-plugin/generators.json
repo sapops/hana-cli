@@ -4,6 +4,11 @@
       "implementation": "./src/generators/datagen",
       "schema": "./src/generators/datagen/schema.json",
       "description": "Generator datagen"
+    },
+    "sysgen": {
+      "factory": "./src/generators/sysgen/generator",
+      "schema": "./src/generators/sysgen/schema.json",
+      "description": "Generate SYS views and entities which should be used in hana2cds"
     }
   }
 }

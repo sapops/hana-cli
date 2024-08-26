@@ -48,3 +48,4 @@ gen
 .nx/workspace-data
 # added by cds
 default-env.json
+db.sqlite*

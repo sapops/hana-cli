@@ -1,7 +1,8 @@
-entity TABLE_COLUMNS {
+@cds.persistence.exists: true
+entity VIEW_COLUMNS {
     key SCHEMA_NAME    : String;
-    key TABLE_NAME     : String;
-        COLUMN_NAME    : String;
+    key VIEW_NAME      : String;
+    key COLUMN_NAME    : String;
         POSITION       : String;
         DATA_TYPE_ID   : String;
         DATA_TYPE_NAME : String;

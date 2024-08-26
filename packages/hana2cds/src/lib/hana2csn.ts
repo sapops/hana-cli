@@ -1,23 +1,16 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import * as cds from '@sap/cds';
 
+
 import { getCdsType } from './hana2cdsType';
 import * as Types from '../cds/other';
-import path = require('path');
-
-
+import * as path from 'path';
 
 interface SingleInput {
   schema: string;
   objects?: string[];
   namespace?: string;
   prefix?: string;
-}
-
-interface CDSEnv {
-  db: {
-    credentials: any;
-  };
 }
 
 export async function db2csn(db: cds.Service, input: SingleInput): Promise<cds.csn.CSN> {

@@ -7,9 +7,9 @@ type kinds = csn.kinds | 'element';
 //generate CSV files with remote data
 export default async function () {
   //load public hana model (tables only)
-  const model = await cds.load('models/public');
+  const model = await cds.load('hana-public-cds');
 
-  const requires = cds.env.requires as any;
+  const requires = cds.env.requires;
 
   //connect to hana db
   //delete requires?.db?.credentials?.database;

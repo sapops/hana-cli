@@ -2,7 +2,7 @@
 import * as cds from '@sap/cds';
 import { getCdsType } from './hana2cdsType';
 import * as path from 'path';
-import type { OBJECTS as OBJECTS_Type } from './types';
+import type { OBJECTS as OBJECTS_Type } from './generated/types';
 
 interface SingleInput {
   schema: string;

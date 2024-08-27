@@ -52,3 +52,5 @@ db.sqlite*
 
 @cds-models
 generated
+
+db/data

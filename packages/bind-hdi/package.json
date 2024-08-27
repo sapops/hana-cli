@@ -4,5 +4,9 @@
   "type": "commonjs",
   "bin": {
     "bind-hdi": "src/bin/run.ts"
+  },
+  "dependencies": {
+    "@commander-js/extra-typings": "^12",
+    "@fastify/deepmerge": "^2"
   }
 }

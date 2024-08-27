@@ -23,6 +23,9 @@ module.exports = [
     languageOptions: {
       parser: jsonc,
     },
+    rules: {
+      '@nx/dependency-checks': 'error',
+    },
   },
   {
     files: ['**/*.ts', '**/*.tsx', '**/*.js', '**/*.jsx'],

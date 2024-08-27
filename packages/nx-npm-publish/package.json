@@ -5,5 +5,9 @@
   "private": true,
   "devDependencies": {
     "set-shebang": "^0.1.12"
+  },
+  "dependencies": {
+    "@nx/devkit": "19.6.3",
+    "type-fest": "^4"
   }
 }

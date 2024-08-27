@@ -100,6 +100,6 @@ export async function db2csn(input: SingleInput): Promise<cds.csn.CSN> {
 
 export async function hana2csn(input: SingleInput): Promise<cds.csn.CSN> {
   // connect to db using public model
-  await cds.connect.to('db');
+  await cds.connect.to('db', { model: 'hana2cds' });
   return db2csn(input);
 }

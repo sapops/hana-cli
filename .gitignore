@@ -51,3 +51,4 @@ default-env.json
 db.sqlite*
 
 @cds-models
+generated

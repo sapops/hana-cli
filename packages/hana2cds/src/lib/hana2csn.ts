@@ -1,44 +1,49 @@
+/* eslint-disable @typescript-eslint/no-unused-expressions */
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import * as cds from '@sap/cds';
 import { getCdsType } from './hana2cdsType';
-import * as path from 'path';
-import type { OBJECTS as OBJECTS_Type } from './generated/types';
 
 interface SingleInput {
   schema: string;
   objects?: string[];
   namespace?: string;
-  prefix?: string;
 }
 
-export async function db2csn(
-  db: cds.Service,
-  input: SingleInput
-): Promise<cds.csn.CSN> {
-  //  const { OBJECTS } = await import('./types/index');
-  const { OBJECTS } = db.entities('');
+interface GetObjectsInput {
+  SCHEMA_NAME?: string[];
+  OBJECT_NAME?: string[];
+}
 
-  // read table/view columns
-  const result = (await db
-    .read(OBJECTS)
-    .columns((o: any) => {
-      o.OBJECT_TYPE, o.OBJECT_OID, o.SCHEMA_NAME, o.OBJECT_NAME;
-      // read view columns
-      o.view((v: any) => {
-        v('*'), v.columns('*');
-      }),
-        //read table columns
-        o.table((v: any) => {
-          v('*'), v.columns('*'), v.keys('*');
-        });
-    })
-    .where(
-      Object.assign(
-        { SCHEMA_NAME: input?.schema },
-        { OBJECT_TYPE: { in: ['TABLE', 'VIEW'] } },
-        input?.objects && { OBJECT_NAME: { in: input.objects } }
-      )
-    )) as Array<OBJECTS_Type>;
+async function getObjects(input: GetObjectsInput) {
+  const { OBJECTS } = await import('./generated/types');
+
+  const result = await SELECT.from(OBJECTS, (o) => {
+    o.OBJECT_TYPE, o.OBJECT_OID, o.SCHEMA_NAME, o.OBJECT_NAME;
+    // read view columns
+    o.view?.((v) => {
+      v?.('*');
+      v?.columns?.('*');
+    });
+    //read table columns
+    o.table?.((v) => {
+      v?.('*');
+      v?.columns?.('*');
+      v?.keys?.('*');
+    });
+  }).where({
+    OBJECT_TYPE: { in: ['TABLE', 'VIEW'] },
+    ...(input?.SCHEMA_NAME && { SCHEMA_NAME: { in: input?.SCHEMA_NAME } }),
+    ...(input?.OBJECT_NAME && { OBJECT_NAME: { in: input?.OBJECT_NAME } }),
+  });
+
+  return result;
+}
+
+export async function db2csn(input: SingleInput): Promise<cds.csn.CSN> {
+  const result = await getObjects({
+    SCHEMA_NAME: [input.schema],
+    OBJECT_NAME: input.objects,
+  });
 
   type ObjectType = 'table' | 'view';
 
@@ -51,7 +56,7 @@ export async function db2csn(
         const object = r?.[r.OBJECT_TYPE?.toLowerCase() as ObjectType];
         const columns = object?.columns;
 
-        let keys = [] as string[];
+        const keys = [] as string[];
 
         switch (r.OBJECT_TYPE) {
           case 'TABLE':
@@ -64,7 +69,7 @@ export async function db2csn(
         }
 
         return [
-          `${input?.prefix || ''}${r.OBJECT_NAME}`,
+          `${r.SCHEMA_NAME}.${r.OBJECT_NAME}`,
           Object.assign(
             { '@cds.persistence.exists': true },
             {
@@ -94,15 +99,7 @@ export async function db2csn(
 }
 
 export async function hana2csn(input: SingleInput): Promise<cds.csn.CSN> {
-  //load public hana model
-  const model = await cds.load(path.resolve(__dirname, '../cds/public'));
-
   // connect to db using public model
-  const db = await cds.connect.to('db', {
-    model: model as any,
-    kind: 'hana',
-    credentials: cds.env.requires?.db?.['credentials'],
-  });
-
-  return db2csn(db, input);
+  await cds.connect.to('db');
+  return db2csn(input);
 }

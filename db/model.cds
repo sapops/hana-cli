@@ -1,2 +1,2 @@
-using from 'hana-public-cds';
+using from 'hana2cds';
 

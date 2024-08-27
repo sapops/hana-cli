@@ -64,3 +64,5 @@ export default new Command()
       await writeFile(options?.output, result);
     }
   });
+
+export * from './lib/hana2csn';

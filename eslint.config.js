@@ -42,7 +42,7 @@ module.exports = [
       ],
     },
   },
-  { ignores: ['.nx'] },
+  { ignores: ['.nx', '**/generated/**'] },
   // ...cds.recommended,
   cdsPlugin.configs.recommended,
   {

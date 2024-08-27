@@ -1,8 +1,0 @@
-{
-  "name": "hana-public-cds",
-  "version": "0.0.0",
-  "private": true,
-  "scripts": {
-    "test": "node index.js"
-  }
-}

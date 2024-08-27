@@ -3,10 +3,10 @@ entity TABLE_COLUMNS {
     key SCHEMA_NAME    : String;
     key TABLE_NAME     : String;
         COLUMN_NAME    : String;
-        POSITION       : String;
+        POSITION       : Integer;
         DATA_TYPE_ID   : String;
         DATA_TYPE_NAME : String;
-        LENGTH         : String;
-        SCALE          : String;
+        LENGTH         : Integer;
+        SCALE          : Integer;
         COMMENTS       : String;
 }

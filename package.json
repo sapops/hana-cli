@@ -7,7 +7,7 @@
     "lint": "nx run-many --target=lint",
     "init:data": " CDS_ENV=hybrid npx nx g datagen",
     "init:sqlite": "CDS_ENV=mock cds deploy",
-    "init:types":"npx @cap-js/cds-typer db/model.cds --outputDirectory db/generated/types",
+    "init:types": "npx @cap-js/cds-typer db/model.cds --outputDirectory db/generated/types",
     "nx:publish": "nx run-many --target=publish",
     "preversion": "nx affected --target=version --base=v${npm_old_version} ${npm_new_version} --workspaces-update=false",
     "version": "npm install --ignore-scripts --package-lock-only --fund=false --audit=false && git add -A "
@@ -24,6 +24,7 @@
     "tslib": "^2.6.3"
   },
   "devDependencies": {
+    "@cap-js/cds-typer": ">=0.1",
     "@cap-js/cds-types": "^0.6.5",
     "@eslint/eslintrc": "^2.1.1",
     "@eslint/js": "~8.57.0",
@@ -56,8 +57,7 @@
     "ts-node": "^10.9.1",
     "type-fest": "^4",
     "typescript": "^5.5.4",
-    "typescript-eslint": "^8.2.0",
-    "@cap-js/cds-typer": ">=0.1"
+    "typescript-eslint": "^8.2.0"
   },
   "workspaces": [
     "packages/**"

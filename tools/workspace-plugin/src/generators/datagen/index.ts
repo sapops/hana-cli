@@ -7,7 +7,7 @@ type kinds = csn.kinds | 'element';
 //generate CSV files with remote data
 export default async function () {
   //load public hana model (tables only)
-  const model = await cds.load('hana-public-cds');
+  const model = await cds.load('hana2cds');
 
   const requires = cds.env.requires;
 
@@ -15,7 +15,7 @@ export default async function () {
   //delete requires?.db?.credentials?.database;
 
   const db = await cds.connect.to('db', {
-    model: model as any,
+    model: model as never,
     kind: 'hana',
     credentials: requires?.db?.credentials,
   });
@@ -78,7 +78,7 @@ export default async function () {
   }
 }
 
-function arrayOfObjectsToCSV(array: any[], headers: string[]) {
+function arrayOfObjectsToCSV(array: unknown[], headers: string[]) {
   const sep = ';';
   let csv = headers.join(sep) + '\n';
   csv += array

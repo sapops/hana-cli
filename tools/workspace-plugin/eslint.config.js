@@ -1,5 +1,7 @@
 const baseConfig = require('../../eslint.config.js');
 
+const jsonc = require('jsonc-eslint-parser');
+
 module.exports = [
   ...baseConfig,
   {
@@ -16,14 +18,18 @@ module.exports = [
   },
   {
     files: ['**/*.json'],
-    parser: 'jsonc-eslint-parser',
+    languageOptions: {
+      parser: jsonc,
+    },
     rules: {
       '@nx/dependency-checks': 'error',
     },
   },
   {
     files: ['./package.json', './generators.json'],
-    parser: 'jsonc-eslint-parser',
+    languageOptions: {
+      parser: jsonc,
+    },
     rules: {
       '@nx/nx-plugin-checks': 'error',
     },

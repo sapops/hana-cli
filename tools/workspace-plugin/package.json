@@ -2,8 +2,9 @@
   "name": "workspace-plugin",
   "version": "0.0.1",
   "dependencies": {
-    "@nx/devkit": "19.6.2",
-    "@sap/cds": "^8"
+    "@nx/devkit": "19.6.3",
+    "@sap/cds": "^8",
+    "hana2cds": "0.3.1"
   },
   "type": "commonjs",
   "main": "./src/index.js",

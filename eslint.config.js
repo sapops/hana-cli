@@ -8,7 +8,7 @@ const globals = require('globals');
 
 module.exports = [
   {
-    files: ['**/*.js'],
+    files: ['**/*.js', '**/*.cjs'],
     languageOptions: {
       globals: {
         ...globals.node,

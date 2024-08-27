@@ -1,8 +1,0 @@
-{
-  "name": "@sapops/hana-sys-cds",
-  "version": "0.3.0",
-  "type": "module",
-  "scripts": {
-    "build-types":"npx @cap-js/cds-typer index.cds --outputDirectory types"
-  }
-}

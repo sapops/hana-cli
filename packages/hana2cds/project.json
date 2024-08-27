@@ -14,7 +14,7 @@
         "tsConfig": "packages/hana2cds/tsconfig.lib.json",
         "assets": ["packages/hana2cds/*.md", "packages/hana2cds/**/*.csn"]
       },
-      "dependsOn": ["^build", "build-cds-csn", "build-cds-types"]
+      "dependsOn": ["^build", "build-types"]
     },
     "lint": {
       "executor": "@nx/eslint:lint"
@@ -26,24 +26,21 @@
         "jestConfig": "packages/hana2cds/jest.config.ts"
       }
     },
-    "build-cds-csn": {
+    "build-csn": {
       "executor": "nx:run-commands",
-      "inputs": ["cds"],
-      "outputs": ["{projectRoot}/src/cds/public.csn"],
-      "options": {
-        "command": "npx cds compile src/cds/public.cds --dest src/cds/public.csn",
-        "cwd": "packages/hana2cds/src/cds"
-      }
-    },
-    "build-cds-types": {
-      "executor": "nx:run-commands",
-      "inputs": ["cds"],
-      "outputs": ["{projectRoot}/src/cds/other.ts"],
-      "options": {
-        "command": "npx cds2types --cds ./src/cds/public.cds --output ./src/cds/",
-        "cwd": "packages/hana2cds/src/cds"
-      }
-    },
+      "inputs": ["{projectRoot}/index.cds"],
+      "outputs": ["{options.outputPath}"],
+      "options": {    
+        "outputPath": "dist/packages/hana2cds",    
+        "command": "npx cds compile index.cds --dest index.csn",
+        "cwd": "dist/packages/hana2cds"
+      },
+      "dependsOn": ["build"]
+    }, 
+    "prepublish": {
+      "executor": "nx:noop",      
+      "dependsOn": ["build-csn"]
+    }, 
     "version": {
       "executor": "nx:run-commands",
       "options": {

@@ -1,6 +1,6 @@
 {
   "name": "hana2cds",
-  "version": "0.3.1",
+  "version": "0.3.2",
   "type": "commonjs",
   "bin": {
     "hana2cds": "src/bin/run.ts"
@@ -11,7 +11,7 @@
     "directory": "packages/hana2cds"
   },
   "scripts": {
-    "build-types":"npx @cap-js/cds-typer index.cds --outputDirectory src/lib/generated/types"
+    "build-types": "npx @cap-js/cds-typer index.cds --outputDirectory src/lib/generated/types"
   },
   "dependencies": {
     "@sap/cds": "^8",

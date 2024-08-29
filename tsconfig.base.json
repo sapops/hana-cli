@@ -16,7 +16,7 @@
     "baseUrl": ".",
     "paths": {
       "@sap/cds": ["node_modules/@cap-js/cds-types"],
-      "@sapops/bind-hdi": ["packages/bind-hdi/src/index.ts"],      
+      "@sapops/bind-hdi": ["packages/bind-hdi/src/index.ts"],
       "hana2cds": ["packages/hana2cds/src/index.ts"],
       "workspace-plugin": ["tools/workspace-plugin/src/index.ts"]
     }

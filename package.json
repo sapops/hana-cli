@@ -3,13 +3,14 @@
   "version": "0.3.1",
   "license": "MIT",
   "scripts": {
-    "build": "nx run-many --target=build",
+    "build": "nx run-many --target=postbuild",
     "lint": "nx run-many --target=lint",
     "init:data": " CDS_ENV=hybrid npx nx g datagen",
     "init:sqlite": "CDS_ENV=mock cds deploy",
     "init:types": "npx @cap-js/cds-typer db/model.cds --outputDirectory db/generated/types",
     "publish:login": "npm adduser --registry http://verdaccio:4873",
-    "publish:local": "NPM_CONFIG_REGISTRY=http://verdaccio:4873 nx release publish"
+    "publish:local": "NPM_CONFIG_REGISTRY=http://verdaccio:4873 nx release publish",
+    "release:patch": "nx release patch --skip-publish"
   },
   "private": true,
   "dependencies": {

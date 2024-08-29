@@ -80,7 +80,8 @@
       "conventionalCommits": true,
       "generatorOptions": {
         "packageRoot": "dist/packages/{projectName}"
-      }
+      },
+      "preVersionCommand": "npm run build"
     },
     "conventionalCommits": {
       "types": {

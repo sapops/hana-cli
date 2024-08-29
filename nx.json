@@ -69,6 +69,17 @@
       "projectChangelogs": {
         "createRelease": "github"
       }
+    },
+    "version": {
+      "conventionalCommits": true
+    },
+    "conventionalCommits": {
+      "types": {
+        "docs": false,
+        "chore": {
+          "changelog": false
+        }
+      }
     }
   }
 }

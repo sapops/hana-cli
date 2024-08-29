@@ -8,7 +8,7 @@
     "init:data": " CDS_ENV=hybrid npx nx g datagen",
     "init:sqlite": "CDS_ENV=mock cds deploy",
     "init:types": "npx @cap-js/cds-typer db/model.cds --outputDirectory db/generated/types",
-    "publish:login": "npm adduser --registry http://verdaccio:4873",
+    "publish:login": "npm login --registry http://verdaccio:4873",
     "publish:local": "NPM_CONFIG_REGISTRY=http://verdaccio:4873 nx release publish",
     "release:patch": "nx release patch --skip-publish"
   },
@@ -49,6 +49,7 @@
     "eslint-formatter-stylish": "^8.40.0",
     "jest": "29.7.0",
     "jest-environment-jsdom": "29.7.0",
+    "jest-environment-node": "^29.7.0",
     "json2fs": "^0.1.4",
     "nx": "19.6.3",
     "prettier": "^2.6.2",
@@ -58,7 +59,8 @@
     "ts-node": "^10.9.1",
     "type-fest": "^4",
     "typescript": "^5.5.4",
-    "typescript-eslint": "^8.2.0"
+    "typescript-eslint": "^8.2.0",
+    "verdaccio": "^5.0.4"
   },
   "workspaces": [
     "packages/**"
@@ -75,5 +77,8 @@
   },
   "imports": {
     "#cds-models/*": "./@cds-models/*/index.js"
+  },
+  "nx": {
+    "includedScripts": []
   }
 }

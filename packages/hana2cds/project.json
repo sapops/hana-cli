@@ -7,57 +7,39 @@
   "targets": {
     "build": {
       "executor": "@nx/js:tsc",
-      "outputs": [
-        "{options.outputPath}"
-      ],
+      "outputs": ["{options.outputPath}"],
       "options": {
         "outputPath": "dist/packages/hana2cds",
         "main": "packages/hana2cds/src/index.ts",
         "tsConfig": "packages/hana2cds/tsconfig.lib.json",
-        "assets": [
-          "packages/hana2cds/*.md",
-          "packages/hana2cds/**/*.csn"
-        ]
+        "assets": ["packages/hana2cds/*.md", "packages/hana2cds/**/*.csn"]
       },
-      "dependsOn": [
-        "^build",
-        "build-types"
-      ]
+      "dependsOn": ["^build", "build-types"]
     },
     "lint": {
       "executor": "@nx/eslint:lint"
     },
     "test": {
       "executor": "@nx/jest:jest",
-      "outputs": [
-        "{workspaceRoot}/coverage/{projectRoot}"
-      ],
+      "outputs": ["{workspaceRoot}/coverage/{projectRoot}"],
       "options": {
         "jestConfig": "packages/hana2cds/jest.config.ts"
       }
     },
     "build-csn": {
       "executor": "nx:run-commands",
-      "inputs": [
-        "{projectRoot}/index.cds"
-      ],
-      "outputs": [
-        "{options.outputPath}"
-      ],
+      "inputs": ["{projectRoot}/index.cds"],
+      "outputs": ["{options.outputPath}"],
       "options": {
         "outputPath": "dist/packages/hana2cds",
         "command": "npx cds compile index.cds --dest index.csn",
         "cwd": "dist/packages/hana2cds"
       },
-      "dependsOn": [
-        "build"
-      ]
+      "dependsOn": ["build"]
     },
     "prepublish": {
       "executor": "nx:noop",
-      "dependsOn": [
-        "build-csn"
-      ]
+      "dependsOn": ["build-csn"]
     },
     "version": {
       "executor": "nx:run-commands",
@@ -76,12 +58,9 @@
         ],
         "cwd": "dist/packages/hana2cds"
       },
-      "dependsOn": [
-        "build"
-      ],
-      "outputs": [
-        "{options.cwd}"
-      ]
+      "dependsOn": ["build"],
+      "outputs": ["{options.cwd}"]
     }
-  }
+  },
+  "nx-release-publish": {}
 }

@@ -7,16 +7,12 @@
   "targets": {
     "build": {
       "executor": "@nx/js:tsc",
-      "outputs": [
-        "{options.outputPath}"
-      ],
+      "outputs": ["{options.outputPath}"],
       "options": {
         "outputPath": "dist/packages/bind-hdi",
         "main": "packages/bind-hdi/src/index.ts",
         "tsConfig": "packages/bind-hdi/tsconfig.lib.json",
-        "assets": [
-          "packages/bind-hdi/*.md"
-        ]
+        "assets": ["packages/bind-hdi/*.md"]
       }
     },
     "lint": {
@@ -39,12 +35,9 @@
         ],
         "cwd": "dist/packages/bind-hdi"
       },
-      "dependsOn": [
-        "build"
-      ],
-      "outputs": [
-        "{options.cwd}"
-      ]
+      "dependsOn": ["build"],
+      "outputs": ["{options.cwd}"]
     }
-  }
+  },
+  "nx-release-publish": {}
 }

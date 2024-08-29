@@ -38,6 +38,10 @@
         "packageRoot": "dist/packages/{projectName}"
       },
       "dependsOn": ["postbuild"]
+    },
+    "@nx/vite:test": {
+      "cache": true,
+      "inputs": ["default", "^production"]
     }
   },
   "namedInputs": {
@@ -45,7 +49,9 @@
     "production": [
       "default",
       "!{projectRoot}/src/test-setup.[jt]s",
-      "!{projectRoot}/eslint.config.js"
+      "!{projectRoot}/eslint.config.js",
+      "!{projectRoot}/**/?(*.)+(spec|test).[jt]s?(x)?(.snap)",
+      "!{projectRoot}/tsconfig.spec.json"
     ],
     "cds": ["{projectRoot}/**/*.cds"],
     "sharedGlobals": []
@@ -67,6 +73,12 @@
       "plugin": "@nx/eslint/plugin",
       "options": {
         "targetName": "lint"
+      }
+    },
+    {
+      "plugin": "@nx/jest/plugin",
+      "options": {
+        "targetName": "test"
       }
     }
   ],

@@ -1,14 +1,11 @@
 process.env['CDS_ENV'] = 'mock';
 
-import * as cds from '@sap/cds';
 import { db2csn } from './hana2csn';
 import { convertCSN } from './convertCSN';
 
 describe('hana2csn', () => {
   test('Connect to sqlite', async () => {
-    const db = await cds.connect.to('db');
-
-    const schema = await db2csn(db, { schema: 'SYS' });
+    const schema = await db2csn({ schema: 'SYS' });
 
     expect(schema).toBeDefined();
 

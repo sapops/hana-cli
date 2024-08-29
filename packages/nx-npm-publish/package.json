@@ -1,9 +1,0 @@
-{
-  "name": "@sapops/nx-npm-publish",
-  "version": "0.0.0",
-  "type": "commonjs",
-  "private": true,
-  "devDependencies": {
-    "set-shebang": "^0.1.12"
-  }
-}

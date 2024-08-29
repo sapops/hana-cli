@@ -3,9 +3,10 @@
   "$schema": "../../node_modules/nx/schemas/project-schema.json",
   "sourceRoot": "packages/bind-hdi/src",
   "projectType": "library",
+  "tags": [],
   "targets": {
     "build": {
-      "executor": "@nrwl/js:tsc",
+      "executor": "@nx/js:tsc",
       "outputs": ["{options.outputPath}"],
       "options": {
         "outputPath": "dist/packages/bind-hdi",
@@ -15,11 +16,7 @@
       }
     },
     "lint": {
-      "executor": "@nrwl/linter:eslint",
-      "outputs": ["{options.outputFile}"],
-      "options": {
-        "lintFilePatterns": ["packages/bind-hdi/**/*.ts"]
-      }
+      "executor": "@nx/eslint:lint"
     },
     "version": {
       "executor": "nx:run-commands",
@@ -27,7 +24,20 @@
         "command": "npm version",
         "cwd": "packages/bind-hdi"
       }
+    },
+    "postbuild": {
+      "executor": "nx:run-commands",
+      "options": {
+        "commands": [
+          "npm pkg set bin.bind-hdi=src/bin/run.js",
+          "npx set-shebang src/bin/run.js node",
+          "npm pkg delete scripts"
+        ],
+        "cwd": "dist/packages/bind-hdi"
+      },
+      "dependsOn": ["build"],
+      "outputs": ["{options.cwd}"]
     }
   },
-  "tags": []
+  "nx-release-publish": {}
 }

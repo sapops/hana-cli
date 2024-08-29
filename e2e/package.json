@@ -1,0 +1,16 @@
+{
+  "name": "e2e",
+  "version": "0.0.1",
+  "dependencies": {
+    "tslib": "^2.3.0",
+    "@e2e/hana2cds": "file:../dist/packages/hana2cds"
+  },
+  "type": "module",
+  "main": "./src/index.js",
+  "typings": "./src/index.d.ts",
+  "private": true,
+  "scripts": {
+    "init": "rm -rf node_modules && npm i",
+    "test": "jest"
+  }
+}

@@ -7,7 +7,6 @@ import { hana2csn } from './lib/hana2csn';
 interface Options {
   schema: string;
   namespace?: string;
-  prefix?: string;
   filter?: string;
   output?: string;
   case?: Case;
@@ -17,7 +16,6 @@ export default new Command()
   .description('Generates CDS model from Hana table/view defintion')
   .requiredOption('-s, --schema <schema>', 'Database schema')
   .option('-n, --namespace <namespace>', 'CDS namespace')
-  .option('-p, --prefix <prefix>', 'Prefix for cds entities')
   .option('-f, --filter <filter>', 'Comma-separated list of tables/views')
   .option('-o, --output <output>', 'Name of output file (STDOUT by default)')
   .option(
@@ -41,7 +39,6 @@ export default new Command()
       schema: options.schema,
       objects: options?.filter?.split(','),
       namespace: options?.namespace,
-      prefix: options?.prefix
     });
 
     if (options?.case && csn.definitions) {
@@ -51,7 +48,7 @@ export default new Command()
         });
         Object.assign(csn.definitions, csnConverted.definitions);
       } catch (error) {
-        //do nothing
+        console.error(error);
       }
     }
 
@@ -60,7 +57,9 @@ export default new Command()
     if (useTTY) {
       stdout.write = write;
       stdout.write(result);
-    } else {
-      options?.output && (await writeFile(options?.output, result));
+    } else if (options?.output) {
+      await writeFile(options?.output, result);
     }
   });
+
+export * from './lib/hana2csn';

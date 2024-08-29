@@ -3,6 +3,7 @@
     "nrwl.angular-console",
     "esbenp.prettier-vscode",
     "dbaeumer.vscode-eslint",
-    "firsttris.vscode-jest-runner"
+    "qwtel.sqlite-viewer",
+    "sourcegraph.cody-ai"
   ]
 }

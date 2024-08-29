@@ -3,7 +3,7 @@ version: '3.8'
 services:
   devcontainer:
     # Using a Dockerfile is optional, but included for completeness.
-    build: 
+    build:
       context: .
       dockerfile: Dockerfile
 
@@ -12,4 +12,14 @@ services:
       - ..:/workspace:cached
 
     # Overrides default command so things don't shut down after the process ends.
-    command: /bin/sh -c "while sleep 1000; do :; done"  
+    command: /bin/sh -c "while sleep 1000; do :; done"
+
+  verdaccio:
+    image: verdaccio/verdaccio
+    ports:
+      - 4873:4873
+    env_file:
+      - .env
+    volumes:
+      - ../.verdaccio:/verdaccio 
+   

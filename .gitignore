@@ -43,3 +43,16 @@ Thumbs.db
 
 gen
 *.sqlite
+
+.nx/cache
+.nx/workspace-data
+# added by cds
+default-env.json
+db.sqlite*
+
+@cds-models
+generated
+
+db/data
+
+*.tgz

@@ -1,5 +1,4 @@
-import { CSN, Definition, entity } from '@sap/cds/apis/csn';
-import { SELECT } from '@sap/cds/apis/cqn';
+import { csn } from '@sap/cds';
 import { strict as assert } from 'node:assert';
 
 export type Case = 'snake' | 'camel' | 'pascal';
@@ -17,10 +16,13 @@ interface Options {
 
 interface Projection {
   kind: 'entity';
-  projection: SELECT['SELECT'];
+  projection: SELECT<unknown>['SELECT'];
 }
 
-export async function convertCSN(model: CSN, options: Options): Promise<CSN> {
+export async function convertCSN(
+  model: csn.CSN,
+  options: Options
+): Promise<csn.CSN> {
   assert(model.definitions, 'Model definitions are not defined');
 
   // switch (options.case) {
@@ -46,14 +48,16 @@ export async function convertCSN(model: CSN, options: Options): Promise<CSN> {
             from: {
               ref: [entity],
             },
-            columns: Object.keys((definition as entity).elements).map((e) => {
+            columns: Object.keys(definition.elements).map((e) => {
               const ref = {
                 ref: [e],
               };
 
               const as = applyCase(e, options?.properties?.case);
 
-              as && as !== e && Object.assign(ref, { as });
+              if (as && as !== e) {
+                Object.assign(ref, { as });
+              }
 
               return ref;
             }),
@@ -65,7 +69,7 @@ export async function convertCSN(model: CSN, options: Options): Promise<CSN> {
 
       return entries;
     },
-    [] as Array<[string, Definition]>
+    [] as Array<[string, csn.Definition]>
   );
 
   return {

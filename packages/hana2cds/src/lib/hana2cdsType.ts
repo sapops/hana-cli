@@ -1,4 +1,4 @@
-import assert = require('assert');
+import * as assert from 'assert';
 
 const length = (type: TemplateStringsArray) =>
   Object.assign(type.join(), { has_length: true });
@@ -50,31 +50,35 @@ interface CdsType {
 }
 
 interface HanaTypeDefinition {
-  DATA_TYPE_NAME: keyof HanaTypes;
-  LENGTH: number;
-  SCALE: number;
+  DATA_TYPE_NAME?: keyof HanaTypes | null;
+  LENGTH?: number | null;
+  SCALE?: number | null;
 }
 
 // convert hana type defintion to CDS type
 export function getCdsType(field: HanaTypeDefinition): CdsType {
   // assert type
-  if (!hanaTypesMap[field.DATA_TYPE_NAME]) {
+  if (field.DATA_TYPE_NAME && !hanaTypesMap[field.DATA_TYPE_NAME]) {
     assert(`Unsupported Hana type ${field.DATA_TYPE_NAME}`);
   }
 
-  const type = hanaTypesMap[field.DATA_TYPE_NAME];
+  const type = field.DATA_TYPE_NAME
+    ? hanaTypesMap[field.DATA_TYPE_NAME]
+    : undefined;
 
   // map Hana type to CDS type
-  const result: CdsType = { type: `cds.${type.toString()}` };
+  const result: CdsType = { type: type ? `cds.${type.toString()}` : undefined };
 
   // fill length only if it's needed
-  if (type.has_length) {
+  if (type && type.has_length && field.LENGTH !== null) {
     result.length = field.LENGTH;
   }
 
-  if (type.has_scale) {
-    result.precision = field.LENGTH;
-    if (field.SCALE) {
+  if (type && type.has_scale) {
+    if (field.LENGTH !== null) {
+      result.precision = field.LENGTH;
+    }
+    if (field.SCALE !== null) {
       result.scale = field.SCALE;
     }
   }

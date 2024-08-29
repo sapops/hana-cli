@@ -1,8 +1,17 @@
 {
   "name": "@sapops/bind-hdi",
-  "version": "0.3.0",
+  "version": "0.4.6",
   "type": "commonjs",
   "bin": {
     "bind-hdi": "src/bin/run.ts"
+  },
+  "dependencies": {
+    "@commander-js/extra-typings": "^12",
+    "@fastify/deepmerge": "^2"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/sapops/hana-cli.git",
+    "directory": "packages/bind-hdi"
   }
 }

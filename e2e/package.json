@@ -3,7 +3,8 @@
   "version": "1.0.0",
   "main": "index.js",
   "scripts": {
-    "test": "hana2cds-e2e"
+    "init": "nx postbuild hana2cds && npm i",
+    "test": "hana2cds --help"
   },
   "author": "",
   "license": "ISC",

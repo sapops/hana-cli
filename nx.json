@@ -50,7 +50,7 @@
   },
   "pluginsConfig": {
     "@nx/js": {
-      "analyzeSourceFiles": true
+      "projectsAffectedByDependencyUpdates": "auto"
     }
   },
   "nxCloudAccessToken": "NTNmNjIwNGQtZTRiZi00ZGM5LTllNDQtMWEyMzVhN2YwMTM1fHJlYWQtd3JpdGU=",
@@ -63,5 +63,12 @@
         "targetName": "lint"
       }
     }
-  ]
+  ],
+  "release": {
+    "changelog": {
+      "projectChangelogs": {
+        "createRelease": "github"
+      }
+    }
+  }
 }

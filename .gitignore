@@ -54,3 +54,5 @@ db.sqlite*
 generated
 
 db/data
+
+*.tgz

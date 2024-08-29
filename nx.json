@@ -52,11 +52,15 @@
     "@nx/js": {
       "analyzeSourceFiles": true
     }
-  },  
+  },
   "nxCloudAccessToken": "NTNmNjIwNGQtZTRiZi00ZGM5LTllNDQtMWEyMzVhN2YwMTM1fHJlYWQtd3JpdGU=",
   "useInferencePlugins": false,
   "defaultBase": "main",
   "plugins": [
+    {
+      "plugin": "nx-pack",
+      "options": {}
+    },
     {
       "plugin": "@nx/eslint/plugin",
       "options": {

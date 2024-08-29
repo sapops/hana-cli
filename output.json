@@ -1,0 +1,584 @@
+{
+  "graph": {
+    "nodes": {
+      "nx-npm-publish": {
+        "name": "nx-npm-publish",
+        "type": "lib",
+        "data": {
+          "root": "packages/nx-npm-publish",
+          "targets": {
+            "pack": {
+              "dependsOn": [
+                "build"
+              ],
+              "cwd": "dist/packages/nx-npm-publish",
+              "executor": "nx:run-commands",
+              "options": {
+                "command": "npm pack"
+              },
+              "configurations": {},
+              "parallelism": true
+            },
+            "lint": {
+              "executor": "@nx/eslint:lint",
+              "options": {},
+              "configurations": {},
+              "parallelism": true,
+              "inputs": [
+                "default",
+                "{workspaceRoot}/.eslintrc.json",
+                "{workspaceRoot}/eslint.config.js"
+              ],
+              "cache": true
+            },
+            "build": {
+              "executor": "@nx/js:tsc",
+              "outputs": [
+                "{options.outputPath}"
+              ],
+              "options": {
+                "outputPath": "dist/packages/nx-npm-publish",
+                "main": "packages/nx-npm-publish/src/index.ts",
+                "tsConfig": "packages/nx-npm-publish/tsconfig.lib.json",
+                "assets": [
+                  "packages/nx-npm-publish/*.md"
+                ]
+              },
+              "configurations": {},
+              "parallelism": true,
+              "cache": true,
+              "dependsOn": [
+                "^build"
+              ],
+              "inputs": [
+                "production",
+                "^production"
+              ]
+            }
+          },
+          "sourceRoot": "packages/nx-npm-publish/src",
+          "name": "nx-npm-publish",
+          "projectType": "library",
+          "tags": [
+            "npm:private"
+          ],
+          "metadata": {
+            "targetGroups": {}
+          },
+          "$schema": "../../node_modules/nx/schemas/project-schema.json",
+          "implicitDependencies": []
+        }
+      },
+      "workspace-plugin": {
+        "name": "workspace-plugin",
+        "type": "lib",
+        "data": {
+          "root": "tools/workspace-plugin",
+          "targets": {
+            "pack": {
+              "dependsOn": [
+                "build"
+              ],
+              "cwd": "dist/tools/workspace-plugin",
+              "executor": "nx:run-commands",
+              "options": {
+                "command": "npm pack"
+              },
+              "configurations": {},
+              "parallelism": true
+            },
+            "lint": {
+              "executor": "@nx/eslint:lint",
+              "options": {},
+              "configurations": {},
+              "parallelism": true,
+              "inputs": [
+                "default",
+                "{workspaceRoot}/.eslintrc.json",
+                "{workspaceRoot}/eslint.config.js"
+              ],
+              "cache": true
+            },
+            "build": {
+              "executor": "@nx/js:tsc",
+              "outputs": [
+                "{options.outputPath}"
+              ],
+              "options": {
+                "outputPath": "dist/tools/workspace-plugin",
+                "main": "tools/workspace-plugin/src/index.ts",
+                "tsConfig": "tools/workspace-plugin/tsconfig.lib.json",
+                "assets": [
+                  {
+                    "input": "./tools/workspace-plugin/src",
+                    "glob": "**/!(*.ts)",
+                    "output": "./src"
+                  },
+                  {
+                    "input": "./tools/workspace-plugin/src",
+                    "glob": "**/*.d.ts",
+                    "output": "./src"
+                  },
+                  {
+                    "input": "./tools/workspace-plugin",
+                    "glob": "generators.json",
+                    "output": "."
+                  },
+                  {
+                    "input": "./tools/workspace-plugin",
+                    "glob": "executors.json",
+                    "output": "."
+                  }
+                ]
+              },
+              "configurations": {},
+              "parallelism": true,
+              "cache": true,
+              "dependsOn": [
+                "^build"
+              ],
+              "inputs": [
+                "production",
+                "^production"
+              ]
+            },
+            "test": {
+              "executor": "@nx/jest:jest",
+              "outputs": [
+                "{workspaceRoot}/coverage/{projectRoot}"
+              ],
+              "options": {
+                "jestConfig": "tools/workspace-plugin/jest.config.ts",
+                "passWithNoTests": true
+              },
+              "configurations": {
+                "ci": {
+                  "ci": true,
+                  "codeCoverage": true
+                }
+              },
+              "parallelism": true,
+              "inputs": [
+                "default",
+                "^production",
+                "{workspaceRoot}/jest.preset.js"
+              ],
+              "cache": true
+            }
+          },
+          "sourceRoot": "tools/workspace-plugin/src",
+          "name": "workspace-plugin",
+          "tags": [
+            "npm:private"
+          ],
+          "metadata": {
+            "targetGroups": {}
+          },
+          "$schema": "../../node_modules/nx/schemas/project-schema.json",
+          "projectType": "library",
+          "implicitDependencies": []
+        }
+      },
+      "bind-hdi": {
+        "name": "bind-hdi",
+        "type": "lib",
+        "data": {
+          "root": "packages/bind-hdi",
+          "targets": {
+            "pack": {
+              "dependsOn": [
+                "build"
+              ],
+              "cwd": "dist/packages/bind-hdi",
+              "executor": "nx:run-commands",
+              "options": {
+                "command": "npm pack"
+              },
+              "configurations": {},
+              "parallelism": true
+            },
+            "lint": {
+              "executor": "@nx/eslint:lint",
+              "options": {},
+              "configurations": {},
+              "parallelism": true,
+              "inputs": [
+                "default",
+                "{workspaceRoot}/.eslintrc.json",
+                "{workspaceRoot}/eslint.config.js"
+              ],
+              "cache": true
+            },
+            "nx-release-publish": {
+              "dependsOn": [
+                "^nx-release-publish"
+              ],
+              "executor": "@nx/js:release-publish",
+              "options": {},
+              "configurations": {},
+              "parallelism": true
+            },
+            "build": {
+              "executor": "@nx/js:tsc",
+              "outputs": [
+                "{options.outputPath}"
+              ],
+              "options": {
+                "outputPath": "dist/packages/bind-hdi",
+                "main": "packages/bind-hdi/src/index.ts",
+                "tsConfig": "packages/bind-hdi/tsconfig.lib.json",
+                "assets": [
+                  "packages/bind-hdi/*.md"
+                ]
+              },
+              "configurations": {},
+              "parallelism": true,
+              "cache": true,
+              "dependsOn": [
+                "^build"
+              ],
+              "inputs": [
+                "production",
+                "^production"
+              ]
+            },
+            "version": {
+              "executor": "nx:run-commands",
+              "options": {
+                "command": "npm version",
+                "cwd": "packages/bind-hdi"
+              },
+              "configurations": {},
+              "parallelism": true
+            }
+          },
+          "sourceRoot": "packages/bind-hdi/src",
+          "name": "bind-hdi",
+          "projectType": "library",
+          "tags": [
+            "npm:public"
+          ],
+          "metadata": {
+            "targetGroups": {}
+          },
+          "$schema": "../../node_modules/nx/schemas/project-schema.json",
+          "implicitDependencies": []
+        }
+      },
+      "hana2cds": {
+        "name": "hana2cds",
+        "type": "lib",
+        "data": {
+          "root": "packages/hana2cds",
+          "targets": {
+            "pack": {
+              "dependsOn": [
+                "build"
+              ],
+              "cwd": "dist/packages/hana2cds",
+              "executor": "nx:run-commands",
+              "options": {
+                "command": "npm pack"
+              },
+              "configurations": {},
+              "parallelism": true
+            },
+            "lint": {
+              "executor": "@nx/eslint:lint",
+              "options": {},
+              "configurations": {},
+              "parallelism": true,
+              "inputs": [
+                "default",
+                "{workspaceRoot}/.eslintrc.json",
+                "{workspaceRoot}/eslint.config.js"
+              ],
+              "cache": true
+            },
+            "build-types": {
+              "executor": "nx:run-script",
+              "options": {
+                "script": "build-types"
+              },
+              "metadata": {
+                "scriptContent": "npx @cap-js/cds-typer index.cds --outputDirectory src/lib/generated/types",
+                "runCommand": "npm run build-types"
+              },
+              "configurations": {},
+              "parallelism": true
+            },
+            "nx-release-publish": {
+              "dependsOn": [
+                "^nx-release-publish"
+              ],
+              "executor": "@nx/js:release-publish",
+              "options": {},
+              "configurations": {},
+              "parallelism": true
+            },
+            "build": {
+              "executor": "@nx/js:tsc",
+              "outputs": [
+                "{options.outputPath}"
+              ],
+              "options": {
+                "outputPath": "dist/packages/hana2cds",
+                "main": "packages/hana2cds/src/index.ts",
+                "tsConfig": "packages/hana2cds/tsconfig.lib.json",
+                "assets": [
+                  "packages/hana2cds/*.md",
+                  "packages/hana2cds/**/*.csn"
+                ]
+              },
+              "dependsOn": [
+                "^build",
+                "build-types"
+              ],
+              "configurations": {},
+              "parallelism": true,
+              "cache": true,
+              "inputs": [
+                "production",
+                "^production"
+              ]
+            },
+            "test": {
+              "executor": "@nx/jest:jest",
+              "outputs": [
+                "{workspaceRoot}/coverage/{projectRoot}"
+              ],
+              "options": {
+                "jestConfig": "packages/hana2cds/jest.config.ts",
+                "passWithNoTests": true
+              },
+              "configurations": {
+                "ci": {
+                  "ci": true,
+                  "codeCoverage": true
+                }
+              },
+              "parallelism": true,
+              "inputs": [
+                "default",
+                "^production",
+                "{workspaceRoot}/jest.preset.js"
+              ],
+              "cache": true
+            },
+            "build-csn": {
+              "executor": "nx:run-commands",
+              "inputs": [
+                "{projectRoot}/index.cds"
+              ],
+              "outputs": [
+                "{options.outputPath}"
+              ],
+              "options": {
+                "outputPath": "dist/packages/hana2cds",
+                "command": "npx cds compile index.cds --dest index.csn",
+                "cwd": "dist/packages/hana2cds"
+              },
+              "dependsOn": [
+                "build"
+              ],
+              "configurations": {},
+              "parallelism": true
+            },
+            "prepublish": {
+              "executor": "nx:noop",
+              "dependsOn": [
+                "build-csn"
+              ],
+              "configurations": {},
+              "options": {},
+              "parallelism": true
+            },
+            "version": {
+              "executor": "nx:run-commands",
+              "options": {
+                "command": "npm version",
+                "cwd": "packages/hana2cds"
+              },
+              "configurations": {},
+              "parallelism": true
+            }
+          },
+          "sourceRoot": "packages/hana2cds/src",
+          "name": "hana2cds",
+          "projectType": "library",
+          "tags": [
+            "npm:public"
+          ],
+          "metadata": {
+            "targetGroups": {
+              "NPM Scripts": [
+                "build-types"
+              ]
+            }
+          },
+          "$schema": "../../node_modules/nx/schemas/project-schema.json",
+          "implicitDependencies": []
+        }
+      },
+      "nx-pack": {
+        "name": "nx-pack",
+        "type": "lib",
+        "data": {
+          "root": "packages/nx-pack",
+          "targets": {
+            "pack": {
+              "dependsOn": [
+                "build"
+              ],
+              "cwd": "dist/packages/nx-pack",
+              "executor": "nx:run-commands",
+              "options": {
+                "command": "npm pack"
+              },
+              "configurations": {},
+              "parallelism": true
+            },
+            "lint": {
+              "cache": true,
+              "options": {
+                "cwd": "packages/nx-pack",
+                "env": {
+                  "ESLINT_USE_FLAT_CONFIG": "true"
+                },
+                "command": "eslint ."
+              },
+              "inputs": [
+                "default",
+                "^default",
+                "{workspaceRoot}/eslint.config.js",
+                "{projectRoot}/eslint.config.js",
+                "{workspaceRoot}/tools/eslint-rules/**/*",
+                {
+                  "externalDependencies": [
+                    "eslint"
+                  ]
+                }
+              ],
+              "outputs": [
+                "{options.outputFile}"
+              ],
+              "metadata": {
+                "technologies": [
+                  "eslint"
+                ],
+                "description": "Runs ESLint on project",
+                "help": {
+                  "command": "npx eslint --help",
+                  "example": {
+                    "options": {
+                      "max-warnings": 0
+                    }
+                  }
+                }
+              },
+              "executor": "nx:run-commands",
+              "configurations": {},
+              "parallelism": true
+            },
+            "build": {
+              "executor": "@nx/js:tsc",
+              "outputs": [
+                "{options.outputPath}"
+              ],
+              "options": {
+                "outputPath": "dist/packages/nx-pack",
+                "main": "packages/nx-pack/src/index.ts",
+                "tsConfig": "packages/nx-pack/tsconfig.lib.json",
+                "assets": [
+                  "packages/nx-pack/*.md",
+                  {
+                    "input": "./packages/nx-pack/src",
+                    "glob": "**/!(*.ts)",
+                    "output": "./src"
+                  },
+                  {
+                    "input": "./packages/nx-pack/src",
+                    "glob": "**/*.d.ts",
+                    "output": "./src"
+                  },
+                  {
+                    "input": "./packages/nx-pack",
+                    "glob": "generators.json",
+                    "output": "."
+                  },
+                  {
+                    "input": "./packages/nx-pack",
+                    "glob": "executors.json",
+                    "output": "."
+                  }
+                ]
+              },
+              "configurations": {},
+              "parallelism": true,
+              "cache": true,
+              "dependsOn": [
+                "^build"
+              ],
+              "inputs": [
+                "production",
+                "^production"
+              ]
+            },
+            "test": {
+              "executor": "@nx/jest:jest",
+              "outputs": [
+                "{workspaceRoot}/coverage/{projectRoot}"
+              ],
+              "options": {
+                "jestConfig": "packages/nx-pack/jest.config.ts",
+                "passWithNoTests": true
+              },
+              "configurations": {
+                "ci": {
+                  "ci": true,
+                  "codeCoverage": true
+                }
+              },
+              "parallelism": true,
+              "inputs": [
+                "default",
+                "^production",
+                "{workspaceRoot}/jest.preset.js"
+              ],
+              "cache": true
+            }
+          },
+          "sourceRoot": "packages/nx-pack/src",
+          "name": "nx-pack",
+          "projectType": "library",
+          "tags": [
+            "npm:private"
+          ],
+          "metadata": {
+            "targetGroups": {}
+          },
+          "$schema": "../../node_modules/nx/schemas/project-schema.json",
+          "implicitDependencies": []
+        }
+      }
+    },
+    "dependencies": {
+      "nx-npm-publish": [],
+      "workspace-plugin": [
+        {
+          "source": "workspace-plugin",
+          "target": "hana2cds",
+          "type": "static"
+        },
+        {
+          "source": "workspace-plugin",
+          "target": "hana2cds",
+          "type": "dynamic"
+        }
+      ],
+      "bind-hdi": [],
+      "hana2cds": [],
+      "nx-pack": []
+    }
+  }
+}

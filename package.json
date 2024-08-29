@@ -8,9 +8,8 @@
     "init:data": " CDS_ENV=hybrid npx nx g datagen",
     "init:sqlite": "CDS_ENV=mock cds deploy",
     "init:types": "npx @cap-js/cds-typer db/model.cds --outputDirectory db/generated/types",
-    "nx:publish": "nx run-many --target=publish",
-    "preversion": "nx affected --target=version --base=v${npm_old_version} ${npm_new_version} --workspaces-update=false",
-    "version": "npm install --ignore-scripts --package-lock-only --fund=false --audit=false && git add -A "
+    "publish:login": "npm adduser --registry http://verdaccio:4873",
+    "publish:local": "NPM_CONFIG_REGISTRY=http://verdaccio:4873 nx release publish"
   },
   "private": true,
   "dependencies": {

@@ -1,3 +1,5 @@
+const { FlatCompat } = require('@eslint/eslintrc');
+const js = require('@eslint/js');
 const eslint = require('@eslint/js');
 const tseslint = require('typescript-eslint');
 const nxEslintPlugin = require('@nx/eslint-plugin');
@@ -6,7 +8,19 @@ const cdsPlugin = require('@sap/eslint-plugin-cds');
 const jsonc = require('jsonc-eslint-parser');
 const globals = require('globals');
 
+const compat = new FlatCompat({
+  baseDirectory: __dirname,
+  recommendedConfig: js.configs.recommended,
+});
+
 module.exports = [
+  ...compat.config({ parser: 'jsonc-eslint-parser' }).map((config) => ({
+    ...config,
+    files: ['**/*.json'],
+    rules: {
+      ...config.rules,
+    },
+  })),
   {
     files: ['**/*.js', '**/*.cjs'],
     languageOptions: {
@@ -18,15 +32,6 @@ module.exports = [
   eslint.configs.recommended,
   ...tseslint.configs.recommended,
   { plugins: { '@nx': nxEslintPlugin } },
-  {
-    files: ['**/*.json'],
-    languageOptions: {
-      parser: jsonc,
-    },
-    rules: {
-      '@nx/dependency-checks': 'error',
-    },
-  },
   {
     files: ['**/*.ts', '**/*.tsx', '**/*.js', '**/*.jsx'],
     rules: {

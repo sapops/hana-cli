@@ -32,6 +32,12 @@
         "{workspaceRoot}/eslint.config.js"
       ],
       "cache": true
+    },
+    "nx-release-publish": {
+      "options": {
+        "packageRoot": "dist/packages/{projectName}"
+      },
+      "dependsOn": ["postbuild"]
     }
   },
   "namedInputs": {
@@ -71,7 +77,10 @@
       }
     },
     "version": {
-      "conventionalCommits": true
+      "conventionalCommits": true,
+      "generatorOptions": {
+        "packageRoot": "dist/packages/{projectName}"
+      }
     },
     "conventionalCommits": {
       "types": {

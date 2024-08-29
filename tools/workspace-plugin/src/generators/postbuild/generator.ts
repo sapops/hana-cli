@@ -1,5 +1,6 @@
 import {
   getProjects,
+  ProjectConfiguration,
   readJsonFile,
   TargetConfiguration,
   Tree,
@@ -14,8 +15,25 @@ export async function postbuildGenerator(
   options: PostbuildGeneratorSchema
 ) {
   const projects = getProjects(tree);
-  const project = projects.get(options.name);
 
+  if (!options.name && !options.all) {
+    console.log(
+      `No project name provided. Please provide a project name or use the --all flag to run postbuild for all projects.`
+    );
+  }
+
+  for (const project of options.all
+    ? projects.values()
+    : [projects.get(options.name)]) {
+    postbuild(tree, options, project);
+  }
+}
+
+async function postbuild(
+  tree: Tree,
+  options: PostbuildGeneratorSchema,
+  project: ProjectConfiguration
+) {
   // only instert for now
   if (project.targets['postbuild']) {
     if (!options.force) {
@@ -61,6 +79,10 @@ export async function postbuildGenerator(
         `npx set-shebang ${newPath} node`
       );
     }
+  }
+
+  if (!options.scripts) {
+    postbuild.options?.commands?.push(`npm pkg delete scripts`);
   }
 
   if (postbuild.options?.commands.length) {

@@ -71,7 +71,8 @@
       "options": {
         "commands": [
           "npm pkg set bin.hana2cds=src/bin/run.js",
-          "npx set-shebang src/bin/run.js node"
+          "npx set-shebang src/bin/run.js node",
+          "npm pkg delete scripts"
         ],
         "cwd": "dist/packages/hana2cds"
       },

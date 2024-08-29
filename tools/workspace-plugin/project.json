@@ -45,6 +45,15 @@
       "options": {
         "jestConfig": "tools/workspace-plugin/jest.config.ts"
       }
+    },
+    "postbuild": {
+      "executor": "nx:run-commands",
+      "options": {
+        "commands": ["npm pkg delete scripts"],
+        "cwd": "dist/tools/workspace-plugin"
+      },
+      "dependsOn": ["build"],
+      "outputs": ["{options.cwd}"]
     }
   }
 }

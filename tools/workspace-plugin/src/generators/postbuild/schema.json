@@ -1,5 +1,5 @@
 {
-  "$schema": "https://json-schema.org/schema",
+  "$schema": "https://json-schema.org/draft-07/schema",
   "$id": "Postbuild",
   "title": "",
   "type": "object",
@@ -10,13 +10,19 @@
       "$default": {
         "$source": "argv",
         "index": 0
-      },
-      "x-prompt": "Project name"
+      }
     },
     "force": {
       "type": "boolean",
       "description": "Rewrite target configuration"
+    },
+    "no-scripts": {
+      "type": "boolean",
+      "description": "Remove scripts from built package.json"
+    },
+    "all": {
+      "type": "boolean",
+      "description": "Generate for all targets"
     }
-  },
-  "required": ["name"]
+  }
 }

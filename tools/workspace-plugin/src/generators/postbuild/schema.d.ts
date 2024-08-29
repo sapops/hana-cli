@@ -1,4 +1,6 @@
 export interface PostbuildGeneratorSchema {
   name: string;
-  force: boolean;
+  force?: boolean;
+  scripts?: boolean;
+  all?: boolean;
 }

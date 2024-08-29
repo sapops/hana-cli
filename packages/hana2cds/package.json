@@ -7,7 +7,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/sapops/hana-cli.git",
+    "url": "git+https://github.com/sapops/hana-cli.git",
     "directory": "packages/hana2cds"
   },
   "scripts": {

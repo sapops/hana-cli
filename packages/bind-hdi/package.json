@@ -8,5 +8,10 @@
   "dependencies": {
     "@commander-js/extra-typings": "^12",
     "@fastify/deepmerge": "^2"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/sapops/hana-cli.git",
+    "directory": "packages/bind-hdi"
   }
 }

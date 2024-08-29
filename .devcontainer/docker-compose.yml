@@ -21,12 +21,5 @@ services:
     env_file:
       - .env
     volumes:
-      - ../.verdaccio:/verdaccio
-
-  test:
-     # Using a Dockerfile is optional, but included for completeness.
-    build:
-      context: .
-      dockerfile: test.Dockerfile
-    
+      - ../.verdaccio:/verdaccio 
    

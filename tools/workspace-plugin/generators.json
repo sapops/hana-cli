@@ -9,6 +9,11 @@
       "factory": "./src/generators/sysgen/generator",
       "schema": "./src/generators/sysgen/schema.json",
       "description": "Generate SYS views and entities which should be used in hana2cds"
+    },
+    "postbuild": {
+      "factory": "./src/generators/postbuild/generator",
+      "schema": "./src/generators/postbuild/schema.json",
+      "description": "PostBuild task generator"
     }
   }
 }

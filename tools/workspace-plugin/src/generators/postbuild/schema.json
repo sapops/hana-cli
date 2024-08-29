@@ -1,0 +1,22 @@
+{
+  "$schema": "https://json-schema.org/schema",
+  "$id": "Postbuild",
+  "title": "",
+  "type": "object",
+  "properties": {
+    "name": {
+      "type": "string",
+      "description": "Project Name",
+      "$default": {
+        "$source": "argv",
+        "index": 0
+      },
+      "x-prompt": "Project name"
+    },
+    "force": {
+      "type": "boolean",
+      "description": "Rewrite target configuration"
+    }
+  },
+  "required": ["name"]
+}

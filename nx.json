@@ -58,10 +58,6 @@
   "defaultBase": "main",
   "plugins": [
     {
-      "plugin": "nx-pack",
-      "options": {}
-    },
-    {
       "plugin": "@nx/eslint/plugin",
       "options": {
         "targetName": "lint"

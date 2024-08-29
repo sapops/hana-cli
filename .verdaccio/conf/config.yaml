@@ -15,3 +15,5 @@ packages:
     publish: $all
     proxy: npmjs
 log: { type: stdout, format: pretty, level: http }
+web:
+  html_cache: false

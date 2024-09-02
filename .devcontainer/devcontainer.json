@@ -22,7 +22,8 @@
 				"eamodio.gitlens",
 				"SAPSE.hana-database-explorer",
 				"esbenp.prettier-vscode",
-				"qwtel.sqlite-viewer"
+				"qwtel.sqlite-viewer",
+				"ms-azuretools.vscode-docker"
 			]
 		}
 	},

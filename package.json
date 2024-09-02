@@ -11,7 +11,7 @@
     "init:types": "npx @cap-js/cds-typer db/model.cds --outputDirectory db/generated/types",
     "publish:login": "npm login --registry http://verdaccio:4873",
     "publish:local": "NPM_CONFIG_REGISTRY=http://verdaccio:4873 nx release publish",
-    "release:patch": "nx release patch --skip-publish"
+    "patch": "nx release patch --skip-publish"
   },
   "private": true,
   "dependencies": {

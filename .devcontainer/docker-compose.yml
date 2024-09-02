@@ -15,11 +15,11 @@ services:
     command: /bin/sh -c "while sleep 1000; do :; done"
 
   verdaccio:
+    profiles: [e2e]
     image: verdaccio/verdaccio
     ports:
       - 4873:4873
     env_file:
       - .env
     volumes:
-      - ../.verdaccio:/verdaccio 
-   
+      - ../.verdaccio:/verdaccio

@@ -1,3 +1,7 @@
+## 0.4.10 (2024-09-03)
+
+This was a version bump only for hana2cds to align it with other projects, there were no code changes.
+
 ## 0.4.9 (2024-09-03)
 
 This was a version bump only for hana2cds to align it with other projects, there were no code changes.

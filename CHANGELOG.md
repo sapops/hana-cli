@@ -1,3 +1,14 @@
+## 0.4.10 (2024-09-03)
+
+
+### 🚀 Features
+
+- **cdsgen:** parseable flag ([04a506f](https://github.com/sapops/hana-cli/commit/04a506f))
+
+### ❤️  Thank You
+
+- Petr Plenkov
+
 ## 0.4.9 (2024-09-03)
 
 This was a version bump only, there were no code changes.

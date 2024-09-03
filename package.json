@@ -5,7 +5,7 @@
   "scripts": {
     "cf:login": "cf login --sso",
     "build": "nx run-many --target=build,postbuild --exclude sapops",
-    "lint": "nx run-many --target=lint",
+    "lint": "nx run-many --target=lint --exclude sapops",
     "init:data": " CDS_ENV=hybrid npx nx g datagen",
     "init:sqlite": "CDS_ENV=mock cds deploy",
     "init:types": "npx @cap-js/cds-typer db/model.cds --outputDirectory db/generated/types",

@@ -2,7 +2,7 @@ const baseConfig = require('../../eslint.config.js');
 
 module.exports = [
   {
-    ignores: ['**/src/cds/**/*.ts'],
+    ignores: ['**/src/cds/**/*.ts', "@cds-models"],
   },
   ...baseConfig,
   {

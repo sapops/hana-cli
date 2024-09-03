@@ -3,38 +3,37 @@
   "$schema": "../../node_modules/nx/schemas/project-schema.json",
   "sourceRoot": "packages/hana2cds/src",
   "projectType": "library",
-  "nx-release-publish": {},
   "tags": [],
   "targets": {
+    "nx-release-publish": {},
     "build": {
       "executor": "@nx/js:tsc",
-      "outputs": ["{options.outputPath}"],
+      "outputs": [
+        "{options.outputPath}"
+      ],
       "options": {
         "outputPath": "dist/packages/hana2cds",
         "main": "packages/hana2cds/src/index.ts",
         "tsConfig": "packages/hana2cds/tsconfig.lib.json",
-        "assets": ["packages/hana2cds/*.md", "packages/hana2cds/**/*.csn"]
+        "assets": [
+          "packages/hana2cds/*.md",
+          "packages/hana2cds/**/*.csn"
+        ]
       },
-      "dependsOn": ["^build", "build-types", "build-csn"]
-    },
-    "lint": {
-      "executor": "@nx/eslint:lint"
-    },
-    "test": {
-      "options": {
-        "passWithNoTests": true
-      },
-      "configurations": {
-        "ci": {
-          "ci": true,
-          "coverage": true
-        }
-      }
+      "dependsOn": [
+        "^build",
+        "build-types",
+        "build-csn"
+      ]
     },
     "build-csn": {
       "executor": "nx:run-commands",
-      "inputs": ["{projectRoot}/**/*.cds"],
-      "outputs": ["{projectRoot}/index.csn"],
+      "inputs": [
+        "{projectRoot}/**/*.cds"
+      ],
+      "outputs": [
+        "{projectRoot}/index.csn"
+      ],
       "options": {
         "command": "npx cds compile index.cds --dest index.csn",
         "cwd": "{projectRoot}"
@@ -42,14 +41,9 @@
     },
     "prepublish": {
       "executor": "nx:noop",
-      "dependsOn": ["build-csn"]
-    },
-    "version": {
-      "executor": "nx:run-commands",
-      "options": {
-        "command": "npm version",
-        "cwd": "packages/hana2cds"
-      }
+      "dependsOn": [
+        "build-csn"
+      ]
     },
     "postbuild": {
       "executor": "nx:run-commands",
@@ -61,8 +55,12 @@
         ],
         "cwd": "dist/packages/hana2cds"
       },
-      "dependsOn": ["build"],
-      "outputs": ["{options.cwd}"]
+      "dependsOn": [
+        "build"
+      ],
+      "outputs": [
+        "{options.cwd}"
+      ]
     }
   }
 }

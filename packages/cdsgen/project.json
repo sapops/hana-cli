@@ -4,8 +4,8 @@
   "sourceRoot": "packages/cdsgen/src",
   "projectType": "library",
   "tags": [],
-  "nx-release-publish": {},
   "targets": {
+    "nx-release-publish": {},
     "build": {
       "executor": "@nx/rollup:rollup",
       "outputs": [

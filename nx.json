@@ -47,6 +47,8 @@
         "packageRoot": "dist/packages/{projectName}"
       },
       "dependsOn": [
+        "build",
+        "lint",
         "postbuild"
       ]
     },
@@ -114,7 +116,7 @@
   "release": {
     "changelog": {
       "projectChangelogs": {
-        "createRelease": "github"
+        "entryWhenNoChanges": false
       }
     },
     "version": {

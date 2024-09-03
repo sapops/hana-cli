@@ -43,6 +43,7 @@
       "cache": true
     },
     "nx-release-publish": {
+      "executor": "@nx/js:release-publish",
       "options": {
         "packageRoot": "dist/packages/{projectName}"
       },

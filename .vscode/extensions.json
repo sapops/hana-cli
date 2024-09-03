@@ -4,6 +4,7 @@
     "esbenp.prettier-vscode",
     "dbaeumer.vscode-eslint",
     "qwtel.sqlite-viewer",
-    "sourcegraph.cody-ai"
+    "sourcegraph.cody-ai",
+    "firsttris.vscode-jest-runner"
   ]
 }

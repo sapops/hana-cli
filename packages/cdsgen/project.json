@@ -1,0 +1,41 @@
+{
+  "name": "cdsgen",
+  "$schema": "../../node_modules/nx/schemas/project-schema.json",
+  "sourceRoot": "packages/cdsgen/src",
+  "projectType": "library",
+  "tags": [],
+  "targets": {
+    "build": {
+      "executor": "@nx/rollup:rollup",
+      "outputs": [
+        "{options.outputPath}"
+      ],
+      "options": {
+        "main": "packages/cdsgen/src/index.ts",
+        "outputPath": "dist/packages/cdsgen",
+        "tsConfig": "packages/cdsgen/tsconfig.lib.json",
+        "compiler": "swc",
+        "project": "packages/cdsgen/package.json",
+        "rollupConfig": [
+          "packages/cdsgen/rollup.config.ts"
+        ],
+        "format": [
+          "cjs",
+          "esm"
+        ],
+        "assets": [
+          {
+            "glob": "packages/cdsgen/README.md",
+            "input": ".",
+            "output": "."
+          },
+          {
+            "glob": "{projectRoot}/bin-out/*",
+            "input": ".",
+            "output": "./bin"
+          }
+        ]
+      }
+    }
+  }
+}

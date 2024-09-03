@@ -39,12 +39,6 @@
         "cwd": "{projectRoot}"
       }
     },
-    "prepublish": {
-      "executor": "nx:noop",
-      "dependsOn": [
-        "build-csn"
-      ]
-    },
     "postbuild": {
       "executor": "nx:run-commands",
       "options": {

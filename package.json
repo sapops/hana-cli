@@ -4,7 +4,7 @@
   "license": "MIT",
   "scripts": {
     "cf:login": "cf login --sso",
-    "build": "nx run-many --target=postbuild",
+    "build": "nx run-many --target=build,postbuild --exclude sapops",
     "lint": "nx run-many --target=lint",
     "init:data": " CDS_ENV=hybrid npx nx g datagen",
     "init:sqlite": "CDS_ENV=mock cds deploy",
@@ -87,13 +87,14 @@
       }
     }
   },
-  "nx:": {
-    "targets": {}
-  },
   "imports": {
     "#cds-models/*": "./@cds-models/*/index.js"
   },
   "nx": {
-    "includedScripts": []
+    "includedScripts": [
+      "build",
+      "lint",
+      "patch"
+    ]
   }
 }

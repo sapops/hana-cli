@@ -18,5 +18,10 @@
     "type": "git",
     "url": "git+https://github.com/sapops/hana-cli.git",
     "directory": "packages/cdsgen"
+  },
+  "nx": {
+    "targets": {
+      "nx-release-publish": {}
+    }
   }
 }

@@ -16,5 +16,10 @@
   "dependencies": {
     "@sap/cds": "^8",
     "commander": "^12"
+  },
+  "nx": {
+    "targets": {
+      "nx-release-publish": {}
+    }
   }
 }

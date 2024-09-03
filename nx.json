@@ -49,7 +49,8 @@
       "dependsOn": [
         "build",
         "lint",
-        "postbuild"
+        "postbuild",
+        "^nx-release-publish"
       ]
     },
     "@nx/vite:test": {

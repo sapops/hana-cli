@@ -13,5 +13,10 @@
     "type": "git",
     "url": "git+https://github.com/sapops/hana-cli.git",
     "directory": "packages/bind-hdi"
+  },
+  "nx": {
+    "targets": {
+      "nx-release-publish": {}
+    }
   }
 }

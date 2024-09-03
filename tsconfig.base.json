@@ -10,36 +10,18 @@
     "importHelpers": false,
     "target": "es2015",
     "module": "esnext",
-    "lib": [
-      "es2017",
-      "dom"
-    ],
+    "lib": ["es2017", "dom"],
     "skipLibCheck": true,
     "skipDefaultLibCheck": true,
     "baseUrl": ".",
     "paths": {
-      "@sap/cds": [
-        "node_modules/@cap-js/cds-types/dist/cds-types.d.ts"
-      ],
-      "@sapops/bind-hdi": [
-        "packages/bind-hdi/src/index.ts"
-      ],
-      "cdsgen": [
-        "packages/cdsgen/src/index.ts"
-      ],
-      "e2e": [
-        "e2e/src/index.ts"
-      ],
-      "hana2cds": [
-        "packages/hana2cds/src/index.ts"
-      ],
-      "workspace-plugin": [
-        "tools/workspace-plugin/src/index.ts"
-      ]
+      "@sap/cds": ["node_modules/@cap-js/cds-types/dist/cds-types.d.ts"],
+      "@sapops/bind-hdi": ["packages/bind-hdi/src/index.ts"],
+      "cdsgen": ["packages/cdsgen/src/index.ts"],
+      "e2e": ["e2e/src/index.ts"],
+      "hana2cds": ["packages/hana2cds/src/index.ts"],
+      "workspace-plugin": ["tools/workspace-plugin/src/index.ts"]
     }
   },
-  "exclude": [
-    "node_modules",
-    "tmp"
-  ]
+  "exclude": ["node_modules", "tmp"]
 }

@@ -17,45 +17,44 @@ export class AppController {
     @CliOption('model')
     @Description('CDS model name')
     name: string,
-    @CliOption('stdout')
-    _stdout?: boolean,
+    @CliOption('parseable')
+    parseable?: boolean,
     @CliOption('output')
     output?: string
   ) {
-    const model = await cds.load(name);
-    const { write } = stdout;
+    if (!parseable) {
+      console.log(`Loading model: ${name}`);
+    }
 
+    const model = (await cds.load(name)) as {
+      definitions: Record<string, Annotatable<csn.Definition>>;
+    };
+
+    const { constantCase } = await import('case-anything');
     const synonyms: hdbsynonym = {};
 
     for (const entity_key in model.definitions) {
-      const entity = model.definitions[
-        entity_key
-      ] as Annotatable<csn.Definition>;
-
-      if (entity.kind !== 'entity' || !entity['@cds.persistence.exists']) {
-        continue;
-      }
-
-      const { constantCase } = await import('case-anything');
-
-      const object = constantCase(entity_key);
-
-      if (object !== entity_key) {
-        synonyms[entity_key] = {
-          target: {
-            object,
-          },
-        };
+      const entity = model.definitions[entity_key];
+      if (entity.kind === 'entity' && entity['@cds.persistence.exists']) {
+        const object = constantCase(entity_key);
+        if (object !== entity_key) {
+          synonyms[entity_key] = {
+            target: {
+              object,
+            },
+          };
+        }
       }
     }
 
     const result = JSON.stringify(synonyms, null, '\t');
-
-    if (_stdout) {
-      stdout.write = write;
+    if (parseable) {
       stdout.write(result);
     } else if (output) {
       await writeFile(output, result);
+    } else {
+      console.log('Generated synonyms:');
+      console.log(result);
     }
   }
 }

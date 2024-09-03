@@ -2,12 +2,12 @@
   "name": "cdsgen",
   "version": "0.0.1",
   "dependencies": {
-    "@eslint/eslintrc": "^2.1.1",
-    "@eslint/js": "~8.57.0",
     "@moostjs/event-cli": "^0.4.19",
     "moost": "^0.4.19",
-    "@sap/cds": "^8",
     "case-anything": "^3.1.0"
+  },
+  "peerDependencies": {
+    "@sap/cds": "^8"
   },
   "main": "./index.cjs",
   "module": "./index.js",

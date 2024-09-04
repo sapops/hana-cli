@@ -1,11 +1,10 @@
 ## 0.4.17 (2024-09-05)
 
-
 ### 🩹 Fixes
 
 - **hana2cds:** fixing nested query ([4cac2b1](https://github.com/sapops/hana-cli/commit/4cac2b1))
 
-### ❤️  Thank You
+### ❤️ Thank You
 
 - Petr Plenkov
 
@@ -35,12 +34,11 @@ This was a version bump only, there were no code changes.
 
 ## 0.4.10 (2024-09-03)
 
-
 ### 🚀 Features
 
 - **cdsgen:** parseable flag ([04a506f](https://github.com/sapops/hana-cli/commit/04a506f))
 
-### ❤️  Thank You
+### ❤️ Thank You
 
 - Petr Plenkov
 

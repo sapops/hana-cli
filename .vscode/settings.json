@@ -10,5 +10,8 @@
     "tab",
     "json"
   ],
-  "git.followTagsWhenSync": true
+  "git.followTagsWhenSync": true,
+  "npm.exclude": [
+    "**/.nx/**"
+  ]
 }

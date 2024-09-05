@@ -1,3 +1,14 @@
+## 0.5.4 (2024-09-05)
+
+
+### 🚀 Features
+
+- **cdsgen:** removed case option,  cap-js/hana format by default ([a305a22](https://github.com/sapops/hana-cli/commit/a305a22))
+
+### ❤️  Thank You
+
+- Petr Plenkov
+
 ## 0.5.3 (2024-09-05)
 
 This was a version bump only, there were no code changes.

@@ -13,14 +13,23 @@ type Annotatable<T> = T & {
 @Controller()
 export class AppController {
   @Cli('synonyms')
+  @Description('Generate hdbsynonym file')
   async synonym(
     @CliOption('model')
     @Description('CDS model name')
     name: string,
     @CliOption('parseable')
+    @Description('Parseable CLI output (JSON)')
     parseable?: boolean,
+    @Description('Output file')
     @CliOption('output')
-    output?: string
+    output?: string,
+    @CliOption('case')
+    @Description('Synonym name format [snake|constant]')
+    transform?: 'snake' | 'constant',
+    @CliOption('schema')
+    @Description('Target schema')
+    schema?: string
   ) {
     if (!parseable) {
       console.log(`Loading model: ${name}`);
@@ -30,19 +39,30 @@ export class AppController {
       definitions: Record<string, Annotatable<csn.Definition>>;
     };
 
-    const { constantCase } = await import('case-anything');
+    const { constantCase, snakeCase } = await import('case-anything');
+
+    const transformers = {
+      snake: snakeCase,
+      constant: constantCase,
+    };
+
+    const transformer = transformers[transform || 'constant'];
+
     const synonyms: hdbsynonym = {};
 
     for (const entity_key in model.definitions) {
       const entity = model.definitions[entity_key];
       if (entity.kind === 'entity' && entity['@cds.persistence.exists']) {
-        const object = constantCase(entity_key);
-        if (object !== entity_key) {
-          synonyms[entity_key] = {
-            target: {
-              object,
-            },
-          };
+        if (transformer) {
+          const synonym_key = transformer(entity_key);
+          if (schema || synonym_key !== entity_key) {
+            synonyms[synonym_key] = {
+              target: {
+                object: entity_key,
+                ...(schema ? { schema } : {}),
+              },
+            };
+          }
         }
       }
     }

@@ -1,3 +1,17 @@
+## 0.5.0 (2024-09-05)
+
+
+### 🩹 Fixes
+
+- **hana2cds:** fixing nested query
+
+- **hana2cds:** remove schema name from the object name
+
+
+### ❤️  Thank You
+
+- Petr Plenkov
+
 ## 0.4.17 (2024-09-05)
 
 

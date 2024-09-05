@@ -1,3 +1,15 @@
+## 0.5.0 (2024-09-05)
+
+
+### 🩹 Fixes
+
+- **hana2cds:** fixing nested query ([4cac2b1](https://github.com/sapops/hana-cli/commit/4cac2b1))
+- **hana2cds:** remove schema name from the object name ([6198aac](https://github.com/sapops/hana-cli/commit/6198aac))
+
+### ❤️  Thank You
+
+- Petr Plenkov
+
 ## 0.4.17 (2024-09-05)
 
 ### 🩹 Fixes

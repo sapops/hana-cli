@@ -71,7 +71,7 @@ export async function db2csn(input: SingleInput): Promise<cds.csn.CSN> {
         }
 
         return [
-          `${r.SCHEMA_NAME}.${r.OBJECT_NAME}`,
+          r.OBJECT_NAME,
           Object.assign(
             { '@cds.persistence.exists': true },
             {

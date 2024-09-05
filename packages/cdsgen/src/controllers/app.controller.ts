@@ -18,15 +18,15 @@ export class AppController {
     @CliOption('model')
     @Description('CDS model name')
     name: string,
+
     @CliOption('parseable')
     @Description('Parseable CLI output (JSON)')
     parseable?: boolean,
+
     @Description('Output file')
     @CliOption('output')
     output?: string,
-    @CliOption('case')
-    @Description('Synonym name format [snake|constant]')
-    transform?: 'snake' | 'constant',
+
     @CliOption('schema')
     @Description('Target schema')
     schema?: string
@@ -39,30 +39,21 @@ export class AppController {
       definitions: Record<string, Annotatable<csn.Definition>>;
     };
 
-    const { constantCase, snakeCase } = await import('case-anything');
-
-    const transformers = {
-      snake: snakeCase,
-      constant: constantCase,
-    };
-
-    const transformer = transformers[transform || 'constant'];
+    const { constantCase } = await import('case-anything');
 
     const synonyms: hdbsynonym = {};
 
     for (const entity_key in model.definitions) {
       const entity = model.definitions[entity_key];
       if (entity.kind === 'entity' && entity['@cds.persistence.exists']) {
-        if (transformer) {
-          const synonym_key = transformer(entity_key);
-          if (schema || synonym_key !== entity_key) {
-            synonyms[synonym_key] = {
-              target: {
-                object: entity_key,
-                ...(schema ? { schema } : {}),
-              },
-            };
-          }
+        const synonym_key = constantCase(entity_key.toUpperCase());
+        if (schema || synonym_key !== entity_key) {
+          synonyms[synonym_key] = {
+            target: {
+              object: entity_key,
+              ...(schema ? { schema } : {}),
+            },
+          };
         }
       }
     }

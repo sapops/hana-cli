@@ -1,11 +1,11 @@
-process.env['CDS_ENV'] = 'mock';
+// process.env['CDS_ENV'] = 'mock';
 
-import { db2csn } from './hana2csn';
+import { hana2csn } from './hana2csn';
 import { convertCSN } from './convertCSN';
 
 describe('hana2csn', () => {
   test('Connect to sqlite', async () => {
-    const schema = await db2csn({ schema: 'SYS' });
+    const schema = await hana2csn({ schema: 'SYS' });
 
     expect(schema).toBeDefined();
 

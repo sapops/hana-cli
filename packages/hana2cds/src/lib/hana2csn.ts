@@ -17,19 +17,21 @@ interface GetObjectsInput {
 async function getObjects(input: GetObjectsInput) {
   const { OBJECTS } = await import('./generated/types');
 
+  //const result = await SELECT.from(OBJECTS);
+
   const result = await SELECT.from(OBJECTS, (o) => {
     o.OBJECT_TYPE, o.OBJECT_OID, o.SCHEMA_NAME, o.OBJECT_NAME;
-    // read view columns
-    o.view?.((v) => {
-      v?.('*');
-      v?.columns?.('*');
-    });
-    //read table columns
-    o.table?.((v) => {
-      v?.('*');
-      v?.columns?.('*');
-      v?.keys?.('*');
-    });
+    o.view &&
+      o.view((v) => {
+        v('*');
+        v.columns && v.columns('*');
+      });
+    o.table &&
+      o.table((t) => {
+        t('*');
+        t.columns && t.columns('*');
+        t.keys && t.keys('*');
+      });
   }).where({
     OBJECT_TYPE: { in: ['TABLE', 'VIEW'] },
     ...(input?.SCHEMA_NAME && { SCHEMA_NAME: { in: input?.SCHEMA_NAME } }),
@@ -100,6 +102,8 @@ export async function db2csn(input: SingleInput): Promise<cds.csn.CSN> {
 
 export async function hana2csn(input: SingleInput): Promise<cds.csn.CSN> {
   // connect to db using public model
-  await cds.connect.to('db', { model: 'hana2cds' });
+  await cds.connect.to('db', {
+    model: 'hana2cds',
+  });
   return db2csn(input);
 }

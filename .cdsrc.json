@@ -1,21 +1,18 @@
 {
-    "build": {
-        "target": "."
-    },
-    "requires": {
-        "db": {
-            "model": [
-                "db/model"
-            ],
-            "kind": "hana",
-            "[mock]": {
-                "kind": "sqlite",
-                "impl":"@cap-js/sqlite",
-                "model":["db/mock"],
-                "credentials": {
-                    "url": "db.sqlite"
-                }
-            }
+  "build": {
+    "target": "."
+  },
+  "requires": {
+    "db": {
+      "kind": "hana",
+      "[mock]": {
+        "kind": "sqlite",
+        "impl": "@cap-js/sqlite",
+        "model": ["db_mock"],
+        "credentials": {
+          "url": "db.sqlite"
         }
+      }
     }
+  }
 }

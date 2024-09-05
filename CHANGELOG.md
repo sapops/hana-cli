@@ -1,3 +1,14 @@
+## 0.4.17 (2024-09-05)
+
+
+### 🩹 Fixes
+
+- **hana2cds:** fixing nested query ([4cac2b1](https://github.com/sapops/hana-cli/commit/4cac2b1))
+
+### ❤️  Thank You
+
+- Petr Plenkov
+
 ## 0.4.16 (2024-09-03)
 
 This was a version bump only, there were no code changes.

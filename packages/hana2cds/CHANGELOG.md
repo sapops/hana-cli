@@ -1,3 +1,15 @@
+## 0.4.17 (2024-09-05)
+
+
+### 🩹 Fixes
+
+- **hana2cds:** fixing nested query
+
+
+### ❤️  Thank You
+
+- Petr Plenkov
+
 
 
 

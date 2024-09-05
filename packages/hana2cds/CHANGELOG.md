@@ -1,3 +1,15 @@
+## 0.5.2 (2024-09-05)
+
+
+### 🩹 Fixes
+
+- **hana2cds:** package.json EOF
+
+
+### ❤️  Thank You
+
+- Petr Plenkov
+
 
 
 ## 0.5.0 (2024-09-05)

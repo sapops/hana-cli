@@ -1,3 +1,14 @@
+## 0.5.2 (2024-09-05)
+
+
+### 🩹 Fixes
+
+- **hana2cds:** package.json EOF ([fbb8a19](https://github.com/sapops/hana-cli/commit/fbb8a19))
+
+### ❤️  Thank You
+
+- Petr Plenkov
+
 ## 0.5.1 (2024-09-05)
 
 This was a version bump only, there were no code changes.

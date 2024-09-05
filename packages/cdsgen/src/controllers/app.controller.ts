@@ -1,6 +1,6 @@
 import { Cli, CliOption } from '@moostjs/event-cli';
 import { Controller, Description } from 'moost';
-import * as cds from '@sap/cds';
+import cds from '@sap/cds';
 import type { csn } from '@sap/cds';
 import { hdbsynonym } from './hana/synonym.js';
 import { stdout } from 'process';

@@ -1,3 +1,14 @@
+## 0.5.6 (2024-09-06)
+
+
+### 🩹 Fixes
+
+- **cdsgen:** support foo::bar pattern for entities ([87520fc](https://github.com/sapops/hana-cli/commit/87520fc))
+
+### ❤️  Thank You
+
+- Petr Plenkov
+
 ## 0.5.5 (2024-09-06)
 
 

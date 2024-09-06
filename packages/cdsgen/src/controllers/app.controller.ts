@@ -29,7 +29,15 @@ export class AppController {
 
     @CliOption('schema')
     @Description('Target schema')
-    schema?: string
+    schema?: string,
+
+    @CliOption('quoted')
+    @Description('Use quuoted SQL mapping')
+    quoted?: boolean,
+
+    @CliOption('plain')
+    @Description('Use plain SQL mapping')
+    plain?: boolean
   ) {
     if (!parseable) {
       console.log(`Loading model: ${name}`);
@@ -43,17 +51,42 @@ export class AppController {
 
     const synonyms: hdbsynonym = {};
 
+    function createSynonym(
+      sql_mapping: 'quoted' | 'plain',
+      entity_key: string
+    ) {
+      let synonym_key: string;
+
+      switch (sql_mapping) {
+        case 'quoted':
+          synonym_key = entity_key;
+          break;
+        case 'plain':
+          synonym_key = constantCase(entity_key.toUpperCase());
+          break;
+        default:
+          throw new Error(`Unknown sql_mapping: ${sql_mapping}`);
+      }
+
+      if (schema || synonym_key !== entity_key) {
+        synonyms[synonym_key] = {
+          target: {
+            object: entity_key,
+            ...(schema ? { schema } : {}),
+          },
+        };
+      }
+    }
+
     for (const entity_key in model.definitions) {
       const entity = model.definitions[entity_key];
       if (entity.kind === 'entity' && entity['@cds.persistence.exists']) {
-        const synonym_key = constantCase(entity_key.toUpperCase());
-        if (schema || synonym_key !== entity_key) {
-          synonyms[synonym_key] = {
-            target: {
-              object: entity_key,
-              ...(schema ? { schema } : {}),
-            },
-          };
+        // it's ok to create both quoted and plain synonyms in the same file
+        if (quoted) {
+          createSynonym('quoted', entity_key);
+        }
+        if (plain) {
+          createSynonym('plain', entity_key);
         }
       }
     }

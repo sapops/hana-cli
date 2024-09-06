@@ -59,7 +59,8 @@ export class AppController {
 
       switch (sql_mapping) {
         case 'quoted':
-          synonym_key = entity_key;
+          // in a quoted mode CAP will replace entities like foo::bar to foo.bar
+          synonym_key = entity_key.replace(/[^a-zA-Z0-9_]+/g, '.');
           break;
         case 'plain':
           synonym_key = constantCase(entity_key.toUpperCase());

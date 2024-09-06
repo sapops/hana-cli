@@ -37,7 +37,11 @@ export class AppController {
 
     @CliOption('plain')
     @Description('Use plain SQL mapping')
-    plain?: boolean
+    plain?: boolean,
+
+    @CliOption('regex')
+    @Description('Filter entities by regex')
+    regex?: string
   ) {
     if (!parseable) {
       console.log(`Loading model: ${name}`);
@@ -81,7 +85,10 @@ export class AppController {
 
     for (const entity_key in model.definitions) {
       const entity = model.definitions[entity_key];
-      if (entity.kind === 'entity' && entity['@cds.persistence.exists']) {
+      if (entity.kind === 'entity') {
+        if (regex && !entity_key.match(regex)) {
+          continue;
+        }
         // it's ok to create both quoted and plain synonyms in the same file
         if (quoted) {
           createSynonym('quoted', entity_key);

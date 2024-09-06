@@ -1,3 +1,14 @@
+## 0.5.5 (2024-09-06)
+
+
+### 🚀 Features
+
+- **cdsgen:** support both plain and quoted sqlmapping for synonyms ([8e77f63](https://github.com/sapops/hana-cli/commit/8e77f63))
+
+### ❤️  Thank You
+
+- Petr Plenkov
+
 ## 0.5.4 (2024-09-05)
 
 

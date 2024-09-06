@@ -46,7 +46,7 @@ OPTIONS
 
 One of the most common use cases is to generate synonyms for the existing database tables.
 
-Let's say you have the app which connects to the extenal schema. In this case even if you generate relevant CDS files with a tool like hana2cds, you still need to generate synonyms for the tables and views if they use `@cds.persistence.exist: true` because those artifacts are not created automatically.
+Let's say you have the app which connects to the extenal schema. In this case even if you generate relevant CDS files with a tool like [hana2cds](../hana2cds/), you still need to generate synonyms for the tables and views if they use `@cds.persistence.exist: true` because those artifacts are not created automatically.
 
 Let's say you have an app connected to the external schema EXTERNAL_SCHEMA . The very first step could be is to generate CDS model for the external schema with a command like :
 
@@ -74,6 +74,72 @@ Now you can generate synonyms with the following command:
 
 ```bash
 npx cdsgen synonyms --model schema --output db/gen/external_schema.hdbsynonym --schema EXTERNAL_SCHEMA
+```
+
+as a result you will get a file like:
+
+```hdbsynonym
+{
+  "EXTENAL_TABLE"" : {
+    "target":{
+      "object":"EXTERNAL_TABLE",
+      "schema":"EXTERNAL_SCHEMA"
+    }
+  }
+}
+```
+
+it also allows you to generate synonyms for entities with special characters like `::`.
+
+Let's say we have a schema with hdbcds entities there in a format like `org.namespace::Foo.Bar`.
+
+Generating CDS for such a table would result in a file like:
+
+```cds
+@cds.persistence.exists : true
+@title : 'Foo Bar'
+entity org.![namespace::Foo].Bar {
+  @title : 'Id'
+  key ID : String(100);
+  @title : 'Type'
+  key TYPE : String(100);
+  @title : 'Name'
+  NAME : String(255);
+};
+```
+
+The problem is that when you build such a model for hana and let's say you want use as projection in another cds view CAP framework will transform such a name into something like `org.namespace.Foo.Bar` which is not the same as `org.namespace::Foo.Bar`. With the help of our tool - we can just give it a whole CDS model and it will try to generate synomys for such entities respecting this rule:
+
+```
+cdsgen synonyms --model model.cds --schema EXTERNAL_SCHEMA --quoted
+```
+
+The `--quoted` directive will generate synonyms in a format compatible to `"sql_mapping" : "quoted"` in cds configuration.
+
+The result will be:
+
+```hdbsynonym
+{
+  "org.namespace.Foo.Bar"" : {
+    "target":{
+      "object":"org.namespace::Foo.Bar",
+      "schema":"EXTERNAL_SCHEMA"
+    }
+  }
+}
+```
+
+Another use case - is the opposite to quoted plain format. In this case you can use `--plain` directive and it will generate synonyms in a format compatible to `"sql_mapping" : "plain"` in cds configuration:
+
+```hdbsynonym
+{
+  "ORG_NAMESPACE_FOO_BAR"" : {
+    "target":{
+      "object":"org.namespace::Foo.Bar",
+      "schema":"EXTERNAL_SCHEMA"
+    }
+  }
+}
 ```
 
 ## Contribution

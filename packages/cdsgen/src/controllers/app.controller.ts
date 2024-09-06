@@ -1,3 +1,6 @@
+/**
+ * Controller class for generating hdbsynonym files.
+ */
 import { Cli, CliOption } from '@moostjs/event-cli';
 import { Controller, Description } from 'moost';
 import cds from '@sap/cds';

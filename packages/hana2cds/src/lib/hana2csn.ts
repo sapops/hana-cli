@@ -32,11 +32,13 @@ async function getObjects(input: GetObjectsInput) {
         t.columns && t.columns('*');
         t.keys && t.keys('*');
       });
-  }).where({
-    OBJECT_TYPE: { in: ['TABLE', 'VIEW'] },
-    ...(input?.SCHEMA_NAME && { SCHEMA_NAME: { in: input?.SCHEMA_NAME } }),
-    ...(input?.OBJECT_NAME && { OBJECT_NAME: { in: input?.OBJECT_NAME } }),
-  });
+  })
+    .where({
+      OBJECT_TYPE: { in: ['TABLE', 'VIEW'] },
+      ...(input?.SCHEMA_NAME && { SCHEMA_NAME: { in: input?.SCHEMA_NAME } }),
+      ...(input?.OBJECT_NAME && { OBJECT_NAME: { in: input?.OBJECT_NAME } }),
+    })
+    .orderBy('OBJECT_NAME');
 
   return result;
 }

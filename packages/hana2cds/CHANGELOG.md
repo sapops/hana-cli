@@ -1,3 +1,15 @@
+## 0.5.8 (2024-09-06)
+
+
+### 🚀 Features
+
+- **hana2cds:** order by object name to prevent random order
+
+
+### ❤️  Thank You
+
+- Petr Plenkov
+
 
 
 

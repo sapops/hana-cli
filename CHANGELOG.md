@@ -1,3 +1,14 @@
+## 0.5.8 (2024-09-06)
+
+
+### 🚀 Features
+
+- **hana2cds:** order by object name to prevent random order ([1059895](https://github.com/sapops/hana-cli/commit/1059895))
+
+### ❤️  Thank You
+
+- Petr Plenkov
+
 ## 0.5.7 (2024-09-06)
 
 This was a version bump only, there were no code changes.

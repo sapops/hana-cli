@@ -1,3 +1,7 @@
+## 0.5.12 (2024-09-24)
+
+This was a version bump only, there were no code changes.
+
 ## 0.5.11 (2024-09-24)
 
 

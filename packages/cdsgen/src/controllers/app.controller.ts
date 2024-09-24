@@ -60,17 +60,16 @@ export class AppController {
 
     function createSynonym(
       sql_mapping: 'quoted' | 'plain',
-      entity_key: string
+      entity_key: string,
+      synonym_key: string
     ) {
-      let synonym_key: string;
-
       switch (sql_mapping) {
         case 'quoted':
           // in a quoted mode CAP will replace entities like foo::bar to foo.bar
-          synonym_key = entity_key.replace(/[^a-zA-Z0-9_]+/g, '.');
+          synonym_key = synonym_key.replace(/[^a-zA-Z0-9_]+/g, '.');
           break;
         case 'plain':
-          synonym_key = constantCase(entity_key.toUpperCase());
+          synonym_key = constantCase(synonym_key.toUpperCase());
           break;
         default:
           throw new Error(`Unknown sql_mapping: ${sql_mapping}`);
@@ -86,18 +85,24 @@ export class AppController {
       }
     }
 
-    for (const entity_key in model.definitions) {
+    for (let entity_key in model.definitions) {
       const entity = model.definitions[entity_key];
+      const synonym_key = entity_key;
       if (entity.kind === 'entity') {
-        if (regex && !entity_key.match(regex)) {
-          continue;
+        if (regex) {
+          const matched_key = entity_key.match(regex);
+          if (!matched_key?.length) {
+            continue;
+          }
+          entity_key = matched_key[0];
         }
+
         // it's ok to create both quoted and plain synonyms in the same file
         if (quoted) {
-          createSynonym('quoted', entity_key);
+          createSynonym('quoted', entity_key, synonym_key);
         }
         if (plain) {
-          createSynonym('plain', entity_key);
+          createSynonym('plain', entity_key, synonym_key);
         }
       }
     }

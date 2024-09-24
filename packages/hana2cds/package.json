@@ -14,8 +14,8 @@
     "build-types": "npx @cap-js/cds-typer index.cds --outputDirectory src/lib/generated/types"
   },
   "dependencies": {
-    "@sap/cds": "^8",
-    "commander": "^12"
+    "@sap/cds": "^8.2.3",
+    "commander": "^12.1.0"
   },
   "nx": {
     "targets": {

@@ -2,12 +2,12 @@
   "name": "cdsgen",
   "version": "0.5.9",
   "dependencies": {
-    "@moostjs/event-cli": "^0.4.19",
-    "moost": "^0.4.19",
-    "case-anything": "^3.1.0"
+    "@moostjs/event-cli": "^0.4.20",
+    "case-anything": "^3.1.0",
+    "moost": "^0.4.19"
   },
   "peerDependencies": {
-    "@sap/cds": "^8"
+    "@sap/cds": "^8.2.3"
   },
   "main": "./index.cjs",
   "module": "./index.js",

@@ -6,8 +6,8 @@
     "bind-hdi": "src/bin/run.ts"
   },
   "dependencies": {
-    "@commander-js/extra-typings": "^12",
-    "@fastify/deepmerge": "^2"
+    "@commander-js/extra-typings": "^12.1.0",
+    "@fastify/deepmerge": "^2.0.0"
   },
   "repository": {
     "type": "git",

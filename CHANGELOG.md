@@ -1,3 +1,14 @@
+## 0.5.11 (2024-09-24)
+
+
+### 🚀 Features
+
+- **hana2cds:** restore prefix CLI option ([99c0eea](https://github.com/sapops/hana-cli/commit/99c0eea))
+
+### ❤️  Thank You
+
+- Petr Plenkov
+
 ## 0.5.10 (2024-09-24)
 
 This was a version bump only, there were no code changes.

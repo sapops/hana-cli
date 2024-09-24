@@ -15,3 +15,8 @@ RUN apt-get update && export DEBIAN_FRONTEND=noninteractive \
 
 # [Optional] Uncomment if you want to install more global node packages
 RUN su node -c "npm install -g nx @sap/cds-dk @sap/eslint-plugin-cds"
+
+RUN curl -LJO https://tools.hana.ondemand.com/additional/btp-cli-linux-amd64-latest.tar.gz --cookie "eula_3_2_agreed=tools.hana.ondemand.com/developer-license-3_2.txt" \
+    && tar -xzf btp-cli-linux-amd64-latest.tar.gz \
+    && rm btp-cli-linux-amd64-latest.tar.gz \
+    && mv linux-amd64/btp /usr/local/bin/

@@ -7,6 +7,7 @@ interface SingleInput {
   schema: string;
   objects?: string[];
   namespace?: string;
+  prefix?: string;
 }
 
 interface GetObjectsInput {
@@ -73,7 +74,7 @@ export async function db2csn(input: SingleInput): Promise<cds.csn.CSN> {
         }
 
         return [
-          r.OBJECT_NAME,
+          `${input.prefix || ''}${r.OBJECT_NAME}`,
           Object.assign(
             { '@cds.persistence.exists': true },
             {

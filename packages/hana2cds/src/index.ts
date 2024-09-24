@@ -10,6 +10,7 @@ interface Options {
   filter?: string;
   output?: string;
   case?: Case;
+  prefix?: string;
 }
 
 export default new Command()
@@ -22,7 +23,7 @@ export default new Command()
     '-c, --case <properties case>',
     'Convert properties to a specific case'
   )
-  // .option('-n, --prefix <projection prefix>', 'Prefix for converted projections (applicable if case is provided)')
+  .option('-p, --prefix <projection prefix>', 'Prefix for projection names')
   .action(async (options: Options) => {
     const useTTY = !options.output;
     const { write } = stdout;
@@ -39,6 +40,7 @@ export default new Command()
       schema: options.schema,
       objects: options?.filter?.split(','),
       namespace: options?.namespace,
+      prefix: options?.prefix,
     });
 
     if (options?.case && csn.definitions) {

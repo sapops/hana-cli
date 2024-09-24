@@ -24,13 +24,13 @@ async function getObjects(input: GetObjectsInput) {
     o.view &&
       o.view((v) => {
         v('*');
-        v.columns && v.columns('*');
+        v.columns!('*');
       });
     o.table &&
       o.table((t) => {
         t('*');
-        t.columns && t.columns('*');
-        t.keys && t.keys('*');
+        t.columns!('*');
+        t.keys!('*');
       });
   })
     .where({

@@ -1,6 +1,6 @@
 {
   "name": "sapops",
-  "version": "0.3.1",
+  "version": "0.4.0",
   "license": "MIT",
   "scripts": {
     "cf:login": "cf login --sso -a $(npx cds env requires.db.binding.apiEndpoint --profile hybrid)",

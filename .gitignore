@@ -56,3 +56,4 @@ generated
 db/data
 
 *.tgz
+vite.config.*.timestamp*

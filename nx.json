@@ -3,13 +3,8 @@
   "targetDefaults": {
     "@nx/js:tsc": {
       "cache": true,
-      "dependsOn": [
-        "^build"
-      ],
-      "inputs": [
-        "production",
-        "^production"
-      ]
+      "dependsOn": ["^build"],
+      "inputs": ["production", "^production"]
     },
     "build-cds-csn": {
       "cache": true
@@ -18,11 +13,7 @@
       "cache": true
     },
     "@nx/jest:jest": {
-      "inputs": [
-        "default",
-        "^production",
-        "{workspaceRoot}/jest.preset.js"
-      ],
+      "inputs": ["default", "^production", "{workspaceRoot}/jest.preset.js"],
       "cache": true,
       "options": {
         "passWithNoTests": true
@@ -47,36 +38,20 @@
       "options": {
         "packageRoot": "dist/packages/{projectName}"
       },
-      "dependsOn": [
-        "build",
-        "lint",
-        "postbuild",
-        "^nx-release-publish"
-      ]
+      "dependsOn": ["build", "lint", "postbuild", "^nx-release-publish"]
     },
     "@nx/vite:test": {
       "cache": true,
-      "inputs": [
-        "default",
-        "^production"
-      ]
+      "inputs": ["default", "^production"]
     },
     "@nx/rollup:rollup": {
       "cache": true,
-      "dependsOn": [
-        "^build"
-      ],
-      "inputs": [
-        "production",
-        "^production"
-      ]
+      "dependsOn": ["^build"],
+      "inputs": ["production", "^production"]
     }
   },
   "namedInputs": {
-    "default": [
-      "{projectRoot}/**/*",
-      "sharedGlobals"
-    ],
+    "default": ["{projectRoot}/**/*", "sharedGlobals"],
     "production": [
       "default",
       "!{projectRoot}/src/test-setup.[jt]s",
@@ -84,9 +59,7 @@
       "!{projectRoot}/**/?(*.)+(spec|test).[jt]s?(x)?(.snap)",
       "!{projectRoot}/tsconfig.spec.json"
     ],
-    "cds": [
-      "{projectRoot}/**/*.cds"
-    ],
+    "cds": ["{projectRoot}/**/*.cds"],
     "sharedGlobals": []
   },
   "workspaceLayout": {
@@ -133,5 +106,6 @@
         }
       }
     }
-  }
+  },
+  "useLegacyCache": true
 }

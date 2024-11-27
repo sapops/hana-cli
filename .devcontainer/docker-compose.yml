@@ -1,7 +1,7 @@
 version: '3.8'
 
 services:
-  devcontainer:
+  hana-cli-devcontainer:
     # Using a Dockerfile is optional, but included for completeness.
     build:
       context: .

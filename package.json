@@ -6,6 +6,7 @@
     "cf:login": "cf login --sso -a $(npx cds env requires.db.binding.apiEndpoint --profile hybrid)",
     "cf:start": "cf update-service dev -c '{\"data\":{\"serviceStopped\":false}}'",
     "build": "nx run-many --target=build,postbuild --exclude sapops",
+    "deploy": "cds deploy --store-credentials",
     "lint": "nx run-many --target=lint --exclude sapops",
     "init:data": " CDS_ENV=hybrid npx nx g datagen",
     "init:sqlite": "CDS_ENV=mock cds deploy",
@@ -95,7 +96,8 @@
     "includedScripts": [
       "build",
       "lint",
-      "patch"
+      "patch",
+      "deploy"
     ]
   }
 }

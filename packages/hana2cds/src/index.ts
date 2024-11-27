@@ -3,9 +3,11 @@ import { writeFile } from 'fs/promises';
 import { stdout } from 'process';
 import { Case, convertCSN } from './lib/convertCSN';
 import { hana2csn } from './lib/hana2csn';
+import { env } from 'node:process';
 
 interface Options {
   schema?: string;
+  service?: string;
   namespace?: string;
   filter?: string;
   output?: string;
@@ -15,13 +17,14 @@ interface Options {
 
 export default new Command()
   .description('Generates CDS model from Hana table/view defintion')
+  .option('--service <service>', 'HDI service name')
   .option('-s, --schema <schema>', 'Database schema')
   .option('-n, --namespace <namespace>', 'CDS namespace')
   .option('-f, --filter <filter>', 'Comma-separated list of tables/views')
   .option('-o, --output <output>', 'Name of output file (STDOUT by default)')
   .option(
     '-c, --case <properties case>',
-    'Convert properties to a specific case'
+    'Convert properties to a specific case',
   )
   .option('-p, --prefix <projection prefix>', 'Prefix for projection names')
   .action(async (options: Options) => {
@@ -33,6 +36,9 @@ export default new Command()
       stdout.write = () => {
         return true;
       };
+    }
+    if (options.service) {
+      env['CDS_REQUIRES_DB_VCAP_NAME'] = options.service;
     }
 
     // generate CSN model

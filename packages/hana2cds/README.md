@@ -11,6 +11,7 @@ The idea behind this CLI is very simple - we connect to Hana database using nati
 This model may be later converted to CDS files by use of `cds compile --to cdl` command
 
 ## Installation
+
 ```
 npm install -D hana2cds
 ```
@@ -20,13 +21,17 @@ npm install -D hana2cds
 ```
 Usage: hana2cds [options]
 
-Generates CSN model from Hana table/view defintion
+Generates CDS model from Hana table/view defintion
 
 Options:
-  -s, --schema <schema>      Database schema
-  -f, --filter <filter>      Comma-separated list of tables/views
-  -o, --output <output>  Name of output file (STDOUT by default)
-  -h, --help             display help for command
+  --service <service>               HDI service name
+  -s, --schema <schema>             Database schema
+  -n, --namespace <namespace>       CDS namespace
+  -f, --filter <filter>             Comma-separated list of tables/views
+  -o, --output <output>             Name of output file (STDOUT by default)
+  -c, --case <properties case>      Convert properties to a specific case
+  -p, --prefix <projection prefix>  Prefix for projection names
+  -h, --help                        display help for command
 ```
 
 Some examples:
@@ -40,6 +45,18 @@ Generate a model with specific tables and writing to a specific file (OS indepen
 
 ```
 hana2cds -s FLIGHTS --f AIRLINES,FLIGHTS -o flights.csn.json
+```
+
+## Default behavior
+
+By default CLI will try to take schema from cds.env.requires.db
+
+So command like `hana2cds` will be equivalent to `hana2cds -s <schema-from-cds.env.requires.db>`
+
+This object always contains a first hana database from VCAP_SERVICES. If you have several hana services in your VCAP_SERVICES you can pick up a specific one by using `--service` parameter:
+
+```
+hana2cds --service=flights-hdi > flights.csn
 ```
 
 ## Storing secrets
@@ -57,5 +74,3 @@ cds env get requires.db.credentials --resolve-bindings | json2fs --to .cds/requi
 ```
 
 This additional utility also developed in this project will parse the file and will store secrets in key-based files with the provided path. In can be local path ( make sure you ignore it from git ) or it can be your home directory for example. In this case CDS will be able to read those secrets automatically if you define this PATH in CDS_CONFIG=`/workspace/.cds`. Keep in mind that currenlty CDS_CONFIG only supports absolute paths, and even tilda is not parsed properly. Also notice that the folder should have a structure requires->service_name->credentials and CDS config is ponting to the root folder for requires.
-
-

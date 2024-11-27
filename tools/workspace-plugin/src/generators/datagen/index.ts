@@ -2,7 +2,7 @@ import * as cds from '@sap/cds';
 import { writeFile } from 'fs/promises';
 import { type csn } from '@sap/cds';
 
-type kinds = csn.kinds | 'element';
+type kinds = csn.kinds;
 
 //generate CSV files with remote data
 export default async function () {

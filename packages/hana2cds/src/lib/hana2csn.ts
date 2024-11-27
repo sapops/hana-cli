@@ -4,7 +4,7 @@ import * as cds from '@sap/cds';
 import { getCdsType } from './hana2cdsType';
 
 interface SingleInput {
-  schema: string;
+  schema?: string;
   objects?: string[];
   namespace?: string;
   prefix?: string;
@@ -45,8 +45,19 @@ async function getObjects(input: GetObjectsInput) {
 }
 
 export async function db2csn(input: SingleInput): Promise<cds.csn.CSN> {
+
+  let schema = input.schema;
+
+  if (!schema) {
+    schema = await cds.env.requires?.db?.['credentials']?.schema;
+  }
+
+  if (!schema) {
+    throw new Error('No schema specified');
+  }
+
   const result = await getObjects({
-    SCHEMA_NAME: [input.schema],
+    SCHEMA_NAME: [schema],
     OBJECT_NAME: input.objects,
   });
 

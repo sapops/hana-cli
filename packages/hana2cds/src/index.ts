@@ -5,7 +5,7 @@ import { Case, convertCSN } from './lib/convertCSN';
 import { hana2csn } from './lib/hana2csn';
 
 interface Options {
-  schema: string;
+  schema?: string;
   namespace?: string;
   filter?: string;
   output?: string;
@@ -15,7 +15,7 @@ interface Options {
 
 export default new Command()
   .description('Generates CDS model from Hana table/view defintion')
-  .requiredOption('-s, --schema <schema>', 'Database schema')
+  .option('-s, --schema <schema>', 'Database schema')
   .option('-n, --namespace <namespace>', 'CDS namespace')
   .option('-f, --filter <filter>', 'Comma-separated list of tables/views')
   .option('-o, --output <output>', 'Name of output file (STDOUT by default)')

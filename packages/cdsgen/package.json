@@ -1,6 +1,6 @@
 {
   "name": "cdsgen",
-  "version": "0.4.0",
+  "version": "0.6.0",
   "dependencies": {
     "@moostjs/event-cli": "^0.4.20",
     "case-anything": "^3.1.0",

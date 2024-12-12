@@ -14,7 +14,9 @@
     "publish:login": "npm login --registry http://verdaccio:4873",
     "publish:local": "NPM_CONFIG_REGISTRY=http://verdaccio:4873 nx release publish",
     "preversion": "npx nx release version ${npm_new_version}",
-    "prepare": "husky"
+    "prepare": "husky",
+    "build:csn": "cds bind --exec --profile sflight -- npx hana2cds -o ./tmp/sflight/index.csn.json -c snake",
+    "build:cds": "cds compile sflight/index.csn.json --to cdl -o ./tmp/sflight/index"
   },
   "private": true,
   "dependencies": {

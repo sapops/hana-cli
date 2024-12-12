@@ -1,2 +1,2 @@
-#!/usr/bin/env jiti
-import '../src/index';
+#!/usr/bin/env -S node --import jiti/register
+import "../src/index"
